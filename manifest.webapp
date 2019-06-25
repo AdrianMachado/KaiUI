@@ -1,15 +1,29 @@
 {
   "name": "Rately",
-  "description": "A Hello World app",
-  "launch_path": "rately/src/index.js",
+  "version": "1.0.0"
+  "description": "A kaiOS Currency Conversion Calculator",
+  "launch_path": "/src/index.js",
   "icons": {
-    "16": "/icons/icon16x16.png",
-    "48": "/icons/icon48x48.png",
-    "60": "/icons/icon60x60.png",
-    "128": "/icons/icon128x128.png"
+    "56": "/icons/rately56x56.png"
+    "112": "/icons/rately112x112.png"
   },
   "developer": {
     "name": "Adrian Machado",
-    "url": "http://example.com"
+    "url": "https://github.com/AdrianMachado"
+  },
+  "locale": {
+    "en-US":{
+      "name": "Rately",
+      "description": "A kaiOS Currency Conversion Calculator",
+    }
   }
+  "default_locale": "en-US",
+  "subtitle": "Quick Currency Conversion Calculator",
+  "permissions:{
+    "input":{
+      "description": "Required to enter currency values"
+    }
+  },
+  "orientation": [ "portrait-primary" ]
+
 }
