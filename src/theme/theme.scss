@@ -1,0 +1,227 @@
+/* Set default font to all elements */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+* {
+    font-family: "Open Sans";
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  input {
+    font-variant-numeric: nominal;
+  }
+  
+  /*
+  Gaia theme variables
+  */
+  
+  :root {
+  
+    /** Grey Colors
+     ---------------------------------------------------------*/
+  
+    --color-alpha: #333333;
+    --color-beta: #ffffff;
+    --color-gamma: #4d4d4d;
+    --color-delta: #5f5f5f;
+    --color-epsilon: #858585;
+    --color-zeta: #a6a6a6;
+    --color-eta: #c7c7c7;
+    --color-theta: #e7e7e7;
+    --color-iota: #f4f4f4;
+    --color-white: #ffffff;
+  
+  /** Brand Colors
+   ---------------------------------------------------------*/
+  
+    --color-darkblue: #00539f;
+    --color-blue: #00caf2;
+    --color-turquoise: #27c8c2;
+    --color-darkorange: #e66000;
+    --color-orange: #ff9500;
+    --color-yellow: #ffcb00;
+    --color-violet: #c40c84;
+    --color-carrotorange: #eb9423;
+    --color-wathetblue: #005da5;
+  
+    /* gold */
+    --color-gold: #ffa000;
+    --color-gold-pressed: #cc8000;
+  
+    --color-warning: #fbbd3c;
+    --color-destructive: #e2443a;
+    --color-preffered: #00ba91;
+  
+    /* KaiOS Colors */
+  
+    --color-gs100: #000000;
+    --color-gs90: #323232;
+    --color-gs70: #6a6a6a;
+    --color-gs45: #8c8c8c;
+    --color-gs20: #cccccc;
+    --color-gs10: #e6e6e6;
+    --color-gs00: #ffffff;
+  
+    --color-purple: #873eff;
+    --color-pink: #f6529b;
+    --color-lime: #82c51b;
+    --color-cyan: #1cc1c4;
+    --color-blue: #0da1e1;
+    --color-orange: #ff8329;
+    --color-red: #f3203d;
+  
+    --color-purple-pressed: #6c32cc;
+    --color-pink-pressed: #bf2392;
+    --color-lime-pressed: #6b9a23;
+    --color-cyan-pressed: #31979e;
+    --color-blue-pressed: #0a80b4;
+    --color-orange-pressed: #cc5310;
+    --color-red-pressed: #c21930;
+  
+    /** Background
+     ---------------------------------------------------------*/
+  
+    --background: var(--color-beta);
+    --background-plus: var(--color-theta);
+    --background-minus: var(--color-zeta);
+  
+    /** Text Color
+     ---------------------------------------------------------*/
+  
+    --text-color: var(--color-gamma);
+    --text-color-minus: var(--color-eta);
+  
+    /** Button
+     ---------------------------------------------------------*/
+  
+    --button-background: var(--color-iota);
+  
+    /** Links
+     ---------------------------------------------------------*/
+  
+    --link-color: var(--highlight-color);
+  
+    /** Inputs
+     ---------------------------------------------------------*/
+  
+    --input-background: var(--color-beta);
+    --input-color: var(--color-alpha);
+    --input-clear-background: #909ca7;
+  
+    /** Buttons
+     ---------------------------------------------------------*/
+  
+    --button-box-shadow:
+      inset 0 -1px 0 #d8d8d8,
+      inset 0 1px 0 #eeeeee;
+    --button-box-shadow-active: var(--button-box-shadow);
+  
+    /** Header
+     ---------------------------------------------------------*/
+  
+    --header-purple-background: #320374;
+    --header-pink-background: #48132c;
+    --header-lime-background: #2a400c;
+    --header-cyan-background: #045463;
+    --header-blue-background: #20407b;
+    --header-orange-background: #381e0d;
+    --header-red-background: #5b0700;
+  
+    --header-disabled-button-color: rgba(255,255,255,0.3);
+  
+    /** Statusbar, Softkeybar and ClientHeight
+     *  Should update to proper value according to device size
+     ---------------------------------------------------------*/
+    --statusbar-height: 2.6rem;
+    --softkeybar-height: 3rem;
+    --header-height: 2.8rem;
+    --header-large-text-height: 2.4rem;
+    --tabbar-height: 2.7rem;
+    --rocketbar-urlbar-height: 3.6rem;
+  
+    --statusbar-softkeybar-height: 5.6rem;
+    --header-tabbar-height: 5.5rem;
+  
+    --client-height: calc(100% - var(--statusbar-softkeybar-height));
+  }
+  
+  
+  .theme-system,
+  .theme-launcher {
+  
+    /** Brand Color
+     ---------------------------------------------------------*/
+  
+    --highlight-color: var(--color-purple);
+    --highlight-color-pressed: var(--color-purple-pressed);
+  
+    /** Header
+     ---------------------------------------------------------*/
+  
+    --header-background: var(--header-purple-background);
+  
+    --header-color: var(--color-beta);
+  }
+  
+  .rately-theme {
+  
+    /** Background
+     ---------------------------------------------------------*/
+  
+    --background: var(--color-pink);
+    --background-title: var(--color-white);
+    --background-plus: var(--color-beta);
+    --background-minus: var(--color-epsilon);
+    --background-minus-minus: var(--color-zeta);
+  
+    /** Highlight
+     ---------------------------------------------------------*/
+  
+    --highlight-color: var(--color-lime);
+  
+    /** Borders
+     ---------------------------------------------------------*/
+  
+    --border-color: var(--color-theta);
+  
+    /** Titles
+     ---------------------------------------------------------*/
+  
+    --title-color: var(--background-title);
+  
+    /** Buttons
+     ---------------------------------------------------------*/
+  
+    --button-background: var(--background-plus);
+  
+    /** Switch
+     ---------------------------------------------------------*/
+  
+    --switch-background: var(--background-minus-minus);
+  
+    /** Checkbox
+     ---------------------------------------------------------*/
+  
+    --checkbox-border-color: var(--background-minus-minus);
+
+    /** Inputs
+     ---------------------------------------------------------*/
+  
+     --input-background: var(--background-plus);
+  
+     /** Text Input
+      ---------------------------------------------------------*/
+   
+     --text-input-background: var(--background-minus);
+  
+    /** Header
+     ---------------------------------------------------------*/
+  
+    --header-color: var(--title-color);
+    --header-background: var(--color-wathetblue); /*changed*/
+    --header-button-color: var(--highlight-color);
+    --header-disabled-button-color: var(--color-theta);
+    --header-action-button-color: var(--title-color);
+  }
+  

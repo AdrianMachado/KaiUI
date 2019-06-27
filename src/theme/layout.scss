@@ -1,0 +1,24 @@
+:root {
+    --statusbar-height: 2.6rem;
+    --softkeybar-height: 3rem;
+    --header-height: 2.8rem;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  %text-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  @mixin flex($direction: column, $inline: block) {
+    display: if($inline == block, flex, inline-flex);
+    flex-direction: $direction;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }

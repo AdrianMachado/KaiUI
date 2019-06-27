@@ -1,0 +1,85 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+
+:root {
+    --softkeybar-background-color: var(--color-gs20, #cccccc);
+    --softkey-color: var(--color-gs90, #323232);
+    --softkey-color--icon: var(--color-gs70, #6a6a6a);
+    --softkey-color--disabled: var(--color-eta, #c7c7c7);
+    --softkey-background-color--active: #00aacc;
+    --softkey-icon-size: 2rem;
+}
+  
+.kai-softkey {
+    $skbar-gap: 0.5rem;
+    z-index: var(--z-index--softkey, 9999);
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+    text-align: center;
+    color: var(--softkey-color);
+    background-color: var(--softkeybar-background-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    &:not(.visible) {
+        opacity: 0;
+    }
+
+    > * {
+        text-transform: capitalize;
+        &:first-child {
+            @extend h5;
+            min-width: 7.2rem + $skbar-gap;
+            padding: 0 0 0 $skbar-gap;
+            text-align: left;
+        }
+
+        &:nth-child(2) {
+            font-size: 1.6rem;
+            font-weight: 700;
+            min-width: 2rem + $skbar-gap * 2; // min gap between LSK & RSK = 2rem
+            max-width: 7.6rem;
+            text-transform: uppercase;
+            padding: 0 $skbar-gap;
+        }
+
+        &:last-child {
+            @extend h5;
+            min-width: 7.2rem + $skbar-gap;
+            text-align: right;
+            padding: 0 $skbar-gap 0 0;
+        }
+    }
+
+    &-btn {
+        display: block;
+        min-width: 1rem;
+        height: var(--softkeybar-height);
+        line-height: var(--softkeybar-height);
+        border: unset;
+        overflow: hidden;
+        @extend %text-ellipsis;
+        color: var(--softkey-color);
+        background: unset;
+
+        &:active,
+        &.active {
+        background-color: var(--softkey-background-color--active);
+        }
+
+        &[disabled] {
+        --softkey-color: var(--softkey-color--disabled);
+        background-color: transparent;
+        pointer-events: auto;
+        }
+
+        &[data-icon] {
+        --softkey-font-size: var(--softkey-icon-size);
+        --softkey-color: var(--softkey-color--icon);
+        }
+    }
+}
+  

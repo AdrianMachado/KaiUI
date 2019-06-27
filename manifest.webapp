@@ -1,10 +1,10 @@
 {
   "name": "Rately",
-  "version": "1.0.0"
+  "version": "1.0.0",
   "description": "A kaiOS Currency Conversion Calculator",
-  "launch_path": "/src/index.js",
+  "launch_path": "/index.html",
   "icons": {
-    "56": "/icons/rately56x56.png"
+    "56": "/icons/rately56x56.png",
     "112": "/icons/rately112x112.png"
   },
   "developer": {
@@ -14,16 +14,15 @@
   "locale": {
     "en-US":{
       "name": "Rately",
-      "description": "A kaiOS Currency Conversion Calculator",
+      "description": "A kaiOS Currency Conversion Calculator"
     }
-  }
+  },
   "default_locale": "en-US",
   "subtitle": "Quick Currency Conversion Calculator",
-  "permissions:{
+  "permissions":{
     "input":{
       "description": "Required to enter currency values"
     }
   },
   "orientation": [ "portrait-primary" ]
-
 }
