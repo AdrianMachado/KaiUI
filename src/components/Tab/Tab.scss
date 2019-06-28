@@ -1,0 +1,47 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+
+:root {
+  --tab-background-color: var(--color-gs00);
+  --tab-underline-color: var(--color-purple);
+}
+
+.kai-tab-active {
+  outline: none;
+  text-align: center;
+  background-color: var(--tab-background-color);
+  width: 100%;
+  height: 0.3rem;
+  border-radius: 6px;
+  margin-bottom: 0.2rem;
+  box-shadow: 0 2.8rem 0 0 var(--tab-underline-color);
+
+  &-label {
+    @extend h3;
+    margin: 0 0.5rem;
+    overflow: hidden;
+    height: 3rem;
+    line-height: 3rem;
+    font-weight: 900;
+  }
+}
+
+.kai-tab-inactive {
+  outline: none;
+  text-align: center;
+  background-color: var(--tab-background-color);
+  width: 100%;
+  height: 0.2rem;
+  border-radius: 6px;
+  margin-bottom: 0.2rem;
+
+  &-label {
+    @extend h3;
+    margin: 0 0.5rem;
+    overflow: hidden;
+    height: 3rem;
+    line-height: 3rem;
+    font-weight: 200;
+  }
+}

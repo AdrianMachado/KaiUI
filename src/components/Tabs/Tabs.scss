@@ -1,0 +1,29 @@
+:root {
+  --tabs-background-color: var(--color-gs00);
+  --tabs-height: 3rem;
+}
+
+.kai-tabs {
+  overflow: auto;
+  white-space: nowrap;
+  height: var(--tabs-height);
+  outline: none;
+  background-color: var(--tabs-background-color);
+  z-index: var(--z-index--tab, 9999);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  top: 0;
+  > * {
+    margin: 0 0.25rem 0 0.25rem;
+    &:first-child {
+      margin: 0 0.25rem 0 1rem;
+    }
+
+    &:last-child {
+      margin: 0 1rem 0 0.25rem;
+    }
+  }
+}

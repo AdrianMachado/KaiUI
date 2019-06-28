@@ -5,19 +5,27 @@ import './SoftKey.scss';
 
 const prefixCls = 'kai-softkey';
 
-const Button = (props) => {
-  return <button className={`${prefixCls}-btn`} onClick={(e) => handleButtonClick(e, props.handleClick)}>{props.icon ? <i class={props.icon}/> : null}{props.text}</button>;
+const Button = props => {
+  return (
+    <button
+      className={`${prefixCls}-btn`}
+      onClick={e => handleButtonClick(e, props.handleClick)}
+    >
+      {props.icon ? <i class={props.icon} /> : null}
+      {props.text}
+    </button>
+  );
 };
 
 const handleButtonClick = (e, handleClick) => {
-    e.preventDefault();
-    handleClick();
-}
+  e.preventDefault();
+  handleClick();
+};
 
 class SoftKey extends React.Component {
   constructor(props) {
     super(props);
-    document.addEventListener('keydown', (e) => this.handleKeyDown(e, props));
+    document.addEventListener('keydown', e => this.handleKeyDown(e, props));
   }
 
   handleKeyDown(e, props) {
@@ -36,10 +44,10 @@ class SoftKey extends React.Component {
         // Action case press center key
         props.centerCallback();
         break;
-      default: break;
+      default:
+        break;
     }
-  };
-
+  }
 
   render() {
     const {
@@ -50,36 +58,40 @@ class SoftKey extends React.Component {
       rightText,
       centerText,
       centerIcon,
-     } = this.props;
-     console.log(this.props);
+    } = this.props;
     return (
       <form className={`${prefixCls} visible`} data-type="action">
         <Button pos="left" text={leftText} handleClick={leftCallback} />
-        <Button pos="center" text={centerText} icon={centerIcon} handleClick={centerCallback}/>
-        <Button pos="right" text={rightText} handleClick={rightCallback}/>
+        <Button
+          pos="center"
+          text={centerText}
+          icon={centerIcon}
+          handleClick={centerCallback}
+        />
+        <Button pos="right" text={rightText} handleClick={rightCallback} />
       </form>
     );
   }
 }
 
 SoftKey.defaultProps = {
-    leftText: '',
-    centerText:'',
-    rightText: '',
-    centerIcon: null,
-    leftCallback: () => {},
-    centerCallback: () => {},
-    rightCallback: () => {},
+  leftText: '',
+  centerText: '',
+  rightText: '',
+  centerIcon: null,
+  leftCallback: () => {},
+  centerCallback: () => {},
+  rightCallback: () => {},
 };
 
 SoftKey.propTypes = {
-    leftText: PropTypes.string,
-    centerText: PropTypes.string,
-    rightText: PropTypes.string,
-    centerIcon: PropTypes.string,
-    leftCallback: PropTypes.func,
-    centerCallback: PropTypes.func,
-    rightCallback: PropTypes.func,
+  leftText: PropTypes.string,
+  centerText: PropTypes.string,
+  rightText: PropTypes.string,
+  centerIcon: PropTypes.string,
+  leftCallback: PropTypes.func,
+  centerCallback: PropTypes.func,
+  rightCallback: PropTypes.func,
 };
 
 export default SoftKey;
