@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'kai-icons';
+  src:  url('fonts/kai-icons.eot?67hhep');
+  src:  url('fonts/kai-icons.eot?67hhep#iefix') format('embedded-opentype'),
+    url('fonts/kai-icons.ttf?67hhep') format('truetype'),
+    url('fonts/kai-icons.woff?67hhep') format('woff'),
+    url('fonts/kai-icons.svg?67hhep#kai-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="kai-icon-"], [class*=" kai-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'kai-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.kai-icon-arrow:before {
+  content: "\e900";
+  color: #fff;
+}
+.kai-icon-checkbox-checked:before {
+  content: "\e901";
+  color: #fff;
+}
+.kai-icon-checkbox-unchecked:before {
+  content: "\e902";
+  color: #fff;
+}
+.kai-icon-radio-button-selected:before {
+  content: "\e906";
+  color: #fff;
+}
+.kai-icon-radio-button-unselected:before {
+  content: "\e90f";
+  color: #fff;
+}
+.kai-icon-bluetooth:before {
+  content: "\e903";
+  color: #fff;
+}
+.kai-icon-calendar:before {
+  content: "\e904";
+  color: #fff;
+}
+.kai-icon-camera:before {
+  content: "\e905";
+  color: #fff;
+}
+.kai-icon-contacts:before {
+  content: "\e907";
+  color: #fff;
+}
+.kai-icon-download:before {
+  content: "\e908";
+  color: #fff;
+}
+.kai-icon-email:before {
+  content: "\e909";
+  color: #fff;
+}
+.kai-icon-favorite-off:before {
+  content: "\e90a";
+  color: #fff;
+}
+.kai-icon-favorite-on:before {
+  content: "\e90b";
+  color: #fff;
+}
+.kai-icon-message:before {
+  content: "\e90c";
+  color: #fff;
+}
+.kai-icon-mic:before {
+  content: "\e90d";
+  color: #fff;
+}
+.kai-icon-phone:before {
+  content: "\e90e";
+  color: #fff;
+}
+.kai-icon-search:before {
+  content: "\e910";
+  color: #fff;
+}
+.kai-icon-settings:before {
+  content: "\e911";
+  color: #fff;
+}
+.kai-icon-video:before {
+  content: "\e912";
+  color: #fff;
+}
+.kai-icon-wifi:before {
+  content: "\e913";
+  color: #fff;
+}
