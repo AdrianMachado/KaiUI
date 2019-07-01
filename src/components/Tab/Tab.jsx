@@ -11,7 +11,7 @@ class Tab extends React.Component {
   }
 
   handleClick() {
-    this.props.handleClick(this.props.index);
+    this.props.onTabChange(this.props.index);
   }
 
   render() {
@@ -28,14 +28,14 @@ class Tab extends React.Component {
 Tab.defaultProps = {
   index: 0,
   label: null,
-  handleClick: () => {},
+  onTabChange: () => {},
   isActive: false,
 };
 
 Tab.propTypes = {
   index: PropTypes.number,
   label: PropTypes.string,
-  handleClick: PropTypes.func,
+  onTabChange: PropTypes.func,
   isActive: PropTypes.bool,
 };
 

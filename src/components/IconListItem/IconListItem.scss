@@ -1,0 +1,65 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+@import '../../kai-font/style.scss';
+
+:root {
+  --il-background-color: var(--color-gs00);
+  --il-text-focused: var(--color-gs00);
+  --il-background-active-color: var(--color-purple);
+  --il-checkbox-unfocused: var(--color-zeta);
+}
+.kai-il {
+  width: auto;
+  min-height: 6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  outline: none;
+  background-color: var(--il-background-color);
+  &:focus {
+    color: var(--il-text-focused);
+    background-color: var(--il-background-active-color);
+  }
+
+  &-icon {
+    &-focused {
+      span::before {
+        @include list-item-icon;
+        color: var(--il-text-focused);
+      }
+    }
+
+    &-unfocused {
+      span::before {
+        @include list-item-icon;
+        color: var(--il-checkbox-unfocused);
+      }
+    }
+  }
+
+  &-line {
+    font-family: 'Open Sans';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 1rem 1rem 1rem 0;
+    span,
+    label {
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  &-primary {
+    @extend .p-pri;
+  }
+
+  &-secondary {
+    @extend .p-sec;
+  }
+}

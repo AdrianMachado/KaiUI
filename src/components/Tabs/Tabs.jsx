@@ -9,15 +9,13 @@ class Tabs extends React.Component {
     super();
     // Bind the method to the component context
     this.renderChildren = this.renderChildren.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleTabChange = this.handleTabChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     document.addEventListener('keydown', e => this.handleKeyDown(e));
     this.state = { activeChild: 0 };
   }
 
-  tabRefs = [];
-
-  handleClick(childIndex) {
+  handleTabChange(childIndex) {
     this.setState({ activeChild: childIndex });
     this.refs[childIndex].scrollIntoView({
       behavior: 'smooth',
@@ -35,13 +33,11 @@ class Tabs extends React.Component {
           index + 1,
           React.Children.count(this.props.children) - 1
         );
-        this.setState({ activeChild: index });
-        this.props.onChangeIndex(index);
+        this.handleTabChange(index);
         break;
       case 'ArrowLeft':
         index = Math.max(index - 1, 0);
-        this.setState({ activeChild: index });
-        this.props.onChangeIndex(index);
+        this.handleTabChange(index);
         break;
       default:
         break;
@@ -55,7 +51,7 @@ class Tabs extends React.Component {
         <div ref={i}>
           {React.cloneElement(child, {
             index: i,
-            handleClick: this.handleClick,
+            onTabChange: this.handleTabChange,
             isActive: activeChild === i,
           })}
         </div>

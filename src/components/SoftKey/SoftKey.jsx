@@ -60,7 +60,7 @@ class SoftKey extends React.Component {
       centerIcon,
     } = this.props;
     return (
-      <form className={`${prefixCls} visible`} data-type="action">
+      <div className={`${prefixCls} visible`}>
         <Button pos="left" text={leftText} handleClick={leftCallback} />
         <Button
           pos="center"
@@ -69,7 +69,7 @@ class SoftKey extends React.Component {
           handleClick={centerCallback}
         />
         <Button pos="right" text={rightText} handleClick={rightCallback} />
-      </form>
+      </div>
     );
   }
 }

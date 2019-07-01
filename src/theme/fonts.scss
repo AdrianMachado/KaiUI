@@ -2,197 +2,185 @@
  * Font
  * ---------------------------------- */
 
- h1, .h1 {
+h1,
+.h1 {
+  /** Text for Header, Light
+     ---------------------------------------------------------*/
+  font-weight: 300;
+  font-size: 1.7rem;
+}
 
-    /** Text for Header, Light
+h2,
+.h2 {
+  /** Header of body texts, Semi-Bold
      ---------------------------------------------------------*/
-    font-weight: 300;
-    font-size: 1.7rem;
-  }
-  
-  h2, .h2 {
-  
-    /** Header of body texts, Semi-Bold
+  font-weight: 600;
+  font-size: 1.7rem;
+}
+
+h3,
+.h3 {
+  /** Text for Tabs, Regular
      ---------------------------------------------------------*/
-    font-weight: 600;
-    font-size: 1.7rem;
-  }
-  
-  h3, .h3 {
-  
-    /** Text for Tabs, Regular
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+h4,
+.h4 {
+  /** Text for Separators, Regular
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.4rem;
-  }
-  
-  h4, .h4 {
-  
-    /** Text for Separators, Regular
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+h5,
+.h5 {
+  /** Text for Software keys, Regular
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.4rem;
-  }
-  
-  h5, .h5 {
-  
-    /** Text for Software keys, Regular
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+:root:not([lang|='fr']) h1,
+:root:not([lang|='fr']) .h1,
+:root:not([lang|='fr']) h3,
+:root:not([lang|='fr']) .h3,
+:root:not([lang|='fr']) h4,
+:root:not([lang|='fr']) .h4,
+:root:not([lang|='fr']) h5,
+:root:not([lang|='fr']) .h5 {
+  text-transform: capitalize;
+}
+
+.p-pri {
+  /** Primary information, Regular
      ---------------------------------------------------------*/
-    font-weight: 600;
-    font-size: 1.4rem;
-  }
-  
-  :root:not([lang|="fr"]) h1,
-  :root:not([lang|="fr"]) .h1,
-  :root:not([lang|="fr"]) h3,
-  :root:not([lang|="fr"]) .h3,
-  :root:not([lang|="fr"]) h4,
-  :root:not([lang|="fr"]) .h4,
-  :root:not([lang|="fr"]) h5,
-  :root:not([lang|="fr"]) .h5 {
-    text-transform: capitalize;
-  }
-  
-  .p-pri {
-  
-    /** Primary information, Regular
+  font-weight: 400;
+  font-size: 1.7rem;
+}
+
+.p-sec {
+  /** Secondary information, Regular
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.7rem;
-  }
-  
-  .p-sec {
-  
-    /** Secondary information, Regular
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.p-thi {
+  /** Tertiary information, Regular
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.4rem;
-  }
-  
-  .p-thi {
-  
-    /** Tertiary information, Regular
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+p,
+.p,
+ul,
+.ul {
+  /** Body texts, Regular
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-  
-  p, .p,
-  ul, .ul {
-  
-    /** Body texts, Regular
+  font-weight: 400;
+  font-size: 1.7rem;
+}
+
+.p-link {
+  /** Text for hyperlink, Bold, Underline
      ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.7rem;
-  }
-  
-  .p-link {
-  
-    /** Text for hyperlink, Bold, Underline
+  font-weight: 700;
+  font-size: 1.7rem;
+  text-decoration: underline;
+}
+
+.p-btn {
+  /** Text for Button, Regular, Capitalize
      ---------------------------------------------------------*/
-    font-weight: 700;
-    font-size: 1.7rem;
-    text-decoration: underline;
-  }
-  
-  .p-btn {
-  
-    /** Text for Button, Regular, Capitalize
-     ---------------------------------------------------------*/
-    font-weight: 400;
-    font-size: 1.7rem;
-    text-transform: capitalize;
-  }
-  
-  /* ----------------------------------
+  font-weight: 400;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+}
+
+/* ----------------------------------
    * Font for large text mode
    * ---------------------------------- */
-  
-  .large-text h1,
-  .large-text .h1 {
-  
-    /** Text for Header, Light for large text mode
+
+.large-text h1,
+.large-text .h1 {
+  /** Text for Header, Light for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  
-  .large-text h2,
-  .large-text .h2 {
-  
-    /** Header of body texts, Semi-Bold for large text mode
+  font-size: 2.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.large-text h2,
+.large-text .h2 {
+  /** Header of body texts, Semi-Bold for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-  }
-  
-  .large-text h3,
-  .large-text .h3 {
-  
-    /** Text for Tabs, Regular for large text mode
+  font-size: 2.2rem;
+}
+
+.large-text h3,
+.large-text .h3 {
+  /** Text for Tabs, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 1.8rem;
-  }
-  
-  .large-text h4,
-  .large-text .h4 {
-  
-    /** Text for Separators, Regular for large text mode
+  font-size: 1.8rem;
+}
+
+.large-text h4,
+.large-text .h4 {
+  /** Text for Separators, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 1.8rem;
-  }
-  
-  .large-text h5,
-  .large-text .h5 {
-  
-    /** Text for Software keys, Regular for large text mode
+  font-size: 1.8rem;
+}
+
+.large-text h5,
+.large-text .h5 {
+  /** Text for Software keys, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 1.8rem;
-  }
-  
-  .large-text .p-pri {
-  
-    /** Primary information, Regular for large text mode
+  font-size: 1.8rem;
+}
+
+.large-text .p-pri {
+  /** Primary information, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-  }
-  
-  .large-text .p-sec {
-  
-    /** Secondary information, Regular for large text mode
+  font-size: 2.2rem;
+}
+
+.large-text .p-sec {
+  /** Secondary information, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 1.8rem;
-  }
-  
-  .large-text .p-thi {
-  
-    /** Thirdary information, Regular for large text mode
+  font-size: 1.8rem;
+}
+
+.large-text .p-thi {
+  /** Thirdary information, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 1.6rem;
-  }
-  
-  .large-text p,
-  .large-text .p,
-  .large-text ul,
-  .large-text .ul {
-  
-    /** Body texts, Regular for large text mode
+  font-size: 1.6rem;
+}
+
+.large-text p,
+.large-text .p,
+.large-text ul,
+.large-text .ul {
+  /** Body texts, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-  }
-  
-  .large-text .p-link {
-  
-    /** Text for hyperlink, Bold, Underline for large text mode
+  font-size: 2.2rem;
+}
+
+.large-text .p-link {
+  /** Text for hyperlink, Bold, Underline for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-  }
-  
-  .large-text .p-btn {
-  
-    /** Text for Button, Regular for large text mode
+  font-size: 2.2rem;
+}
+
+.large-text .p-btn {
+  /** Text for Button, Regular for large text mode
      ---------------------------------------------------------*/
-    font-size: 2.2rem;
-  }
-  
+  font-size: 2.2rem;
+}
+
+.icon-font {
+  font-size: 3.2rem;
+}

@@ -5,32 +5,41 @@
 
 :root {
   --cbl-background-color: var(--color-gs00);
+  --cbl-text-focused: var(--color-gs00);
   --cbl-background-active-color: var(--color-purple);
-  --cbl-checkbox-border-color: var(--color-zeta);
+  --cbl-checkbox-unfocused: var(--color-zeta);
 }
 .kai-cbl {
   width: auto;
-  height: 6rem;
+  min-height: 6rem;
   display: flex;
   flex-direction: row;
   align-items: center;
-  overflow: auto;
+  overflow: hidden;
   outline: none;
   background-color: var(--cbl-background-color);
   &:focus {
-    color: var(--color-gs00);
+    color: var(--cbl-text-focused);
     background-color: var(--cbl-background-active-color);
   }
 
   &-box {
-    margin: 0 0.5rem 0 0.5rem;
+    margin: 0 1rem;
+
+    &-input-focused {
+      color: var(--cbl-text-focused);
+    }
+
+    &-input-unfocused {
+      color: var(--cbl-checkbox-unfocused);
+    }
+
     > input[type='checkbox'] {
       -webkit-appearance: none;
       -moz-appearance: none;
       position: relative;
       width: 2rem;
       height: 2rem;
-      color: var(--cbl-checkbox-border-color);
       border-radius: 35%;
     }
 
@@ -56,13 +65,21 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    margin: 1rem 0 1rem 1rem;
     span,
     label {
       padding: 0;
       width: 100%;
       overflow: hidden;
     }
+  }
+
+  .left {
+    box-sizing: border-box;
+    padding: 1rem 0 1rem 1rem;
+  }
+  .right {
+    box-sizing: border-box;
+    padding: 1rem 1rem 1rem 0;
   }
 
   &-primary {

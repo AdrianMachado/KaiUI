@@ -7,7 +7,6 @@ const prefixCls = 'kai-header';
 
 const Header = ({ text }) => (
   <header className={prefixCls}>
-    <link rel="stylesheet" type="text/css" href="../../theme/icons.css" />
     <h1 className="h1">{text}</h1>
   </header>
 );
