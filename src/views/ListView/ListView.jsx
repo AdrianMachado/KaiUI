@@ -46,14 +46,17 @@ class ListView extends React.Component {
     }
     switch (e.key) {
       case 'ArrowUp':
-        index = Math.max(index - 1, 0);
+        // looping to bottom
+        index =
+          index - 1 >= 0
+            ? index - 1
+            : React.Children.count(this.props.children) - 1;
         this.setFocusToIndex(index);
         break;
       case 'ArrowDown':
-        index = Math.min(
-          index + 1,
-          React.Children.count(this.props.children) - 1
-        );
+        // looping to top
+        index =
+          index + 1 < React.Children.count(this.props.children) ? index + 1 : 0;
         this.setFocusToIndex(index);
         break;
       default:

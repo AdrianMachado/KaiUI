@@ -1,0 +1,44 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+
+:root {
+  --tl-background-color: var(--color-gs00);
+  --tl-text-focused: var(--color-gs00);
+  --tl-background-active-color: var(--color-purple);
+}
+.kai-tl {
+  height: fit-content;
+  width: 100%;
+  min-height: 6rem;
+  outline: none;
+  background-color: var(--tl-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  span,
+  label {
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &:focus {
+    color: var(--tl-text-focused);
+    background-color: var(--tl-background-active-color);
+  }
+
+  &-primary {
+    @extend .p-pri;
+  }
+
+  &-secondary {
+    @extend .p-sec;
+  }
+
+  &-tertiary {
+    @extend .p-thi;
+  }
+}

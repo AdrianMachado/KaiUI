@@ -4,12 +4,12 @@
 @import '../../kai-font/style.scss';
 
 :root {
-  --il-background-color: var(--color-gs00);
-  --il-text-focused: var(--color-gs00);
-  --il-background-active-color: var(--color-purple);
-  --il-icon-unfocused: var(--color-zeta);
+  --al-background-color: var(--color-gs00);
+  --al-text-focused: var(--color-gs00);
+  --al-background-active-color: var(--color-purple);
+  --al-icon-unfocused: var(--color-zeta);
 }
-.kai-il {
+.kai-al {
   width: auto;
   min-height: 6rem;
   display: flex;
@@ -17,24 +17,24 @@
   align-items: center;
   overflow: hidden;
   outline: none;
-  background-color: var(--il-background-color);
+  background-color: var(--al-background-color);
   &:focus {
-    color: var(--il-text-focused);
-    background-color: var(--il-background-active-color);
+    color: var(--al-text-focused);
+    background-color: var(--al-background-active-color);
   }
 
   &-icon {
     &-focused {
       span::before {
-        @include list-item-icon;
-        color: var(--il-text-focused);
+        @include list-item-arrow;
+        color: var(--al-text-focused);
       }
     }
 
     &-unfocused {
       span::before {
-        @include list-item-icon;
-        color: var(--il-icon-unfocused);
+        @include list-item-arrow;
+        color: var(--al-icon-unfocused);
       }
     }
   }
@@ -46,7 +46,7 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1rem 0 1rem 1rem;
     span,
     label {
       padding: 0;

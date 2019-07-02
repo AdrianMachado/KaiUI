@@ -18,7 +18,7 @@ class Tabs extends React.Component {
   handleTabChange(childIndex) {
     this.setState({ activeChild: childIndex });
     this.refs[childIndex].scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'auto',
       block: 'start',
       inline: 'center',
     });

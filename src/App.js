@@ -5,6 +5,9 @@ import TabView from './views/TabView/TabView';
 import ListView from './views/ListView/ListView';
 import CheckboxListItem from './components/CheckboxListItem/CheckboxListItem';
 import IconListItem from './components/IconListItem/IconListItem';
+import TextListItem from './components/TextListItem/TextListItem';
+import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
+import ArrowListItem from './components/ArrowListItem/ArrowListItem';
 
 function App() {
   const leftCallback = () => {
@@ -18,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <Header text="rately" />
-      <TabView tabLabels={['checkboxes', 'icons']}>
+      <TabView tabLabels={['checkboxes', 'icons', '3 Text', 'body-arr']}>
         <ListView>
           <CheckboxListItem
             primary="Hello primary text"
@@ -63,6 +66,27 @@ function App() {
           />
           <IconListItem primary="Item without secondary" icon="kai-icon-wifi" />
           <IconListItem primary="Last item" icon="kai-icon-camera" />
+        </ListView>
+        <ListView>
+          <TextListItem
+            primary="Hello primary text"
+            secondary="secondary text"
+            tertiary="tertiary text"
+          />
+          <TextListItem
+            primary="Hello primary text"
+            secondary="No tertiary here"
+          />
+          <TextListItem primary="Just primary" />
+        </ListView>
+        <ListView>
+          <BodyTextListItem
+            header="Header text"
+            body="body text, can support a whole lot of text"
+          />
+          <BodyTextListItem header="Header text, but no body" />
+          <ArrowListItem primary="Primary text" secondary="Secondary text" />
+          <ArrowListItem primary="Just me and arrow" />
         </ListView>
       </TabView>
       <footer>

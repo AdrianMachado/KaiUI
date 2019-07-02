@@ -27,3 +27,8 @@ ul {
   margin: 0 1rem;
   @extend .icon-font;
 }
+
+@mixin list-item-arrow {
+  margin: 0 1rem;
+  @extend .arrow-font;
+}
