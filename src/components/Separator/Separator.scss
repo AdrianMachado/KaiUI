@@ -1,0 +1,19 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+
+:root {
+  --separator-background-color: var(--color-gs10);
+  --separator-text-color: var(--color-gs70);
+}
+
+.kai-separator {
+  height: 2.4rem;
+  width: 100%;
+  background-color: var(--separator-background-color);
+  &-text {
+    @extend h4;
+    margin: 0 1rem;
+    text-align: center;
+    color: var(--separator-text-color);
+  }
+}

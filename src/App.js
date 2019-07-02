@@ -9,6 +9,7 @@ import TextListItem from './components/TextListItem/TextListItem';
 import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
 import ArrowListItem from './components/ArrowListItem/ArrowListItem';
 import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
+import Separator from './components/Separator/Separator';
 
 function App() {
   const leftCallback = () => {
@@ -31,6 +32,7 @@ function App() {
             onInputChange={() => {}}
             checkboxSide="left"
           />
+          <Separator separatorText={'hello, separator here'} />
           <CheckboxListItem
             primary="Another item with more text"
             secondary="seconday text at the bottom"
@@ -64,6 +66,7 @@ function App() {
             secondary="seconday text at the bottom"
             icon="kai-icon-favorite-on"
           />
+          <Separator separatorText={'Another separator'} />
           <IconListItem primary="Item without secondary" icon="kai-icon-wifi" />
           <IconListItem primary="Last item" icon="kai-icon-camera" />
         </ListView>

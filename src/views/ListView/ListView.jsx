@@ -47,16 +47,12 @@ class ListView extends React.Component {
     switch (e.key) {
       case 'ArrowUp':
         // looping to bottom
-        index =
-          index - 1 >= 0
-            ? index - 1
-            : React.Children.count(this.props.children) - 1;
+        index = index - 1 >= 0 ? index - 1 : this.itemRefs.length - 1;
         this.setFocusToIndex(index);
         break;
       case 'ArrowDown':
         // looping to top
-        index =
-          index + 1 < React.Children.count(this.props.children) ? index + 1 : 0;
+        index = index + 1 < this.itemRefs.length ? index + 1 : 0;
         this.setFocusToIndex(index);
         break;
       default:
@@ -65,11 +61,17 @@ class ListView extends React.Component {
   }
 
   renderChildren() {
-    return React.Children.map(this.props.children, (child, i) => {
+    let index = -1;
+    return React.Children.map(this.props.children, child => {
+      // Don't focus on separators
+      if (child.props.separatorText != null) {
+        return child;
+      }
+      index++;
       const newRef = React.createRef();
-      this.itemRefs[i] = newRef;
+      this.itemRefs[index] = newRef;
       return React.cloneElement(child, {
-        index: i,
+        index,
         onFocusChange: this.handleChangeIndex,
         ref: newRef,
       });
