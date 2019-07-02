@@ -1,0 +1,92 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+@import '../../kai-font/style.scss';
+
+:root {
+  --rbl-background-color: var(--color-gs00);
+  --rbl-text-focused: var(--color-gs00);
+  --rbl-background-active-color: var(--color-purple);
+  --rbl-radio-unfocused: var(--color-zeta);
+}
+.kai-rbl {
+  width: auto;
+  min-height: 6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  outline: none;
+  background-color: var(--rbl-background-color);
+  &:focus {
+    color: var(--rbl-text-focused);
+    background-color: var(--rbl-background-active-color);
+  }
+
+  &-button {
+    margin: 0 1rem;
+
+    &-input-focused {
+      color: var(--rbl-text-focused);
+    }
+
+    &-input-unfocused {
+      color: var(--rbl-radio-unfocused);
+    }
+
+    > input[type='radio'] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 35%;
+    }
+
+    > input[type='radio']::before {
+      font-family: $icomoon-font-family;
+      position: absolute;
+      font-size: 2rem;
+    }
+
+    > input[type='radio']:not(:checked)::before {
+      content: $kai-icon-radio-button-unselected;
+    }
+
+    > input[type='radio']:checked::before {
+      content: $kai-icon-radio-button-selected;
+    }
+  }
+
+  &-line {
+    font-family: 'Open Sans';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    span,
+    label {
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .left {
+    box-sizing: border-box;
+    padding: 1rem 0 1rem 1rem;
+  }
+  .right {
+    box-sizing: border-box;
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  &-primary {
+    @extend .p-pri;
+  }
+
+  &-secondary {
+    @extend .p-sec;
+  }
+}

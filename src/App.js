@@ -8,6 +8,7 @@ import IconListItem from './components/IconListItem/IconListItem';
 import TextListItem from './components/TextListItem/TextListItem';
 import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
 import ArrowListItem from './components/ArrowListItem/ArrowListItem';
+import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
 
 function App() {
   const leftCallback = () => {
@@ -37,20 +38,19 @@ function App() {
             onInputChange={() => {}}
             checkboxSide="right"
           />
+          <RadioButtonListItem
+            primary="Surprise radio button"
+            secondary="Not a checkbox"
+            initButtonVal={false}
+            onInputChange={handleInputChange}
+            buttonSide="right"
+          />
           <CheckboxListItem
             primary="Item without secondary"
             initCheckboxVal={false}
             isChecked={cbVal}
             onInputChange={handleInputChange}
             checkboxSide="right"
-          />
-          <CheckboxListItem
-            primary="Another item to force a scroll"
-            secondary="How lovely!"
-            initCheckboxVal={true}
-            isChecked={cbVal}
-            onInputChange={handleInputChange}
-            checkboxSide="left"
           />
         </ListView>
         <ListView>
