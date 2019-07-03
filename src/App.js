@@ -72,11 +72,20 @@ function App() {
           <IconListItem primary="Last item" icon="kai-icon-camera" />
         </ListView>
         <ListView>
-          <ProgressBar header={'Downloading...'} percentage={80} />
+          <ProgressBar
+            header={'Downloading...'}
+            percentage={80}
+            type={'download'}
+          />
           <TextListItem
             primary="Hello primary text"
             secondary="secondary text"
             tertiary="tertiary text"
+          />
+          <ProgressBar
+            header={'Downloading...'}
+            percentage={30}
+            type={'buffer'}
           />
           <TextListItem
             primary="Hello primary text"

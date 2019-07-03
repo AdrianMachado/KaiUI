@@ -45,3 +45,37 @@ ul {
   border-radius: 0 50px 50px 0;
   transition: width 0.5s ease-in;
 }
+
+@mixin progress-bar-buffer {
+  display: block;
+  position: absolute;
+  content: '';
+
+  left: -50px;
+  width: 10px;
+  height: 0.5rem;
+  background-color: var(--pbar-right-buffer-color);
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  from {
+    left: -50px;
+    width: 30%;
+  }
+  50% {
+    width: 30%;
+  }
+  70% {
+    width: 70%;
+  }
+  80% {
+    left: 50%;
+  }
+  95% {
+    left: 120%;
+  }
+  to {
+    left: 100%;
+  }
+}

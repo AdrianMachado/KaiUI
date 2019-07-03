@@ -19,14 +19,14 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const { header, percentage, forwardedRef } = this.props;
+    const { header, percentage, type, forwardedRef } = this.props;
     const { isFocused } = this.state;
     const lineCls = `${prefixCls}-line`;
     const barWrapperCls = `${prefixCls}-bar-wrapper`;
     const leftFillerCls = `${prefixCls}-left-filler-${
       isFocused ? 'focused' : 'unfocused'
     }`;
-    const rightFillerCls = `${prefixCls}-right-filler-${
+    const rightFillerCls = `${prefixCls}-right-filler-${type}-${
       isFocused ? 'focused' : 'unfocused'
     }`;
 
@@ -55,6 +55,7 @@ ProgressBar.defaultProps = {};
 
 ProgressBar.propTypes = {
   header: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['download', 'buffer']).isRequired,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
