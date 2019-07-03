@@ -1,0 +1,66 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout.scss';
+
+:root {
+  --pbar-background: var(--color-gs00);
+  --pbar-left-filler-color: var(--color-purple);
+  --pbar-right-filler-color: var(--color-gs20);
+
+  --pbar-text-focused: var(--color-gs00);
+  --pbar-background-active-color: var(--color-purple);
+  --pbar-left-filler-focused-color: var(--color-gs00);
+  --pbar-right-filler-focused-color: var(--color-gs45);
+}
+
+.kai-pbar {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: var(--progress-bar-height);
+  width: 100%;
+
+  &:focus {
+    color: var(--pbar-text-focused);
+    background-color: var(--pbar-background-active-color);
+  }
+
+  &-line {
+    @extend .p-pri;
+    padding-bottom: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &-bar-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 0.5rem;
+  }
+
+  &-left-filler {
+    &-focused {
+      @include progress-bar-left-filler;
+      background-color: var(--pbar-left-filler-focused-color);
+    }
+    &-unfocused {
+      @include progress-bar-left-filler;
+      background-color: var(--pbar-left-filler-color);
+    }
+  }
+
+  &-right-filler {
+    &-focused {
+      @include progress-bar-right-filler;
+      background-color: var(--pbar-right-filler-focused-color);
+    }
+    &-unfocused {
+      @include progress-bar-right-filler;
+      background-color: var(--pbar-right-filler-color);
+    }
+  }
+}

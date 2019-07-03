@@ -32,3 +32,16 @@ ul {
   margin: 0 1rem;
   @extend .arrow-font;
 }
+
+@mixin progress-bar-left-filler {
+  height: 100%;
+  border-radius: 50px 0 0 50px;
+  transition: width 0.5s ease-in;
+  margin-right: 0.3rem;
+}
+
+@mixin progress-bar-right-filler {
+  height: 100%;
+  border-radius: 0 50px 50px 0;
+  transition: width 0.5s ease-in;
+}

@@ -11,7 +11,7 @@
 }
 .kai-rbl {
   width: auto;
-  min-height: 6rem;
+  min-height: var(--list-item-height);
   display: flex;
   flex-direction: row;
   align-items: center;

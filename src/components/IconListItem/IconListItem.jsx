@@ -13,10 +13,11 @@ class IconListItem extends React.Component {
     this.handleFocusChange = this.handleFocusChange.bind(this);
   }
 
-  handleFocusChange() {
-    this.setState(prevState => {
-      return { ...prevState, isFocused: !prevState.isFocused };
-    });
+  handleFocusChange(isFocused) {
+    this.setState({ isFocused });
+    if (isFocused) {
+      this.props.onFocusChange(this.props.index);
+    }
   }
 
   render() {
@@ -34,8 +35,8 @@ class IconListItem extends React.Component {
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
-        onFocus={this.handleFocusChange}
-        onBlur={this.handleFocusChange}
+        onFocus={() => this.handleFocusChange(true)}
+        onBlur={() => this.handleFocusChange(false)}
       >
         <div className={iconCls}>
           <span className={icon} />
@@ -61,6 +62,8 @@ IconListItem.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  index: PropTypes.number,
+  onFocusChange: PropTypes.func,
 };
 
 export default React.forwardRef((props, ref) => (

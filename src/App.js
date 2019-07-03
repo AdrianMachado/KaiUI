@@ -10,6 +10,7 @@ import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
 import ArrowListItem from './components/ArrowListItem/ArrowListItem';
 import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
 import Separator from './components/Separator/Separator';
+import ProgressBar from './components/ProgressBar/ProgressBar';
 
 function App() {
   const leftCallback = () => {
@@ -71,6 +72,7 @@ function App() {
           <IconListItem primary="Last item" icon="kai-icon-camera" />
         </ListView>
         <ListView>
+          <ProgressBar header={'Downloading...'} percentage={80} />
           <TextListItem
             primary="Hello primary text"
             secondary="secondary text"

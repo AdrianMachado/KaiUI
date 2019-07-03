@@ -6,7 +6,14 @@ const prefixCls = 'kai-tl';
 
 class TextListItem extends React.Component {
   render() {
-    const { primary, secondary, tertiary, forwardedRef } = this.props;
+    const {
+      primary,
+      secondary,
+      tertiary,
+      forwardedRef,
+      index,
+      onFocusChange,
+    } = this.props;
 
     const itemCls = prefixCls;
     const primaryCls = `${prefixCls}-primary`;
@@ -14,7 +21,12 @@ class TextListItem extends React.Component {
     const tertiaryCls = `${prefixCls}-tertiary ${tertiary ? '' : 'hidden'}`;
 
     return (
-      <div tabIndex="0" className={itemCls} ref={forwardedRef}>
+      <div
+        tabIndex="0"
+        className={itemCls}
+        ref={forwardedRef}
+        onFocus={() => onFocusChange(index)}
+      >
         <span className={primaryCls}>{primary}</span>
         <label className={secondaryCls}>{secondary}</label>
         <label className={tertiaryCls}>{tertiary}</label>
@@ -36,6 +48,8 @@ TextListItem.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  index: PropTypes.number,
+  onFocusChange: PropTypes.func,
 };
 
 export default React.forwardRef((props, ref) => (

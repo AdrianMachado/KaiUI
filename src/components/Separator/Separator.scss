@@ -7,7 +7,7 @@
 }
 
 .kai-separator {
-  height: 2.4rem;
+  height: var(--separator-height);
   width: 100%;
   background-color: var(--separator-background-color);
   &-text {
