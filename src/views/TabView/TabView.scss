@@ -13,6 +13,7 @@
   }
   &-content {
     flex-grow: 1;
+    height: calc(100% - 3rem);
     overflow: auto;
   }
 }

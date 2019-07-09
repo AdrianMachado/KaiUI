@@ -1,0 +1,14 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.App {
+  height: 100%;
+  overflow: hidden;
+}
+
+.content {
+  height: calc(100vh - 5.8rem);
+  overflow-y: hidden;
+}

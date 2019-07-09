@@ -6,7 +6,7 @@ const prefixCls = 'kai-btl';
 
 class BodyTextListItem extends React.Component {
   render() {
-    const { header, body, forwardedRef, onFocusChange } = this.props;
+    const { header, body, index, forwardedRef, onFocusChange } = this.props;
 
     const itemCls = prefixCls;
     const headerCls = `${prefixCls}-header`;
@@ -17,8 +17,7 @@ class BodyTextListItem extends React.Component {
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
-        onFocus={() => onFocusChange(true)}
-        onBlur={() => onFocusChange(false)}
+        onFocus={() => onFocusChange(index)}
       >
         <span className={headerCls}>{header}</span>
         <label className={bodyCls}>{body}</label>
@@ -38,6 +37,7 @@ BodyTextListItem.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };
 

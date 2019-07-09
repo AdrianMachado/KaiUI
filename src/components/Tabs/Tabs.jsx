@@ -33,11 +33,15 @@ class Tabs extends React.Component {
           index + 1,
           React.Children.count(this.props.children) - 1
         );
-        this.handleTabChange(index);
+        if (this.state.activeChild !== index) {
+          this.handleTabChange(index);
+        }
         break;
       case 'ArrowLeft':
         index = Math.max(index - 1, 0);
-        this.handleTabChange(index);
+        if (this.state.activeChild !== index) {
+          this.handleTabChange(index);
+        }
         break;
       default:
         break;

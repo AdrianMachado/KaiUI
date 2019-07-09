@@ -4,7 +4,7 @@
 }
 
 .kai-tabs {
-  overflow: auto;
+  overflow-x: hidden;
   white-space: nowrap;
   height: var(--tabs-height);
   outline: none;
