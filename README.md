@@ -1,2 +1,3 @@
-# rately
-Currency conversion calculator for kaios
+# KaiUI
+
+UI Component library for building KaiOS apps

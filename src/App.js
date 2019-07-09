@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header text="rately" />
+      <Header text="KaiUI" />
       <TabView tabLabels={['checkboxes', 'icons', '3 Text', 'body-arr']}>
         <ListView>
           <CheckboxListItem

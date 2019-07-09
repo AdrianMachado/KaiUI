@@ -1,7 +1,7 @@
 {
-  "name": "Rately",
+  "name": "KaiUI Demo",
   "version": "1.0.0",
-  "description": "A kaiOS Currency Conversion Calculator",
+  "description": "A demo app for KaiUI components",
   "launch_path": "/index.html",
   "icons": {
     "56": "/icons/rately56x56.png",
@@ -13,15 +13,15 @@
   },
   "locale": {
     "en-US":{
-      "name": "Rately",
-      "description": "A kaiOS Currency Conversion Calculator"
+      "name": "KaiUI Demo",
+      "description": "A demo app for KaiUI components"
     }
   },
   "default_locale": "en-US",
-  "subtitle": "Quick Currency Conversion Calculator",
+  "subtitle": "Small demo app for KaiUI",
   "permissions":{
     "input":{
-      "description": "Required to enter currency values"
+      "description": "Required to enter values"
     }
   },
   "orientation": [ "portrait-primary" ]
