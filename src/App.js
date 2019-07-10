@@ -16,7 +16,6 @@ function App() {
   const leftCallback = () => {
     console.log('left was pressed');
   };
-  let cbVal = false;
   const handleInputChange = newVal => {
     console.log('new input value', newVal);
   };
@@ -25,7 +24,7 @@ function App() {
     <div className="App">
       <Header text="KaiUI" />
       <div className="content">
-        <TabView tabLabels={['checkboxes', 'icons', '3 Text', 'body-arr']}>
+        <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
           <ListView>
             <CheckboxListItem
               primary="Hello primary text"
@@ -37,24 +36,23 @@ function App() {
             <Separator separatorText={'hello, separator here'} />
             <CheckboxListItem
               primary="Another item with more text"
-              secondary="seconday text at the bottom"
+              secondary="secondary text at the bottom"
               initCheckboxVal={true}
               onInputChange={() => {}}
               checkboxSide="right"
             />
             <RadioButtonListItem
-              primary="Surprise radio button"
-              secondary="Not a checkbox"
+              primary="Radio button"
+              secondary="Secondary text"
               initButtonVal={false}
               onInputChange={handleInputChange}
               buttonSide="right"
             />
-            <CheckboxListItem
-              primary="Item without secondary"
-              initCheckboxVal={false}
-              isChecked={cbVal}
+            <RadioButtonListItem
+              primary="Another radio button"
+              initButtonVal={true}
               onInputChange={handleInputChange}
-              checkboxSide="right"
+              buttonSide="right"
             />
           </ListView>
           <ListView>
@@ -81,6 +79,11 @@ function App() {
               percentage={80}
               type={'download'}
             />
+            <ProgressBar
+              header={'Downloading...'}
+              percentage={30}
+              type={'download'}
+            />
             <TextListItem
               primary="Hello primary text"
               secondary="secondary text"
@@ -89,6 +92,11 @@ function App() {
             <ProgressBar
               header={'Buffering...'}
               percentage={30}
+              type={'buffer'}
+            />
+            <ProgressBar
+              header={'Buffering...'}
+              percentage={70}
               type={'buffer'}
             />
             <TextListItem
