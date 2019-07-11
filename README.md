@@ -61,11 +61,11 @@ TBD
 ## Themes
 
 Standardized colors and font stylings are found in the [themes directory](https://github.com/AdrianMachado/KaiUI/tree/master/src/theme). These follow the KaiOS [typography standard](https://developer.kaiostech.com/design-guide/typography).
-Currently customization must be done manually by changing SASS variables, but in-code styling is a WIP
+Currently you can customize the focus color of components through props, font color is a WIP.
 
 ## Icons
 
-KaiUI uses custom icons provided on the KaiOS developer portal. These are included in the kai-icons font and incorporated as [SASS/CSS classes](https://github.com/AdrianMachado/KaiUI/tree/master/src/kai-font)
+KaiUI uses custom icons provided on the KaiOS developer portal. These are included in the kai-icons font and incorporated as [SASS/CSS classes](https://github.com/AdrianMachado/KaiUI/tree/master/src/kai-font).
 
 # Contributing
 

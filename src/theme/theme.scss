@@ -50,7 +50,7 @@ input {
 
   --color-warning: #fbbd3c;
   --color-destructive: #e2443a;
-  --color-preffered: #00ba91;
+  --color-preferred: #00ba91;
 
   /* KaiOS Colors */
 
@@ -161,4 +161,34 @@ input {
   --header-background: var(--header-purple-background);
 
   --header-color: var(--color-beta);
+}
+
+@mixin header-background-colors {
+  .purple {
+    background: var(--header-purple-background);
+  }
+
+  .pink {
+    background: var(--header-pink-background);
+  }
+
+  .lime {
+    background: var(--header-lime-background);
+  }
+
+  .cyan {
+    background: var(--header-cyan-background);
+  }
+
+  .blue {
+    background: var(--header-blue-background);
+  }
+
+  .orange {
+    background: var(--header-orange-background);
+  }
+
+  .red {
+    background: var(--header-red-background);
+  }
 }

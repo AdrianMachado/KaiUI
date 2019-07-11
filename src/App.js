@@ -12,6 +12,8 @@ import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonLis
 import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import './App.scss';
+import colors from './theme/colors.scss';
+
 function App() {
   const leftCallback = () => {
     console.log('left was pressed');
@@ -22,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header text="KaiUI" />
+      <Header text="KaiUI" backgroundColor={colors.headerPurple} />
       <div className="content">
         <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
           <ListView>
@@ -40,6 +42,7 @@ function App() {
               initCheckboxVal={true}
               onInputChange={() => {}}
               checkboxSide="right"
+              focusColor={colors.carrotOrange}
             />
             <RadioButtonListItem
               primary="Radio button"
@@ -88,6 +91,7 @@ function App() {
               primary="Hello primary text"
               secondary="secondary text"
               tertiary="tertiary text"
+              focusColor={colors.gold}
             />
             <ProgressBar
               header={'Buffering...'}

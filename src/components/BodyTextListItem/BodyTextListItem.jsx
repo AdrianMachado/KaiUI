@@ -1,13 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './BodyTextListItem.scss';
 
 const prefixCls = 'kai-btl';
 
 class BodyTextListItem extends React.Component {
-  render() {
-    const { header, body, index, forwardedRef, onFocusChange } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFocused: false,
+    };
+    this.handleFocusChange = this.handleFocusChange.bind(this);
+  }
 
+  handleFocusChange(isFocused) {
+    this.setState({ isFocused });
+    if (isFocused) {
+      this.props.onFocusChange(this.props.index);
+    }
+  }
+
+  render() {
+    const { header, body, focusColor, forwardedRef } = this.props;
+    const { isFocused } = this.state;
     const itemCls = prefixCls;
     const headerCls = `${prefixCls}-header`;
     const bodyCls = `${prefixCls}-body ${body ? '' : 'hidden'}`;
@@ -17,7 +34,9 @@ class BodyTextListItem extends React.Component {
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
-        onFocus={() => onFocusChange(index)}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+        onFocus={() => this.handleFocusChange(true)}
+        onBlur={() => this.handleFocusChange(false)}
       >
         <span className={headerCls}>{header}</span>
         <label className={bodyCls}>{body}</label>
@@ -28,11 +47,13 @@ class BodyTextListItem extends React.Component {
 
 BodyTextListItem.defaultProps = {
   body: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 BodyTextListItem.propTypes = {
   header: PropTypes.string.isRequired,
   body: PropTypes.string,
+  focusColor: PropTypes.string,
   forwardedRed: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

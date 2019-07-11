@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './CheckboxListItem.scss';
 
 const prefixCls = 'kai-cbl';
@@ -41,7 +43,13 @@ class CheckboxListItem extends React.Component {
   }
 
   render() {
-    const { checkboxSide, primary, secondary, forwardedRef } = this.props;
+    const {
+      checkboxSide,
+      primary,
+      secondary,
+      focusColor,
+      forwardedRef,
+    } = this.props;
     const { isFocused } = this.state;
 
     // Managed vs self-managed checkboxes
@@ -63,6 +71,7 @@ class CheckboxListItem extends React.Component {
       <div
         tabIndex="0"
         className={itemCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
@@ -105,6 +114,7 @@ class CheckboxListItem extends React.Component {
 CheckboxListItem.defaultProps = {
   secondary: null,
   isChecked: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 CheckboxListItem.propTypes = {
@@ -116,6 +126,7 @@ CheckboxListItem.propTypes = {
   // For direct management over the checkbox value
   isChecked: PropTypes.bool,
   checkboxSide: PropTypes.oneOf(['left', 'right']).isRequired,
+  focusColor: PropTypes.string,
   // For ListView navigation
   onFocusChange: PropTypes.func,
   index: PropTypes.number,

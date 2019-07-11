@@ -2,16 +2,13 @@
 @import '../../theme/theme.scss';
 
 :root {
-  --btl-background-color: var(--color-gs00);
   --btl-text-focused: var(--color-gs00);
-  --btl-background-active-color: var(--color-purple);
 }
 .kai-btl {
   height: fit-content;
   width: 100%;
   min-height: var(--list-item-height);
   outline: none;
-  background-color: var(--btl-background-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +24,6 @@
 
   &:focus {
     color: var(--btl-text-focused);
-    background-color: var(--btl-background-active-color);
   }
 
   &-header {

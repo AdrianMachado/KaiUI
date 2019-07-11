@@ -1,18 +1,19 @@
 @import '../../theme/fonts.scss';
 @import '../../theme/theme.scss';
-@import '../../theme/layout';
+@import '../../theme/layout.scss';
 
 $kai-header-height: 2.8rem;
 
 .kai-header {
   @include flex(row);
+  // @include header-background-colors;
   width: 100%;
   line-height: $kai-header-height;
+
   h1 {
     width: 100%;
     height: 100%;
     color: var(--color-gs00, #fff);
-    background: var(--header-purple-background);
     @extend %text-ellipsis;
     @extend h1;
     text-align: center;

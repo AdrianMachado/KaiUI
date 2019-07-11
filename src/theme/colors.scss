@@ -1,0 +1,88 @@
+@import './theme.scss';
+
+$defaultFocusColor: var(--color-purple);
+
+$headerPurple: var(--header-purple-background);
+$headerPink: var(--header-pink-background);
+$headerLime: var(--header-lime-background);
+$headerCyan: var(--header-cyan-background);
+$headerBlue: var(--header-blue-background);
+$headerOrange: var(--header-orange-background);
+$headerRed: var(--header-red-background);
+
+$darkBlue: var(--color-darkblue);
+$blue: var(--color-blue);
+$turquoise: var(--color-turquoise);
+$darkOrange: var(--color-darkorange);
+$orange: var(--color-orange);
+$yellow: var(--color-yellow);
+$violet: var(--color-violet);
+$carrotOrange: var(--color-carrotorange);
+$watTheBlue: var(--color-wathetblue);
+$gold: var(--color-gold);
+$purple: var(--color-purple);
+$pink: var(--color-pink);
+$lime: var(--color-lime);
+$cyan: var(--color-cyan);
+$red: var(--color-red);
+
+$warning: var(--color-warning);
+$destructive: var(--color-destructive);
+$preferred: var(--color-preferred);
+
+$black: var(--color-gs100);
+$grayscale90: var(--color-gs90);
+$grayscale70: var(--color-gs70);
+$grayscale45: var(--color-gs45);
+$grayscale20: var(--color-gs20);
+$grayscale10: var(--color-gs10);
+$white: var(--color-gs00);
+
+/* TODO: save for pressed state
+--color-purple-pressed: #6c32cc;
+--color-pink-pressed: #bf2392;
+--color-lime-pressed: #6b9a23;
+--color-cyan-pressed: #31979e;
+--color-blue-pressed: #0a80b4;
+--color-orange-pressed: #cc5310;
+--color-red-pressed: #c21930;
+--color-gold-pressed: #cc8000;
+*/
+
+:export {
+  defaultFocusColor: $defaultFocusColor;
+  headerPurple: $headerPurple;
+  headerPink: $headerPink;
+  headerLime: $headerLime;
+  headerCyan: $headerCyan;
+  headerBlue: $headerBlue;
+  headerOrange: $headerOrange;
+  headerRed: $headerRed;
+  darkBlue: $darkBlue;
+  $blue: $blue;
+  turquoise: $turquoise;
+  darkOrange: $darkOrange;
+  orange: $orange;
+  yellow: $yellow;
+  violet: $violet;
+  carrotOrange: $carrotOrange;
+  watTheBlue: $watTheBlue;
+  gold: $gold;
+  purple: $purple;
+  pink: $pink;
+  lime: $lime;
+  cyan: $cyan;
+  red: $red;
+
+  warning: $warning;
+  destructive: $destructive;
+  preferred: $preferred;
+
+  black: $black;
+  grayscale90: $grayscale90;
+  grayscale70: $grayscale70;
+  grayscale45: $grayscale45;
+  grayscale20: $grayscale20;
+  grayscale10: $grayscale10;
+  white: $white;
+}

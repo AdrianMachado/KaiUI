@@ -2,16 +2,13 @@
 @import '../../theme/theme.scss';
 
 :root {
-  --tl-background-color: var(--color-gs00);
   --tl-text-focused: var(--color-gs00);
-  --tl-background-active-color: var(--color-purple);
 }
 .kai-tl {
   height: fit-content;
   width: 100%;
   min-height: var(--list-item-height);
   outline: none;
-  background-color: var(--tl-background-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +24,6 @@
 
   &:focus {
     color: var(--tl-text-focused);
-    background-color: var(--tl-background-active-color);
   }
 
   &-primary {

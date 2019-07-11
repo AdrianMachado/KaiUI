@@ -4,9 +4,7 @@
 @import '../../kai-font/style.scss';
 
 :root {
-  --il-background-color: var(--color-gs00);
   --il-text-focused: var(--color-gs00);
-  --il-background-active-color: var(--color-purple);
   --il-icon-unfocused: var(--color-zeta);
 }
 .kai-il {
@@ -17,10 +15,8 @@
   align-items: center;
   overflow: hidden;
   outline: none;
-  background-color: var(--il-background-color);
   &:focus {
     color: var(--il-text-focused);
-    background-color: var(--il-background-active-color);
   }
 
   &-icon {

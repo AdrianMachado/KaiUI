@@ -4,9 +4,7 @@
 @import '../../kai-font/style.scss';
 
 :root {
-  --cbl-background-color: var(--color-gs00);
   --cbl-text-focused: var(--color-gs00);
-  --cbl-background-active-color: var(--color-purple);
   --cbl-checkbox-unfocused: var(--color-zeta);
 }
 .kai-cbl {
@@ -17,10 +15,8 @@
   align-items: center;
   overflow: hidden;
   outline: none;
-  background-color: var(--cbl-background-color);
   &:focus {
     color: var(--cbl-text-focused);
-    background-color: var(--cbl-background-active-color);
   }
 
   &-box {

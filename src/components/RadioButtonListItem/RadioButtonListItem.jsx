@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './RadioButtonListItem.scss';
 
 const prefixCls = 'kai-rbl';
@@ -41,7 +43,13 @@ class RadioButtonListItem extends React.Component {
   }
 
   render() {
-    const { buttonSide, primary, secondary, forwardedRef } = this.props;
+    const {
+      buttonSide,
+      primary,
+      secondary,
+      focusColor,
+      forwardedRef,
+    } = this.props;
     const { isFocused } = this.state;
 
     // Managed vs self-managed radio buttons
@@ -65,6 +73,7 @@ class RadioButtonListItem extends React.Component {
       <div
         tabIndex="0"
         className={itemCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
@@ -107,6 +116,7 @@ class RadioButtonListItem extends React.Component {
 RadioButtonListItem.defaultProps = {
   secondary: null,
   isChecked: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 RadioButtonListItem.propTypes = {
@@ -120,6 +130,7 @@ RadioButtonListItem.propTypes = {
   buttonSide: PropTypes.oneOf(['left', 'right']).isRequired,
   // For ListView navigation
   onFocusChange: PropTypes.func,
+  focusColor: PropTypes.string,
   index: PropTypes.number,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,

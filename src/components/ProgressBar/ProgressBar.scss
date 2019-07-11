@@ -3,13 +3,11 @@
 @import '../../theme/layout.scss';
 
 :root {
-  --pbar-background: var(--color-gs00);
   --pbar-left-filler-color: var(--color-purple);
   --pbar-right-filler-color: var(--color-gs20);
   --pbar-right-buffer-color: var(--color-gs45);
 
   --pbar-text-focused: var(--color-gs00);
-  --pbar-background-active-color: var(--color-purple);
   --pbar-left-filler-focused-color: var(--color-gs00);
   --pbar-right-filler-focused-color: var(--color-gs45);
 }
@@ -26,7 +24,6 @@
 
   &:focus {
     color: var(--pbar-text-focused);
-    background-color: var(--pbar-background-active-color);
   }
 
   &-line {

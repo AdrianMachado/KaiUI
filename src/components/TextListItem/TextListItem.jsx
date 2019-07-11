@@ -1,19 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './TextListItem.scss';
 
 const prefixCls = 'kai-tl';
 
 class TextListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFocused: false,
+    };
+    this.handleFocusChange = this.handleFocusChange.bind(this);
+  }
+
+  handleFocusChange(isFocused) {
+    this.setState({ isFocused });
+    if (isFocused) {
+      this.props.onFocusChange(this.props.index);
+    }
+  }
+
   render() {
     const {
       primary,
       secondary,
       tertiary,
+      focusColor,
       forwardedRef,
-      index,
-      onFocusChange,
     } = this.props;
+    const { isFocused } = this.state;
 
     const itemCls = prefixCls;
     const primaryCls = `${prefixCls}-primary`;
@@ -24,8 +41,10 @@ class TextListItem extends React.Component {
       <div
         tabIndex="0"
         className={itemCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => onFocusChange(index)}
+        onFocus={() => this.handleFocusChange(true)}
+        onBlur={() => this.handleFocusChange(false)}
       >
         <span className={primaryCls}>{primary}</span>
         <label className={secondaryCls}>{secondary}</label>
@@ -38,12 +57,14 @@ class TextListItem extends React.Component {
 TextListItem.defaultProps = {
   secondary: null,
   tertiary: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 TextListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
   tertiary: PropTypes.string,
+  focusColor: PropTypes.string,
   forwardedRed: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

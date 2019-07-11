@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './ProgressBar.scss';
 
 const prefixCls = 'kai-pbar';
@@ -19,7 +21,7 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const { header, percentage, type, forwardedRef } = this.props;
+    const { header, percentage, type, focusColor, forwardedRef } = this.props;
     const { isFocused } = this.state;
     const lineCls = `${prefixCls}-line`;
     const barWrapperCls = `${prefixCls}-bar-wrapper`;
@@ -34,6 +36,7 @@ class ProgressBar extends React.Component {
       <div
         tabIndex="0"
         className={prefixCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
@@ -51,11 +54,14 @@ class ProgressBar extends React.Component {
   }
 }
 
-ProgressBar.defaultProps = {};
+ProgressBar.defaultProps = {
+  focusColor: colors.defaultFocusColor,
+};
 
 ProgressBar.propTypes = {
   header: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['download', 'buffer']).isRequired,
+  focusColor: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

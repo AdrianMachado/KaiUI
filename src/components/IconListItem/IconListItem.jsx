@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './IconListItem.scss';
 
 const prefixCls = 'kai-il';
@@ -21,7 +23,7 @@ class IconListItem extends React.Component {
   }
 
   render() {
-    const { primary, secondary, icon, forwardedRef } = this.props;
+    const { primary, secondary, icon, focusColor, forwardedRef } = this.props;
     const { isFocused } = this.state;
 
     const itemCls = prefixCls;
@@ -35,6 +37,7 @@ class IconListItem extends React.Component {
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
       >
@@ -52,12 +55,14 @@ class IconListItem extends React.Component {
 
 IconListItem.defaultProps = {
   secondary: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 IconListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
   icon: PropTypes.string.isRequired,
+  focusColor: PropTypes.string,
   forwardedRed: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

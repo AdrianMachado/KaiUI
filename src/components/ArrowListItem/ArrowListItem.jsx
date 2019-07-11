@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import colors from '../../theme/colors.scss';
+
 import './ArrowListItem.scss';
 
 const prefixCls = 'kai-al';
@@ -21,7 +23,7 @@ class ArrowListItem extends React.Component {
   }
 
   render() {
-    const { primary, secondary, forwardedRef } = this.props;
+    const { primary, secondary, forwardedRef, focusColor } = this.props;
     const { isFocused } = this.state;
 
     const itemCls = prefixCls;
@@ -35,6 +37,7 @@ class ArrowListItem extends React.Component {
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
       >
@@ -52,6 +55,7 @@ class ArrowListItem extends React.Component {
 
 ArrowListItem.defaultProps = {
   secondary: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 ArrowListItem.propTypes = {
@@ -61,6 +65,7 @@ ArrowListItem.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  focusColor: PropTypes.string,
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };

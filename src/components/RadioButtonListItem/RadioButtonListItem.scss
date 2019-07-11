@@ -4,9 +4,7 @@
 @import '../../kai-font/style.scss';
 
 :root {
-  --rbl-background-color: var(--color-gs00);
   --rbl-text-focused: var(--color-gs00);
-  --rbl-background-active-color: var(--color-purple);
   --rbl-radio-unfocused: var(--color-zeta);
 }
 .kai-rbl {
@@ -17,10 +15,8 @@
   align-items: center;
   overflow: hidden;
   outline: none;
-  background-color: var(--rbl-background-color);
   &:focus {
     color: var(--rbl-text-focused);
-    background-color: var(--rbl-background-active-color);
   }
 
   &-button {
