@@ -4,7 +4,7 @@ import './Tabs.scss';
 
 const prefixCls = 'kai-tabs';
 
-class Tabs extends React.Component {
+class Tabs extends React.PureComponent {
   constructor() {
     super();
     // Bind the method to the component context

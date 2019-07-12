@@ -22,7 +22,7 @@ const handleButtonClick = (e, handleClick) => {
   handleClick();
 };
 
-class SoftKey extends React.Component {
+class SoftKey extends React.PureComponent {
   constructor(props) {
     super(props);
     document.addEventListener('keydown', e => this.handleKeyDown(e, props));

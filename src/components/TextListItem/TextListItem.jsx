@@ -6,7 +6,7 @@ import './TextListItem.scss';
 
 const prefixCls = 'kai-tl';
 
-class TextListItem extends React.Component {
+class TextListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

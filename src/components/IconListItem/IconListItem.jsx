@@ -6,7 +6,7 @@ import './IconListItem.scss';
 
 const prefixCls = 'kai-il';
 
-class IconListItem extends React.Component {
+class IconListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

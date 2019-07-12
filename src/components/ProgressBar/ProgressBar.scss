@@ -21,6 +21,7 @@
   box-sizing: border-box;
   height: var(--progress-bar-height);
   width: 100%;
+  outline: none;
 
   &:focus {
     color: var(--pbar-text-focused);

@@ -6,9 +6,9 @@ $kai-header-height: 2.8rem;
 
 .kai-header {
   @include flex(row);
-  // @include header-background-colors;
   width: 100%;
   line-height: $kai-header-height;
+  outline: none;
 
   h1 {
     width: 100%;

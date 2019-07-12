@@ -6,7 +6,7 @@ import './BodyTextListItem.scss';
 
 const prefixCls = 'kai-btl';
 
-class BodyTextListItem extends React.Component {
+class BodyTextListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,8 +33,8 @@ class BodyTextListItem extends React.Component {
       <div
         tabIndex="0"
         className={itemCls}
-        ref={forwardedRef}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+        ref={forwardedRef}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
       >
@@ -54,7 +54,7 @@ BodyTextListItem.propTypes = {
   header: PropTypes.string.isRequired,
   body: PropTypes.string,
   focusColor: PropTypes.string,
-  forwardedRed: PropTypes.oneOfType([
+  forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),

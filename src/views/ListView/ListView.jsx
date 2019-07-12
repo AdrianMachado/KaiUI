@@ -5,7 +5,7 @@ import './ListView.scss';
 
 const prefixCls = 'kai-list-view';
 
-class ListView extends React.Component {
+class ListView extends React.PureComponent {
   constructor() {
     super();
     this.handleChangeIndex = this.handleChangeIndex.bind(this);

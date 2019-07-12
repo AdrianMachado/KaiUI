@@ -6,7 +6,7 @@ import './RadioButtonListItem.scss';
 
 const prefixCls = 'kai-rbl';
 
-class RadioButtonListItem extends React.Component {
+class RadioButtonListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

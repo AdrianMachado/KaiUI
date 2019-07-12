@@ -4,7 +4,7 @@ import './Tab.scss';
 
 const prefixCls = 'kai-tab';
 
-class Tab extends React.Component {
+class Tab extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);

@@ -6,7 +6,7 @@ import './ProgressBar.scss';
 
 const prefixCls = 'kai-pbar';
 
-class ProgressBar extends React.Component {
+class ProgressBar extends React.PureComponent {
   constructor() {
     super();
     this.state = { isFocused: false };

@@ -6,7 +6,7 @@ import './ArrowListItem.scss';
 
 const prefixCls = 'kai-al';
 
-class ArrowListItem extends React.Component {
+class ArrowListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,8 +36,8 @@ class ArrowListItem extends React.Component {
       <div
         tabIndex="0"
         className={itemCls}
-        ref={forwardedRef}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+        ref={forwardedRef}
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
       >
@@ -61,11 +61,11 @@ ArrowListItem.defaultProps = {
 ArrowListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
+  focusColor: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  focusColor: PropTypes.string,
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };

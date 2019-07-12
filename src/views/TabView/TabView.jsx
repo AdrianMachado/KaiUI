@@ -7,7 +7,7 @@ import './TabView.scss';
 
 const prefixCls = 'kai-tab-view';
 
-class TabView extends React.Component {
+class TabView extends React.PureComponent {
   constructor() {
     super();
     this.renderChildren = this.renderChildren.bind(this);

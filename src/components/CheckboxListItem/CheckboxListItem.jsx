@@ -6,7 +6,7 @@ import './CheckboxListItem.scss';
 
 const prefixCls = 'kai-cbl';
 
-class CheckboxListItem extends React.Component {
+class CheckboxListItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
