@@ -22,6 +22,8 @@ const handleButtonClick = (e, handleClick) => {
   handleClick();
 };
 
+// TODO: convert to functional with Hooks
+
 class SoftKey extends React.PureComponent {
   constructor(props) {
     super(props);
