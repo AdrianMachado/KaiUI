@@ -43,7 +43,13 @@ class ProgressBar extends React.PureComponent {
       >
         <span className={lineCls}>{header}</span>
         <div className={barWrapperCls}>
-          <div className={leftFillerCls} style={{ width: `${percentage}%` }} />
+          <div
+            className={leftFillerCls}
+            style={{
+              width: `${percentage}%`,
+              backgroundColor: isFocused ? colors.grayscale20 : focusColor,
+            }}
+          />
           <div
             className={rightFillerCls}
             style={{ width: `${100 - percentage}%` }}

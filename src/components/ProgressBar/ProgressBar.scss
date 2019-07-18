@@ -3,12 +3,10 @@
 @import '../../theme/layout.scss';
 
 :root {
-  --pbar-left-filler-color: var(--color-purple);
   --pbar-right-filler-color: var(--color-gs20);
   --pbar-right-buffer-color: var(--color-gs45);
 
   --pbar-text-focused: var(--color-gs00);
-  --pbar-left-filler-focused-color: var(--color-gs00);
   --pbar-right-filler-focused-color: var(--color-gs45);
 }
 
@@ -44,11 +42,9 @@
   &-left-filler {
     &-focused {
       @include progress-bar-left-filler;
-      background-color: var(--pbar-left-filler-focused-color);
     }
     &-unfocused {
       @include progress-bar-left-filler;
-      background-color: var(--pbar-left-filler-color);
     }
   }
 

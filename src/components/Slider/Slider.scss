@@ -1,0 +1,131 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout.scss';
+
+:root {
+  // Manipulate these in the component
+  --slider-text-focused: var(--color-gs00);
+  --slider-track-color: var(--color-gs20);
+}
+
+.kai-slider {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: var(--slider-height);
+  width: 100%;
+  outline: none;
+
+  &:focus {
+    color: var(--slider-text-focused);
+  }
+
+  &-line {
+    @extend .p-pri;
+    padding-bottom: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  // Credit for slider css goes to Ana Tudor
+  // https://css-tricks.com/sliding-nightmare-understanding-range-input/
+
+  &-slider-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 0.5rem;
+    $track-width: 100%;
+    $track-height: 0.5rem;
+    $thumb-diam: 2rem;
+    $track-c: var(--slider-track-color);
+    $fill-c: var(--slider-left-filler-color);
+
+    @mixin track($fill: 0) {
+      box-sizing: border-box;
+      border: none;
+      width: $track-width;
+      height: $track-height;
+      background: $track-c;
+      border-radius: 50px;
+
+      @if $fill == 1 {
+        & {
+          background: linear-gradient($fill-c, $fill-c)
+            0 /
+            var(--sx)
+            100%
+            no-repeat
+            $track-c;
+        }
+      }
+    }
+
+    @mixin fill() {
+      height: $track-height;
+      background: $fill-c;
+    }
+
+    @mixin thumb() {
+      box-sizing: border-box;
+      border: 0.3rem solid var(--slider-thumb-border-color);
+      width: $thumb-diam;
+      height: $thumb-diam;
+      border-radius: 50%;
+      background: var(--slider-left-filler-color);
+    }
+
+    [type='range'] {
+      &,
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
+
+      --range: calc(var(--max) - var(--min));
+      --ratio: calc((var(--val) - var(--min)) / var(--range));
+      --sx: calc(0.5 *#{$thumb-diam} + var(--ratio) * (100% - #{$thumb-diam}));
+      margin: 0;
+      padding: 0;
+      width: $track-width;
+      // height: $thumb-diam;
+      background: transparent;
+      font: 1em/1 arial, sans-serif;
+
+      &::-webkit-slider-runnable-track {
+        @include track(1);
+      }
+      &::-moz-range-track {
+        @include track;
+      }
+      &::-ms-track {
+        @include track;
+      }
+
+      &::-moz-range-progress {
+        @include fill;
+      }
+      &::-ms-fill-lower {
+        @include fill;
+      }
+
+      &::-webkit-slider-thumb {
+        margin-top: 0.5 * ($track-height - $thumb-diam);
+        @include thumb;
+      }
+      &::-moz-range-thumb {
+        @include thumb;
+      }
+      &::-ms-thumb {
+        margin-top: 0;
+        @include thumb;
+      }
+
+      &::-ms-tooltip {
+        display: none;
+      }
+    }
+  }
+}

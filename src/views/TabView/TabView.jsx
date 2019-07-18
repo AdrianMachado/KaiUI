@@ -59,6 +59,7 @@ class TabView extends React.PureComponent {
             index={activeTab}
             onChangeIndex={this.handleChangeIndex}
             onTransitionEnd={this.handleTransitionEnd}
+            disabled={true}
           >
             {this.renderChildren()}
           </SwipeableViews>

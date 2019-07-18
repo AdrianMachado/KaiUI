@@ -11,6 +11,7 @@ import ArrowListItem from './components/ArrowListItem/ArrowListItem';
 import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
 import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
+import Slider from './components/Slider/Slider';
 import './App.scss';
 import colors from './theme/colors.scss';
 
@@ -64,10 +65,11 @@ function App() {
               secondary="seconday text"
               icon="kai-icon-favorite-off"
             />
-            <IconListItem
-              primary="Another item with more text"
-              secondary="seconday text at the bottom"
-              icon="kai-icon-favorite-on"
+            <Slider
+              header="I am slider"
+              initialValue={5}
+              minValue={0}
+              maxValue={10}
             />
             <Separator separatorText={'Another separator'} />
             <IconListItem
@@ -81,6 +83,7 @@ function App() {
               header={'Downloading...'}
               percentage={80}
               type={'download'}
+              focusColor={colors.lime}
             />
             <ProgressBar
               header={'Downloading...'}
