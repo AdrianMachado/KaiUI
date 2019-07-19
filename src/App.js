@@ -66,7 +66,13 @@ function App() {
               icon="kai-icon-favorite-off"
             />
             <Slider
-              header="I am slider"
+              header="I am a slider"
+              initialValue={3}
+              minValue={0}
+              maxValue={10}
+            />
+            <Slider
+              header="Also a slider"
               initialValue={5}
               minValue={0}
               maxValue={10}

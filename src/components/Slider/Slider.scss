@@ -24,10 +24,23 @@
   }
 
   &-line {
-    @extend .p-pri;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     padding-bottom: 1rem;
     width: 100%;
+  }
+
+  &-header {
+    @extend .p-pri;
     overflow: hidden;
+  }
+
+  &-tracker {
+    @extend .p-sec;
+    overflow: hidden;
+    align-self: flex-end;
   }
 
   // Credit for slider css goes to Ana Tudor

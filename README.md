@@ -37,7 +37,7 @@ All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-co
 | Radio Button        | ![alt text](./component_screenshots/kaiui-rb.png 'Radio button')                         |                                                                                |
 | Progress-Download   | ![alt text](./component_screenshots/kaiui-progress-download.png 'Download')              | ![alt text](./component_screenshots/kaiui-progress-spec.png 'Progress spec')   |
 | Progress-Buffering  | ![alt text](./component_screenshots/kaiui-progress-buffer.gif 'Buffering')               |                                                                                |
-| Slider              | WIP                                                                                      | ![alt text](./component_screenshots/kaiui-slider.png 'Slider')                 |
+| Slider              | ![alt text](./component_screenshots/kaiui-slider.gif 'Slider')                           | ![alt text](./component_screenshots/kaiui-slider-spec.png 'Slider spec')       |
 | Button              | TBD                                                                                      | ![alt text](./component_screenshots/kaiui-button.png 'Button')                 |
 | Input               | TBD                                                                                      | ![alt text](./component_screenshots/kaiui-input.png 'Input')                   |
 

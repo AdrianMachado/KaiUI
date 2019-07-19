@@ -7,7 +7,6 @@ import './Slider.scss';
 const prefixCls = 'kai-slider';
 
 class Slider extends React.PureComponent {
-  slider = React.createRef();
   constructor(props) {
     super(props);
     this.state = { isFocused: false, sliderValue: props.initialValue };
@@ -38,6 +37,8 @@ class Slider extends React.PureComponent {
     } = this.props;
     const { isFocused, sliderValue } = this.state;
     const lineCls = `${prefixCls}-line`;
+    const headerCls = `${prefixCls}-header`;
+    const trackerCls = `${prefixCls}-tracker`;
     const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
 
     return (
@@ -49,7 +50,11 @@ class Slider extends React.PureComponent {
         onFocus={() => this.handleFocusChange(true)}
         onBlur={() => this.handleFocusChange(false)}
       >
-        <span className={lineCls}>{header}</span>
+        <div className={lineCls}>
+          <span className={headerCls}>{header}</span>
+          <span className={trackerCls}>{`${sliderValue}/${maxValue}`}</span>
+        </div>
+
         <div className={sliderWrapperCls}>
           <input
             ref={this.slider}
