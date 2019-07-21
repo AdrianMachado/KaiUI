@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
-
+import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 import './RadioButtonListItem.scss';
 
 const prefixCls = 'kai-rbl';
@@ -15,6 +15,20 @@ class RadioButtonListItem extends React.PureComponent {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFocusChange = this.handleFocusChange.bind(this);
+    this.handleCheckButton = this.handleCheckButton.bind(this);
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    if (this.state.isFocused && !prevState.isFocused) {
+      this.props.softKeyManager.setSoftKeyTexts({ centerText: 'Select' });
+      this.props.softKeyManager.setSoftKeyCallbacks({
+        centerCallback: this.handleCheckButton,
+      });
+    }
+  }
+
+  handleCheckButton() {
+    this.setState({ isChecked: true });
   }
 
   handleInputChange(e) {
@@ -139,5 +153,13 @@ RadioButtonListItem.propTypes = {
 };
 
 export default React.forwardRef((props, ref) => (
-  <RadioButtonListItem forwardedRef={ref} {...props} />
+  <SoftKeyConsumer>
+    {context => (
+      <RadioButtonListItem
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
 ));

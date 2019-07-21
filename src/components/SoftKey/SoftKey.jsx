@@ -10,6 +10,7 @@ const Button = props => {
     <button
       className={`${prefixCls}-btn`}
       onClick={e => handleButtonClick(e, props.handleClick)}
+      onFocus={handleCheckFocus}
     >
       {props.icon ? <i class={props.icon} /> : null}
       {props.text}
@@ -20,6 +21,18 @@ const Button = props => {
 const handleButtonClick = (e, handleClick) => {
   e.preventDefault();
   handleClick();
+};
+
+// We want to avoid losing focus on the parent element
+const handleCheckFocus = e => {
+  e.preventDefault();
+  if (e.relatedTarget) {
+    // Revert focus back to previous blurring element
+    e.relatedTarget.focus();
+  } else {
+    // No previous focus target, blur instead
+    e.currentTarget.blur();
+  }
 };
 
 // TODO: convert to functional with Hooks
@@ -33,12 +46,10 @@ class SoftKey extends React.PureComponent {
   handleKeyDown(e, props) {
     switch (e.key) {
       case 'SoftLeft':
-        // Action case press left key
         props.leftCallback();
         break;
 
       case 'SoftRight':
-        // Action case press right key
         props.rightCallback();
         break;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
-
+import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 import './CheckboxListItem.scss';
 
 const prefixCls = 'kai-cbl';
@@ -15,6 +15,26 @@ class CheckboxListItem extends React.PureComponent {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFocusChange = this.handleFocusChange.bind(this);
+    this.handleInvertCheck = this.handleInvertCheck.bind(this);
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const centerText = this.state.isChecked ? 'Deselect' : 'Select';
+    if (this.state.isFocused && !prevState.isFocused) {
+      this.props.softKeyManager.setSoftKeyTexts({ centerText });
+      this.props.softKeyManager.setSoftKeyCallbacks({
+        centerCallback: this.handleInvertCheck,
+      });
+    }
+    if (this.state.isFocused && this.state.isChecked !== prevState.isChecked) {
+      this.props.softKeyManager.setCenterText(centerText);
+    }
+  }
+
+  handleInvertCheck() {
+    this.setState(prevState => {
+      return { ...prevState, isChecked: !prevState.isChecked };
+    });
   }
 
   handleInputChange(e) {
@@ -137,5 +157,13 @@ CheckboxListItem.propTypes = {
 };
 
 export default React.forwardRef((props, ref) => (
-  <CheckboxListItem forwardedRef={ref} {...props} />
+  <SoftKeyConsumer>
+    {context => (
+      <CheckboxListItem
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
 ));

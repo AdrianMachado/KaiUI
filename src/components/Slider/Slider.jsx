@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
-
+import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 import './Slider.scss';
 
 const prefixCls = 'kai-slider';
@@ -12,6 +12,21 @@ class Slider extends React.PureComponent {
     this.state = { isFocused: false, sliderValue: props.initialValue };
     this.handleFocusChange = this.handleFocusChange.bind(this);
     this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.handleDecrementSlider = this.handleDecrementSlider.bind(this);
+    this.handleIncrementSlider = this.handleIncrementSlider.bind(this);
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    if (this.state.isFocused && !prevState.isFocused) {
+      this.props.softKeyManager.setSoftKeyTexts({
+        leftText: '-',
+        rightText: '+',
+      });
+      this.props.softKeyManager.setSoftKeyCallbacks({
+        leftCallback: this.handleDecrementSlider,
+        rightCallback: this.handleIncrementSlider,
+      });
+    }
   }
 
   handleFocusChange(isFocused) {
@@ -19,6 +34,18 @@ class Slider extends React.PureComponent {
     if (isFocused) {
       this.props.onFocusChange(this.props.index);
     }
+  }
+
+  handleDecrementSlider() {
+    this.setState(prevState => {
+      return { ...prevState, sliderValue: prevState.sliderValue - 1 };
+    });
+  }
+
+  handleIncrementSlider() {
+    this.setState(prevState => {
+      return { ...prevState, sliderValue: prevState.sliderValue + 1 };
+    });
   }
 
   handleSliderChange(event) {
@@ -103,5 +130,9 @@ Slider.propTypes = {
 };
 
 export default React.forwardRef((props, ref) => (
-  <Slider forwardedRef={ref} {...props} />
+  <SoftKeyConsumer>
+    {context => (
+      <Slider softKeyManager={context} forwardedRef={ref} {...props} />
+    )}
+  </SoftKeyConsumer>
 ));
