@@ -36,7 +36,6 @@ class ListView extends React.PureComponent {
 
   setFocusToIndex(index) {
     ReactDOM.findDOMNode(this.itemRefs[index].current).focus();
-    this.handleChangeIndex(index);
   }
 
   handleKeyDown(e) {

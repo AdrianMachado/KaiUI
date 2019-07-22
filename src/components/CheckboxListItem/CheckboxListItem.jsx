@@ -20,12 +20,6 @@ class CheckboxListItem extends React.PureComponent {
 
   componentDidUpdate(_prevProps, prevState) {
     const centerText = this.state.isChecked ? 'Deselect' : 'Select';
-    if (this.state.isFocused && !prevState.isFocused) {
-      this.props.softKeyManager.setSoftKeyTexts({ centerText });
-      this.props.softKeyManager.setSoftKeyCallbacks({
-        centerCallback: this.handleInvertCheck,
-      });
-    }
     if (this.state.isFocused && this.state.isChecked !== prevState.isChecked) {
       this.props.softKeyManager.setCenterText(centerText);
     }
@@ -58,7 +52,14 @@ class CheckboxListItem extends React.PureComponent {
   handleFocusChange(isFocused) {
     this.setState({ isFocused });
     if (isFocused) {
+      const centerText = this.state.isChecked ? 'Deselect' : 'Select';
+      this.props.softKeyManager.setSoftKeyTexts({ centerText });
+      this.props.softKeyManager.setSoftKeyCallbacks({
+        centerCallback: this.handleInvertCheck,
+      });
       this.props.onFocusChange(this.props.index);
+    } else {
+      this.props.softKeyManager.unregisterSoftKeys();
     }
   }
 

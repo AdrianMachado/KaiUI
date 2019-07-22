@@ -16,8 +16,9 @@ class Slider extends React.PureComponent {
     this.handleIncrementSlider = this.handleIncrementSlider.bind(this);
   }
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (this.state.isFocused && !prevState.isFocused) {
+  handleFocusChange(isFocused) {
+    this.setState({ isFocused });
+    if (isFocused) {
       this.props.softKeyManager.setSoftKeyTexts({
         leftText: '-',
         rightText: '+',
@@ -26,13 +27,9 @@ class Slider extends React.PureComponent {
         leftCallback: this.handleDecrementSlider,
         rightCallback: this.handleIncrementSlider,
       });
-    }
-  }
-
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
       this.props.onFocusChange(this.props.index);
+    } else {
+      this.props.softKeyManager.unregisterSoftKeys();
     }
   }
 

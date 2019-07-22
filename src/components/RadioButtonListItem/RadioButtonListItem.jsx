@@ -18,15 +18,6 @@ class RadioButtonListItem extends React.PureComponent {
     this.handleCheckButton = this.handleCheckButton.bind(this);
   }
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (this.state.isFocused && !prevState.isFocused) {
-      this.props.softKeyManager.setSoftKeyTexts({ centerText: 'Select' });
-      this.props.softKeyManager.setSoftKeyCallbacks({
-        centerCallback: this.handleCheckButton,
-      });
-    }
-  }
-
   handleCheckButton() {
     this.setState({ isChecked: true });
   }
@@ -52,7 +43,13 @@ class RadioButtonListItem extends React.PureComponent {
   handleFocusChange(isFocused) {
     this.setState({ isFocused });
     if (isFocused) {
+      this.props.softKeyManager.setSoftKeyTexts({ centerText: 'Select' });
+      this.props.softKeyManager.setSoftKeyCallbacks({
+        centerCallback: this.handleCheckButton,
+      });
       this.props.onFocusChange(this.props.index);
+    } else {
+      this.props.softKeyManager.unregisterSoftKeys();
     }
   }
 

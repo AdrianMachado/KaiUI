@@ -56,6 +56,18 @@ export class SoftKeyProvider extends React.PureComponent {
     this.setState({ leftCallback, centerCallback, rightCallback });
   };
 
+  unregisterSoftKeys = () => {
+    this.setState({
+      leftCallback: () => {},
+      centerCallback: () => {},
+      rightCallback: () => {},
+      leftText: null,
+      rightText: null,
+      centerText: null,
+      centerIcon: null,
+    });
+  };
+
   render() {
     const context = {
       setLeftCallback: this.setLeftCallback,
@@ -67,6 +79,7 @@ export class SoftKeyProvider extends React.PureComponent {
       setCenterIcon: this.setCenterIcon,
       setSoftKeyTexts: this.setSoftKeyTexts,
       setSoftKeyCallbacks: this.setSoftKeyCallbacks,
+      unregisterSoftKeys: this.unregisterSoftKeys,
     };
 
     return (
