@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '../../components/Tabs/Tabs';
 import Tab from '../../components/Tab/Tab';
+import colors from '../../theme/colors.scss';
+
 import './TabView.scss';
 
 const prefixCls = 'kai-tab-view';
@@ -28,7 +30,13 @@ class TabView extends React.PureComponent {
 
   renderTabs() {
     return this.props.tabLabels.map((label, i) => {
-      return <Tab key={`key-${i}`} label={label} />;
+      return (
+        <Tab
+          key={`key-${i}`}
+          label={label}
+          focusColor={this.props.focusColor}
+        />
+      );
     });
   }
 
@@ -71,11 +79,13 @@ class TabView extends React.PureComponent {
 
 TabView.defaultProps = {
   onChangeIndex: () => {},
+  focusColor: colors.defaultFocusColor,
 };
 
 TabView.propTypes = {
   tabLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChangeIndex: PropTypes.func,
+  focusColor: PropTypes.string,
 };
 
 export default TabView;
