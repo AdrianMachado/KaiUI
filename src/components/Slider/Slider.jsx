@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
@@ -6,64 +6,54 @@ import './Slider.scss';
 
 const prefixCls = 'kai-slider';
 
-class Slider extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { isFocused: false, sliderValue: props.initialValue };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-    this.handleSliderChange = this.handleSliderChange.bind(this);
-    this.handleDecrementSlider = this.handleDecrementSlider.bind(this);
-    this.handleIncrementSlider = this.handleIncrementSlider.bind(this);
-  }
-
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.softKeyManager.setSoftKeyTexts({
-        leftText: '-',
-        rightText: '+',
-      });
-      this.props.softKeyManager.setSoftKeyCallbacks({
-        leftCallback: this.handleDecrementSlider,
-        rightCallback: this.handleIncrementSlider,
-      });
-      this.props.onFocusChange(this.props.index);
-    } else {
-      this.props.softKeyManager.unregisterSoftKeys();
-    }
-  }
-
-  handleDecrementSlider() {
-    this.setState(prevState => {
-      return { ...prevState, sliderValue: prevState.sliderValue - 1 };
-    });
-  }
-
-  handleIncrementSlider() {
-    this.setState(prevState => {
-      return { ...prevState, sliderValue: prevState.sliderValue + 1 };
-    });
-  }
-
-  handleSliderChange(event) {
-    const sliderValue = event.target.value;
-    this.setState({ sliderValue });
-  }
-
-  render() {
+const Slider = React.memo(
+  props => {
     const {
       header,
+      initialValue,
       maxValue,
       minValue,
       stepSize,
       focusColor,
       forwardedRef,
-    } = this.props;
-    const { isFocused, sliderValue } = this.state;
+      index,
+      onFocusChange,
+      softKeyManager
+    } = props;
+
+    const [isFocused, setFocused] = useState(false);
+    const [sliderValue, setSliderValue] = useState(initialValue);
+
     const lineCls = `${prefixCls}-line`;
     const headerCls = `${prefixCls}-header`;
     const trackerCls = `${prefixCls}-tracker`;
     const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
+
+    const handleFocusChange = useCallback(
+      newFocused => {
+        setFocused(newFocused);
+        if (newFocused) {
+          softKeyManager.setSoftKeyTexts({
+            leftText: '-',
+            rightText: '+',
+          });
+          softKeyManager.setSoftKeyCallbacks({
+            leftCallback: handleDecrementSlider,
+            rightCallback: handleIncrementSlider,
+          });
+          onFocusChange(index);
+        } else {
+          softKeyManager.unregisterSoftKeys();
+        }
+      },
+      [index, onFocusChange, softKeyManager]
+    );
+
+    const handleDecrementSlider = () => setSliderValue(prevVal => prevVal - 1);
+
+    const handleIncrementSlider = () => setSliderValue(prevVal => prevVal + 1);
+
+    const handleSliderChange = event => setSliderValue(event.target.value)
 
     return (
       <div
@@ -71,8 +61,8 @@ class Slider extends React.PureComponent {
         className={prefixCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
         <div className={lineCls}>
           <span className={headerCls}>{header}</span>
@@ -81,13 +71,13 @@ class Slider extends React.PureComponent {
 
         <div className={sliderWrapperCls}>
           <input
-            ref={this.slider}
+            ref={forwardedRef}
             type="range"
             min={minValue}
             max={maxValue}
             step={stepSize}
             value={sliderValue}
-            onChange={this.handleSliderChange}
+            onChange={handleSliderChange}
             style={{
               '--min': minValue,
               '--max': maxValue,
@@ -104,12 +94,7 @@ class Slider extends React.PureComponent {
       </div>
     );
   }
-}
-
-Slider.defaultProps = {
-  focusColor: colors.defaultFocusColor,
-  stepSize: 1,
-};
+);
 
 Slider.propTypes = {
   header: PropTypes.string.isRequired,
@@ -124,6 +109,11 @@ Slider.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+};
+
+Slider.defaultProps = {
+  focusColor: colors.defaultFocusColor,
+  stepSize: 1,
 };
 
 export default React.forwardRef((props, ref) => (
