@@ -6,23 +6,23 @@ import './Tab.scss';
 
 const prefixCls = 'kai-tab';
 
-// TODO: Convert to function component
-class Tab extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+const Tab = React.memo(
+  props => {
+    const {
+      index,
+      label,
+      onTabChange,
+      isActive,
+      focusColor
+    } = props;
 
-  handleClick() {
-    this.props.onTabChange(this.props.index);
-  }
-
-  render() {
-    const { label, isActive, focusColor } = this.props;
     const actPrefixCls = `${prefixCls}${isActive ? '-active' : '-inactive'}`;
+
+    const handleClick = () => onTabChange(index);
+
     return (
       <div
-        onClick={this.handleClick}
+        onClick={handleClick}
         className={actPrefixCls}
         style={{ '--tab-underline-color': focusColor }}
       >
@@ -30,15 +30,7 @@ class Tab extends React.PureComponent {
       </div>
     );
   }
-}
-
-Tab.defaultProps = {
-  index: 0,
-  label: null,
-  onTabChange: () => {},
-  isActive: false,
-  focusColor: colors.defaultFocusColor,
-};
+);
 
 Tab.propTypes = {
   index: PropTypes.number,
@@ -46,6 +38,14 @@ Tab.propTypes = {
   onTabChange: PropTypes.func,
   isActive: PropTypes.bool,
   focusColor: PropTypes.string,
+};
+
+Tab.defaultProps = {
+  index: 0,
+  label: null,
+  onTabChange: () => {},
+  isActive: false,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default Tab;
