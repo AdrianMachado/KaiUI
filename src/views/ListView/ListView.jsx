@@ -1,97 +1,102 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import './ListView.scss';
 
 const prefixCls = 'kai-list-view';
 
-class ListView extends React.PureComponent {
-  constructor() {
-    super();
-    this.handleChangeIndex = this.handleChangeIndex.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.setFocusToIndex = this.setFocusToIndex.bind(this);
-    document.addEventListener('keydown', e => this.handleKeyDown(e));
-    this.state = { activeItem: 0 };
-  }
+const ListView = React.memo(
+  props => {
+    const itemRefs = [];
 
-  componentDidMount() {
-    if (this.props.isActive) {
-      this.setFocusToIndex(0);
-    }
-  }
+    const [activeItem, setActiveItem] = useState(0);
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.isActive && this.props.isActive) {
-      this.setFocusToIndex(this.state.activeItem);
-    }
-  }
+    const {
+      children,
+      onChangeIndex,
+      isActive,
+    } = props;
 
-  itemRefs = [];
+    const handleChangeIndex = itemIndex => {
+      setActiveItem(itemIndex);
+      onChangeIndex(itemIndex);
+    };
 
-  handleChangeIndex(itemIndex) {
-    this.setState({ activeItem: itemIndex });
-    this.props.onChangeIndex(itemIndex);
-  }
+    const setFocusToIndex = useCallback(
+      index => ReactDOM.findDOMNode(itemRefs[index].current).focus(),
+      [itemRefs]
+    );
 
-  setFocusToIndex(index) {
-    ReactDOM.findDOMNode(this.itemRefs[index].current).focus();
-  }
+    const handleKeyDown = useCallback(
+      e => {
+        let index = activeItem;
+        if (!isActive) {
+          return;
+        }
 
-  handleKeyDown(e) {
-    let index = this.state.activeItem;
-    if (!this.props.isActive) {
-      return;
-    }
-    switch (e.key) {
-      case 'ArrowUp':
-        // looping to bottom
-        index = index - 1 >= 0 ? index - 1 : this.itemRefs.length - 1;
-        this.setFocusToIndex(index);
-        break;
-      case 'ArrowDown':
-        // looping to top
-        index = index + 1 < this.itemRefs.length ? index + 1 : 0;
-        this.setFocusToIndex(index);
-        break;
-      default:
-        break;
-    }
-  }
+        switch (e.key) {
+          case 'ArrowUp':
+            // looping to bottom
+            index = index - 1 >= 0 ? index - 1 : itemRefs.length - 1;
+            setFocusToIndex(index);
+            break;
+          case 'ArrowDown':
+            // looping to top
+            index = index + 1 < itemRefs.length ? index + 1 : 0;
+            setFocusToIndex(index);
+            break;
+          default:
+            break;
+        }
+      },
+      [isActive, activeItem, setFocusToIndex, itemRefs]
+    );
 
-  renderChildren() {
-    let index = -1;
-    return React.Children.map(this.props.children, child => {
-      // Don't focus on separators
-      if (child.props.separatorText != null) {
-        return child;
-      }
-      index++;
-      const newRef = React.createRef();
-      this.itemRefs[index] = newRef;
-      return React.cloneElement(child, {
-        index,
-        onFocusChange: this.handleChangeIndex,
-        ref: newRef,
+    useEffect(
+      () => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+      },
+      [handleKeyDown]
+    );
+
+    useEffect(
+      () => setFocusToIndex(activeItem),
+      [setFocusToIndex, activeItem]
+    );
+
+    const renderChildren = () => {
+      let index = -1;
+      return React.Children.map(children, child => {
+        // Don't focus on separators
+        if (child.props.separatorText != null) {
+          return child;
+        }
+        index++;
+        const newRef = React.createRef();
+        itemRefs[index] = newRef;
+        return React.cloneElement(child, {
+          index,
+          onFocusChange: handleChangeIndex,
+          ref: newRef,
+        });
       });
-    });
-  }
+    };
 
-  render() {
-    return <div className={prefixCls}>{this.renderChildren()}</div>;
+    return <div className={prefixCls}>{renderChildren()}</div>;
   }
-}
-
-ListView.defaultProps = {
-  onChangeIndex: () => {},
-  isActive: true,
-};
+);
 
 ListView.propTypes = {
   children: PropTypes.array.isRequired,
   onChangeIndex: PropTypes.func,
   // Refocus on tab change
   isActive: PropTypes.bool,
+};
+
+ListView.defaultProps = {
+  onChangeIndex: () => {},
+  isActive: true,
 };
 
 export default ListView;
