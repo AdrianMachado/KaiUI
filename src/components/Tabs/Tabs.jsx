@@ -1,75 +1,90 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState }  from 'react';
 import PropTypes from 'prop-types';
 import './Tabs.scss';
 
 const prefixCls = 'kai-tabs';
 
-class Tabs extends React.PureComponent {
-  constructor() {
-    super();
-    // Bind the method to the component context
-    this.renderChildren = this.renderChildren.bind(this);
-    this.handleTabChange = this.handleTabChange.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    document.addEventListener('keydown', e => this.handleKeyDown(e));
-    this.state = { activeChild: 0 };
-  }
+const Tabs = React.memo(
+  props => {
+    const {
+      onChangeIndex,
+      children
+    } = props;
 
-  handleTabChange(childIndex) {
-    this.setState({ activeChild: childIndex });
-    this.refs[childIndex].scrollIntoView({
-      behavior: 'auto',
-      block: 'start',
-      inline: 'center',
-    });
-    this.props.onChangeIndex(childIndex);
-  }
+    const childRefs = [];
+    const [activeChild, setActiveChild] = useState(0);
 
-  handleKeyDown(e) {
-    let index = this.state.activeChild;
-    switch (e.key) {
-      case 'ArrowRight':
-        index = Math.min(
-          index + 1,
-          React.Children.count(this.props.children) - 1
-        );
-        if (this.state.activeChild !== index) {
-          this.handleTabChange(index);
+    const handleTabChange = useCallback(
+      childIndex => {
+      setActiveChild(childIndex);
+        childRefs[childIndex].current.scrollIntoView({
+          behavior: 'auto',
+          block: 'start',
+          inline: 'center',
+        });
+        onChangeIndex(childIndex);
+      },
+      [childRefs, onChangeIndex]
+    );
+
+    const handleKeyDown = useCallback(
+      e => {
+        let index = activeChild;
+        switch (e.key) {
+          case 'ArrowRight':
+            index = Math.min(
+              index + 1,
+              React.Children.count(children) - 1
+            );
+            if (activeChild !== index) {
+              handleTabChange(index);
+            }
+            break;
+          case 'ArrowLeft':
+            index = Math.max(index - 1, 0);
+            if (activeChild !== index) {
+              handleTabChange(index);
+            }
+            break;
+          default:
+            break;
         }
-        break;
-      case 'ArrowLeft':
-        index = Math.max(index - 1, 0);
-        if (this.state.activeChild !== index) {
-          this.handleTabChange(index);
-        }
-        break;
-      default:
-        break;
-    }
-  }
+      },
+      [activeChild, children, handleTabChange]
+    );
 
-  renderChildren() {
-    const { activeChild } = this.state;
-    return React.Children.map(this.props.children, (child, i) => {
-      return (
-        <div ref={i}>
-          {React.cloneElement(child, {
+    const renderChildren = () => {
+      return React.Children.map(children, (child, i) => {
+        const childRef = useRef();
+
+        childRefs[i] = childRef;
+
+        return React.cloneElement(
+          child, {
             index: i,
-            onTabChange: this.handleTabChange,
+            onTabChange: handleTabChange,
             isActive: activeChild === i,
-          })}
-        </div>
-      );
-    });
+            ref: childRef
+          }
+        );
+      });
+    };
+    
+    useEffect(
+      () => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+      },
+      [handleKeyDown]
+    );
+  
+    return <div className={prefixCls}>{renderChildren()}</div>;
   }
-  render() {
-    return <div className={prefixCls}>{this.renderChildren()}</div>;
-  }
-}
+);
 
 Tabs.protoTypes = {
   onChangeIndex: PropTypes.func,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.array.isRequired
 };
 
 export default Tabs;
