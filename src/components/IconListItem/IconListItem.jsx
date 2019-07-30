@@ -63,7 +63,7 @@ IconListItem.propTypes = {
   secondary: PropTypes.string,
   icon: PropTypes.string.isRequired,
   focusColor: PropTypes.string,
-  forwardedRed: PropTypes.oneOfType([
+  forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
