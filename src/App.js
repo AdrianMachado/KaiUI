@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -12,6 +12,7 @@ import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonLis
 import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
+import TextInput from './components/TextInput/TextInput';
 import './App.scss';
 import colors from './theme/colors.scss';
 
@@ -20,12 +21,22 @@ function App() {
     console.log('new input value', newVal);
   };
 
+  const [inputValue, setInputValue] = useState('');
+
   return (
     <div className="App">
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
       <SoftKeyProvider>
         <div className="content">
-          <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
+          <TabView
+            tabLabels={[
+              'CB Tab',
+              'Icon Tab',
+              'Txt Tab',
+              'Form Tab',
+              'Misc Tab',
+            ]}
+          >
             <ListView>
               <CheckboxListItem
                 primary="Hello primary text"
@@ -115,6 +126,13 @@ function App() {
                 secondary="No tertiary here"
               />
               <TextListItem primary="Just primary" />
+            </ListView>
+            <ListView>
+              <TextInput
+                label="I am a text input"
+                onChange={e => setInputValue(e.target.value)}
+              />
+              <TextListItem primary={`Input value: ${inputValue}`} />
             </ListView>
             <ListView>
               <BodyTextListItem
