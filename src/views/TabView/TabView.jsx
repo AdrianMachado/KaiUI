@@ -25,8 +25,10 @@ const TabView = React.memo(
     const tabViewContent = `${prefixCls}-content`;
 
     const handleChangeIndex = tabIndex => {
-      setActiveTab(tabIndex);
+      // NOTE: Ensure you set state for tab transition first.
+      //       Otherwise you will face strange race condition bugs.
       setTransitionDone(false);
+      setActiveTab(tabIndex);
       onChangeIndex(tabIndex);
     };
 
