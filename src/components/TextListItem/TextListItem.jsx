@@ -65,7 +65,7 @@ TextListItem.propTypes = {
   secondary: PropTypes.string,
   tertiary: PropTypes.string,
   focusColor: PropTypes.string,
-  forwardedRed: PropTypes.oneOfType([
+  forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
