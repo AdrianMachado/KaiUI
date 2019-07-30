@@ -13,7 +13,8 @@ const Tab = React.memo(
       label,
       onTabChange,
       isActive,
-      focusColor
+      focusColor,
+      forwardedRef
     } = props;
 
     const actPrefixCls = `${prefixCls}${isActive ? '-active' : '-inactive'}`;
@@ -25,6 +26,7 @@ const Tab = React.memo(
         onClick={handleClick}
         className={actPrefixCls}
         style={{ '--tab-underline-color': focusColor }}
+        ref={forwardedRef}
       >
         <div className={`${actPrefixCls}-label`}>{label}</div>
       </div>
@@ -38,6 +40,10 @@ Tab.propTypes = {
   onTabChange: PropTypes.func,
   isActive: PropTypes.bool,
   focusColor: PropTypes.string,
+  forwardedRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
 };
 
 Tab.defaultProps = {
@@ -45,7 +51,9 @@ Tab.defaultProps = {
   label: null,
   onTabChange: () => {},
   isActive: false,
-  focusColor: colors.defaultFocusColor,
+  focusColor: colors.defaultFocusColor
 };
 
-export default Tab;
+export default React.forwardRef((props, ref) => (
+  <Tab forwardedRef={ref} {...props} />
+));
