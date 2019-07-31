@@ -70,3 +70,4 @@ KaiUI uses custom icons provided on the KaiOS developer portal. These are includ
 # Contributing
 
 There's much work to be done on building out more UI components, writing tests, and integrating typing (probably using flow).
+Please look at currently open issues and our [Contributing Guide](https://github.com/AdrianMachado/KaiUI/blob/master/CONTRIBUTING.md)
