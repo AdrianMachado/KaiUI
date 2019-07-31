@@ -1,4 +1,4 @@
-# Contrbuting to KaiUI
+# Contributing to KaiUI
 
 #### **Did you find a bug?**
 
@@ -20,7 +20,9 @@
 
 * Suggest your change to [Adrian](https://github.com/AdrianMachado) and start writing code.
 
-* Do not open an issue on GitHub until you have collected positive feedback about the change. GitHub issues are primarily intended for bug reports and fixes.
+* Do not open an issue on GitHub until you have collected positive feedback about the change.
+
+* Several feature issues that are currently open are most likely more high pri, so please prioritize them before suggesting new features
 
 #### **Do you have questions about the source code?**
 
