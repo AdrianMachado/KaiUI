@@ -61,8 +61,12 @@ const ListView = React.memo(
     );
 
     useEffect(
-      () => setFocusToIndex(activeItem),
-      [setFocusToIndex, activeItem]
+      () => {
+        if(isActive) {
+          setFocusToIndex(activeItem)
+        }
+      },
+      [isActive, setFocusToIndex, activeItem]
     );
 
     const renderChildren = () => {
