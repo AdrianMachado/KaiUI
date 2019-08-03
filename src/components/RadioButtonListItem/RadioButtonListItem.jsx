@@ -22,9 +22,7 @@ const RadioButtonListItem = React.memo(
     } = props;
 
     // Managed vs self-managed radio buttons
-    const [isChecked, setChecked] = props.isChecked
-      ? [ props.isChecked, () => {} ] 
-      : useState(initButtonVal);
+    const [isChecked, setChecked] = useState(initButtonVal);
     const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
@@ -68,6 +66,20 @@ const RadioButtonListItem = React.memo(
       }
     }
 
+    const radioBtn = (
+      <div className={buttonCls}>
+        <input
+          className={inputCls}
+          tabIndex="-1"
+          type="radio"
+          checked={props.isChecked !== null ? props.isChecked : isChecked}
+          onChange={() => {}}
+          onFocus={handleButtonFocus}
+          onClick={handleInputChange}
+        />
+      </div>
+    );
+
     return (
       <div
         tabIndex="0"
@@ -77,36 +89,12 @@ const RadioButtonListItem = React.memo(
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
       >
-        {buttonSide === 'left' ? (
-          <div className={buttonCls}>
-            <input
-              className={inputCls}
-              tabIndex="-1"
-              type="radio"
-              checked={isChecked}
-              onChange={() => {}}
-              onFocus={handleButtonFocus}
-              onClick={handleInputChange}
-            />
-          </div>
-        ) : null}
+        {buttonSide === 'left' ? radioBtn : null}
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
           <label className={secondaryCls}>{secondary}</label>
         </div>
-        {buttonSide === 'right' ? (
-          <div className={buttonCls}>
-            <input
-              className={inputCls}
-              tabIndex="-1"
-              type="radio"
-              checked={isChecked}
-              onChange={() => {}}
-              onFocus={handleButtonFocus}
-              onClick={handleInputChange}
-            />
-          </div>
-        ) : null}
+        {buttonSide === 'right' ? radioBtn : null}
       </div>
     );
   }
