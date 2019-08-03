@@ -22,9 +22,7 @@ const CheckboxListItem = React.memo(
     } = props;
 
     // Managed vs self-managed radio buttons
-    const [isChecked, setChecked] = props.isChecked
-      ? [ props.isChecked, () => {} ] 
-      : useState(initCheckboxVal);
+    const [isChecked, setChecked] = useState(initCheckboxVal);
     const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
@@ -45,14 +43,12 @@ const CheckboxListItem = React.memo(
       [isFocused, isChecked, softKeyManager]
     );
 
-    const handleInvertCheck = () => {
-      setChecked(prevState => !prevState.isChecked);
-    }
+    const handleInvertCheck = () => setChecked(wasChecked => !wasChecked);
 
     const handleInputChange = e => {
-      setChecked(e.target.checked)
+      setChecked(e.target.checked);
       onInputChange(e.target.checked);
-    }
+    };
 
     // We want to avoid losing focus on the parent element
     const handleCheckFocus = e => {
@@ -64,7 +60,7 @@ const CheckboxListItem = React.memo(
         // No previous focus target, blur instead
         e.currentTarget.blur();
       }
-    }
+    };
 
     const handleFocusChange = newFocused => {
       setFocused(newFocused);
@@ -78,7 +74,7 @@ const CheckboxListItem = React.memo(
       } else {
         softKeyManager.unregisterSoftKeys();
       }
-    }
+    };
 
     const checkbox = (
       <div className={boxCls}>
@@ -86,7 +82,7 @@ const CheckboxListItem = React.memo(
           className={inputCls}
           tabIndex="-1"
           type="checkbox"
-          checked={isChecked}
+          checked={props.isChecked !== null ? props.isChecked : isChecked}
           onChange={() => {}}
           onFocus={handleCheckFocus}
           onClick={handleInputChange}
