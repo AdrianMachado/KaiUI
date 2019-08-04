@@ -37,7 +37,9 @@ const Button = React.memo(props => {
 
   const buttonCls = prefixCls;
   const inputCls = `${prefixCls}-input`;
-  const lineCls = `${prefixCls}-line ${iconSide === 'left' ? 'right' : 'left'}`;
+  const lineCls = `${prefixCls}-line ${
+    iconSide === 'left' ? 'right' : iconSide === 'right' ? 'left' : ''
+  }`;
   const textCls = `${prefixCls}-text`;
   const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
 

@@ -71,11 +71,6 @@ function App() {
                 maxValue={10}
               />
               <Button text="A button" icon="kai-icon-camera" iconSide="left" />
-              <Button
-                text="Another button"
-                icon="kai-icon-camera"
-                iconSide="right"
-              />
               <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"
