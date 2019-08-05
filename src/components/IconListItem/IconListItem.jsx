@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 
@@ -6,25 +6,19 @@ import './IconListItem.scss';
 
 const prefixCls = 'kai-il';
 
-class IconListItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-    };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-  }
+const IconListItem = React.memo(
+  props => {
+    const {
+      primary,
+      secondary,
+      icon,
+      focusColor,
+      forwardedRef,
+      index,
+      onFocusChange
+    } = props;
 
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.onFocusChange(this.props.index);
-    }
-  }
-
-  render() {
-    const { primary, secondary, icon, focusColor, forwardedRef } = this.props;
-    const { isFocused } = this.state;
+    const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
     const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
@@ -32,14 +26,21 @@ class IconListItem extends React.PureComponent {
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
 
+    const handleFocusChange = newFocused => {
+      setFocused(newFocused);
+      if (newFocused) {
+        onFocusChange(index);
+      }
+    }
+
     return (
       <div
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
         <div className={iconCls}>
           <span className={icon} />
@@ -51,12 +52,7 @@ class IconListItem extends React.PureComponent {
       </div>
     );
   }
-}
-
-IconListItem.defaultProps = {
-  secondary: null,
-  focusColor: colors.defaultFocusColor,
-};
+);
 
 IconListItem.propTypes = {
   primary: PropTypes.string.isRequired,
@@ -69,6 +65,11 @@ IconListItem.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+};
+
+IconListItem.defaultProps = {
+  secondary: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default React.forwardRef((props, ref) => (

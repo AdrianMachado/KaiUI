@@ -4,21 +4,28 @@ import colors from '../../theme/colors.scss';
 import './Header.scss';
 
 const prefixCls = 'kai-header';
-const Header = React.memo(function Header({ text, backgroundColor }) {
-  return (
-    <header className={prefixCls} style={{ background: backgroundColor }}>
-      <h1 className="h1">{text}</h1>
-    </header>
-  );
-});
+const Header = React.memo(
+  props => {
+    const {
+      text,
+      backgroundColor
+    } = props;
 
-Header.defaultProps = {
-  backgroundColor: colors.headerPurple,
-};
+    return (
+      <header className={prefixCls} style={{ background: backgroundColor }}>
+        <h1 className="h1">{text}</h1>
+      </header>
+    );
+  }
+);
 
 Header.propTypes = {
   text: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string,
+};
+
+Header.defaultProps = {
+  backgroundColor: colors.headerPurple,
 };
 
 export default Header;

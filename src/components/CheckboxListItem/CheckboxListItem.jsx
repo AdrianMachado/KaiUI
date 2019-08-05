@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
@@ -6,78 +6,24 @@ import './CheckboxListItem.scss';
 
 const prefixCls = 'kai-cbl';
 
-class CheckboxListItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isChecked: props.initCheckboxVal,
-      isFocused: false,
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-    this.handleInvertCheck = this.handleInvertCheck.bind(this);
-  }
-
-  componentDidUpdate(_prevProps, prevState) {
-    const centerText = this.state.isChecked ? 'Deselect' : 'Select';
-    if (this.state.isFocused && this.state.isChecked !== prevState.isChecked) {
-      this.props.softKeyManager.setCenterText(centerText);
-    }
-  }
-
-  handleInvertCheck() {
-    this.setState(prevState => {
-      return { ...prevState, isChecked: !prevState.isChecked };
-    });
-  }
-
-  handleInputChange(e) {
-    const newCheckedVal = e.target.checked;
-    this.setState({ isChecked: newCheckedVal });
-    this.props.onInputChange(newCheckedVal);
-  }
-
-  // We want to avoid losing focus on the parent element
-  handleCheckFocus(e) {
-    e.preventDefault();
-    if (e.relatedTarget) {
-      // Revert focus back to previous blurring element
-      e.relatedTarget.focus();
-    } else {
-      // No previous focus target, blur instead
-      e.currentTarget.blur();
-    }
-  }
-
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      const centerText = this.state.isChecked ? 'Deselect' : 'Select';
-      this.props.softKeyManager.setSoftKeyTexts({ centerText });
-      this.props.softKeyManager.setSoftKeyCallbacks({
-        centerCallback: this.handleInvertCheck,
-      });
-      this.props.onFocusChange(this.props.index);
-    } else {
-      this.props.softKeyManager.unregisterSoftKeys();
-    }
-  }
-
-  render() {
+const CheckboxListItem = React.memo(
+  props => {
     const {
-      checkboxSide,
       primary,
       secondary,
+      initCheckboxVal,
+      onInputChange,
+      checkboxSide,
       focusColor,
+      onFocusChange,
+      index,
       forwardedRef,
-    } = this.props;
-    const { isFocused } = this.state;
+      softKeyManager
+    } = props;
 
-    // Managed vs self-managed checkboxes
-    const isChecked =
-      this.props.isChecked != null
-        ? this.props.isChecked
-        : this.state.isChecked;
+    // Managed vs self-managed radio buttons
+    const [isChecked, setChecked] = useState(initCheckboxVal);
+    const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
     const boxCls = `${prefixCls}-box`;
@@ -88,55 +34,81 @@ class CheckboxListItem extends React.PureComponent {
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
     const inputCls = `${boxCls}-input-${isFocused ? 'focused' : 'unfocused'}`;
 
+    useEffect(() => {
+        const centerText = isChecked ? 'Deselect' : 'Select';
+        if (isFocused) {
+          softKeyManager.setCenterText(centerText);
+        }
+      },
+      [isFocused, isChecked, softKeyManager]
+    );
+
+    const handleInvertCheck = () => setChecked(wasChecked => !wasChecked);
+
+    const handleInputChange = e => {
+      setChecked(e.target.checked);
+      onInputChange(e.target.checked);
+    };
+
+    // We want to avoid losing focus on the parent element
+    const handleCheckFocus = e => {
+      e.preventDefault();
+      if (e.relatedTarget) {
+        // Revert focus back to previous blurring element
+        e.relatedTarget.focus();
+      } else {
+        // No previous focus target, blur instead
+        e.currentTarget.blur();
+      }
+    };
+
+    const handleFocusChange = newFocused => {
+      setFocused(newFocused);
+      if (newFocused) {
+        const centerText = isChecked ? 'Deselect' : 'Select';
+        softKeyManager.setSoftKeyTexts({ centerText });
+        softKeyManager.setSoftKeyCallbacks({
+          centerCallback: handleInvertCheck,
+        });
+        onFocusChange(index);
+      } else {
+        softKeyManager.unregisterSoftKeys();
+      }
+    };
+
+    const checkbox = (
+      <div className={boxCls}>
+        <input
+          className={inputCls}
+          tabIndex="-1"
+          type="checkbox"
+          checked={props.isChecked !== null ? props.isChecked : isChecked}
+          onChange={() => {}}
+          onFocus={handleCheckFocus}
+          onClick={handleInputChange}
+        />
+      </div>
+    );
+
     return (
       <div
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
-        {checkboxSide === 'left' ? (
-          <div className={boxCls}>
-            <input
-              className={inputCls}
-              tabIndex="-1"
-              type="checkbox"
-              checked={isChecked}
-              onChange={() => {}}
-              onFocus={this.handleCheckFocus}
-              onClick={this.handleInputChange}
-            />
-          </div>
-        ) : null}
+        {checkboxSide === 'left' ? checkbox : null}
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
           <label className={secondaryCls}>{secondary}</label>
         </div>
-        {checkboxSide === 'right' ? (
-          <div className={boxCls}>
-            <input
-              className={inputCls}
-              tabIndex="-1"
-              type="checkbox"
-              checked={isChecked}
-              onChange={() => {}}
-              onFocus={this.handleCheckFocus}
-              onClick={this.handleInputChange}
-            />
-          </div>
-        ) : null}
+        {checkboxSide === 'right' ? checkbox : null}
       </div>
     );
   }
-}
-
-CheckboxListItem.defaultProps = {
-  secondary: null,
-  isChecked: null,
-  focusColor: colors.defaultFocusColor,
-};
+);
 
 CheckboxListItem.propTypes = {
   primary: PropTypes.string.isRequired,
@@ -155,6 +127,12 @@ CheckboxListItem.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+};
+
+CheckboxListItem.defaultProps = {
+  secondary: null,
+  isChecked: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default React.forwardRef((props, ref) => (
