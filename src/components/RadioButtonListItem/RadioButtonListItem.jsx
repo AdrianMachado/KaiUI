@@ -53,9 +53,9 @@ const RadioButtonListItem = React.memo(
       }
     }
 
-    const handleFocusChange = newFocused => {
-      setFocused(newFocused);
-      if (newFocused) {
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
         softKeyManager.setSoftKeyTexts({ centerText: 'Select' });
         softKeyManager.setSoftKeyCallbacks({
           centerCallback: ()  => setChecked(true),
