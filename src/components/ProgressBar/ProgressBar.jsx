@@ -29,9 +29,9 @@ const ProgressBar = React.memo(
       isFocused ? 'focused' : 'unfocused'
     }`;
 
-    const handleFocusChange = newFocused => {
-      setFocused(newFocused);
-      if (newFocused) {
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
         onFocusChange(index);
       }
     }

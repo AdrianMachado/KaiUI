@@ -25,9 +25,9 @@ const TextListItem = React.memo(
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
     const tertiaryCls = `${prefixCls}-tertiary ${tertiary ? '' : 'hidden'}`;
 
-    const handleFocusChange = newFocused => {
-      setFocused(newFocused);
-      if (newFocused) {
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
         onFocusChange(index);
       }
     }

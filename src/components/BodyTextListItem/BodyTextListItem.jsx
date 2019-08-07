@@ -23,9 +23,9 @@ const BodyTextListItem = React.memo(
     const headerCls = `${prefixCls}-header`;
     const bodyCls = `${prefixCls}-body ${body ? '' : 'hidden'}`;
 
-    const handleFocusChange = newFocused => {
-      setFocused(newFocused);
-      if (newFocused) {
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
         onFocusChange(index);
       }
     }

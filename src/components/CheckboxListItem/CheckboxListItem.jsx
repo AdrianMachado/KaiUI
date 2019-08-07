@@ -62,9 +62,9 @@ const CheckboxListItem = React.memo(
       }
     };
 
-    const handleFocusChange = newFocused => {
-      setFocused(newFocused);
-      if (newFocused) {
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
         const centerText = isChecked ? 'Deselect' : 'Select';
         softKeyManager.setSoftKeyTexts({ centerText });
         softKeyManager.setSoftKeyCallbacks({

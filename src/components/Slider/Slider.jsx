@@ -30,9 +30,9 @@ const Slider = React.memo(
     const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
 
     const handleFocusChange = useCallback(
-      newFocused => {
-        setFocused(newFocused);
-        if (newFocused) {
+      isNowFocused => {
+        setFocused(isNowFocused);
+        if (isNowFocused) {
           softKeyManager.setSoftKeyTexts({
             leftText: '-',
             rightText: '+',
