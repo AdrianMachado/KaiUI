@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { requireOneOf } from '../../utils'
 import colors from '../../theme/colors.scss';
 
 import './IconListItem.scss';
@@ -12,6 +13,7 @@ const IconListItem = React.memo(
       primary,
       secondary,
       icon,
+      iconSrc,
       focusColor,
       forwardedRef,
       index,
@@ -33,6 +35,10 @@ const IconListItem = React.memo(
       }
     }
 
+    const renderedIcon = iconSrc === null ?
+        <span className={icon} /> :
+        <img src={iconSrc} alt="" />;
+
     return (
       <div
         tabIndex="0"
@@ -43,7 +49,7 @@ const IconListItem = React.memo(
         onBlur={() => handleFocusChange(false)}
       >
         <div className={iconCls}>
-          <span className={icon} />
+          {renderedIcon}
         </div>
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
@@ -54,10 +60,16 @@ const IconListItem = React.memo(
   }
 );
 
+const requireOneIcon = requireOneOf({
+  icon: PropTypes.string,
+  iconSrc: PropTypes.string
+});
+
 IconListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
-  icon: PropTypes.string.isRequired,
+  icon: requireOneIcon,
+  iconSrc: requireOneIcon,
   focusColor: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
@@ -69,6 +81,8 @@ IconListItem.propTypes = {
 
 IconListItem.defaultProps = {
   secondary: null,
+  icon: null,
+  iconSrc: null,
   focusColor: colors.defaultFocusColor,
 };
 
