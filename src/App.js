@@ -14,6 +14,7 @@ import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
 import './App.scss';
 import colors from './theme/colors.scss';
+import exampleIcon from './assets/example.png';
 
 function App() {
   const handleInputChange = newVal => {
@@ -59,8 +60,13 @@ function App() {
             </ListView>
             <ListView>
               <IconListItem
-                primary="Hello primary text"
-                secondary="seconday text"
+                primary="List Item"
+                secondary="... with asset icon"
+                iconSrc={exampleIcon}
+              />
+              <IconListItem
+                primary="List Item"
+                secondary="... with font icon"
                 icon="kai-icon-favorite-off"
               />
               <Slider
