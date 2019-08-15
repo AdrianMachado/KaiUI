@@ -1,0 +1,24 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+
+:root {
+  --toast-background: var(--color-gs90);
+  --toast-color: var(--color-gs00);
+}
+
+.kai-toast {
+  z-index: 1;
+  width: 100%;
+  outline: none;
+  display: absolute;
+  overflow: hidden;
+  
+  &-message {
+    @extend .p-pri;
+    padding: 1rem;
+    width: 100%;
+    display: inline-block;
+    background: var(--toast-background);
+    color: var(--toast-color);
+  }
+}

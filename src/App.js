@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -12,19 +12,47 @@ import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonLis
 import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
+import Toasts from './components/Toast/Toasts';
+import Toast from './components/Toast/Toast';
 import './App.scss';
 import colors from './theme/colors.scss';
 
 function App() {
+  const toasts = [];
+
   const handleInputChange = newVal => {
     console.log('new input value', newVal);
   };
 
+  const handleDismiss = index => {
+    console.log("Handle dismiss.");
+    toasts.splice(index, 1);
+  }
+
+  const handleKeyDown = useCallback(
+    e => {
+      switch (e.key) {
+        case 'Enter':
+          const newToast = <Toast message="Button clicked!" timeout={1500} />;
+          toasts.push(newToast);
+          console.log(toasts);
+          break;
+        default:
+          break;
+      }
+    },
+    [toasts]
+  );
+
   return (
     <div className="App">
+      <div id="toasts"></div>
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
       <SoftKeyProvider>
         <div className="content">
+          <Toasts containerId="toasts" onDismiss={handleDismiss}>
+            {toasts}
+          </Toasts>
           <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
             <ListView>
               <CheckboxListItem
@@ -57,31 +85,33 @@ function App() {
                 buttonSide="right"
               />
             </ListView>
-            <ListView>
-              <IconListItem
-                primary="Hello primary text"
-                secondary="seconday text"
-                icon="kai-icon-favorite-off"
-              />
-              <Slider
-                header="I am a slider"
-                initialValue={3}
-                minValue={0}
-                maxValue={10}
-              />
-              <Slider
-                header="Also a slider"
-                initialValue={5}
-                minValue={0}
-                maxValue={10}
-              />
-              <Separator separatorText={'Another separator'} />
-              <IconListItem
-                primary="Item without secondary"
-                icon="kai-icon-wifi"
-              />
-              <IconListItem primary="Last item" icon="kai-icon-camera" />
-            </ListView>
+            <div onKeyDown={handleKeyDown}>
+              <ListView>
+                <IconListItem
+                  primary="List Item"
+                  secondary="... with font icon"
+                  icon="kai-icon-favorite-off"
+                />
+                <Slider
+                  header="I am a slider"
+                  initialValue={3}
+                  minValue={0}
+                  maxValue={10}
+                />
+                <Slider
+                  header="Also a slider"
+                  initialValue={5}
+                  minValue={0}
+                  maxValue={10}
+                />
+                <Separator separatorText={'Another separator'} />
+                <IconListItem
+                  primary="Item without secondary"
+                  icon="kai-icon-wifi"
+                />
+                <IconListItem primary="Last item" icon="kai-icon-camera" />
+              </ListView>
+            </div>
             <ListView>
               <ProgressBar
                 header={'Downloading...'}
