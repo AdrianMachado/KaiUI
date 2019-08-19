@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import './Toast.scss';
 
@@ -9,31 +9,29 @@ const Toast = React.memo(
     const {
       message,
       timeout,
-      index,
       onDismiss,
       forwardedRef
     } = props;
 
+    const [startTime] = useState(new Date().getMilliseconds());
+
     const itemCls = `${prefixCls}`;
     const messageCls = `${prefixCls}-message`;
 
-    console.log("I'm a TOAST");
     useEffect(
       () => {
-        console.log("Start timeout");
-        const timer = setTimeout(
-            () => {
-              console.log("Dismiss toast with index: " + index);
-              onDismiss(index);
-            }, timeout
-        );
+        const millisElapsed = (new Date().getMilliseconds() - startTime);
+        const remainingMillis = timeout - millisElapsed;
 
-        return () => {
-          console.log("Clear timeout for timer.");
-          clearTimeout(timer);
+        if(remainingMillis > 0) {
+          const timer = setTimeout(
+              () => onDismiss(forwardedRef), remainingMillis
+          );
+
+          return () => clearTimeout(timer);
         }
       },
-      [index, onDismiss, timeout]
+      [forwardedRef, onDismiss, timeout, startTime]
     );
 
     return (
@@ -47,8 +45,7 @@ const Toast = React.memo(
 Toast.propTypes = {
   message: PropTypes.string.isRequired,
   timeout: PropTypes.number,
-  index: PropTypes.number.isRequired,
-  onDismiss: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

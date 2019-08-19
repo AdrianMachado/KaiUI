@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -18,15 +18,19 @@ import './App.scss';
 import colors from './theme/colors.scss';
 
 function App() {
-  const toasts = [];
+  const [toasts, setToasts] = useState([]);
 
   const handleInputChange = newVal => {
     console.log('new input value', newVal);
   };
 
-  const handleDismiss = index => {
-    console.log("Handle dismiss.");
-    toasts.splice(index, 1);
+  const handleDismiss = toast => {
+    setToasts(prevToasts => {
+      const oldToasts = [...prevToasts];
+      var index = oldToasts.indexOf(toast)
+      oldToasts.splice(index, 1)
+      return oldToasts;
+    });
   }
 
   const handleKeyDown = useCallback(
@@ -34,14 +38,13 @@ function App() {
       switch (e.key) {
         case 'Enter':
           const newToast = <Toast message="Button clicked!" timeout={1500} />;
-          toasts.push(newToast);
-          console.log(toasts);
+          setToasts(prevToasts => [...prevToasts, newToast]);
           break;
         default:
           break;
       }
     },
-    [toasts]
+    []
   );
 
   return (
@@ -49,10 +52,10 @@ function App() {
       <div id="toasts"></div>
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
       <SoftKeyProvider>
+        <Toasts containerId="toasts" onDismiss={handleDismiss}>
+          {toasts}
+        </Toasts>
         <div className="content">
-          <Toasts containerId="toasts" onDismiss={handleDismiss}>
-            {toasts}
-          </Toasts>
           <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
             <ListView>
               <CheckboxListItem
