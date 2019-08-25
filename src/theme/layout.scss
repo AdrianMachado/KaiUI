@@ -28,6 +28,11 @@ ul {
   @extend .icon-font;
 }
 
+@mixin button-icon {
+  margin: 0 1rem;
+  @extend .button-icon-font;
+}
+
 @mixin list-item-arrow {
   margin: 0 1rem;
   @extend .arrow-font;

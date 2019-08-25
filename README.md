@@ -38,7 +38,7 @@ All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-co
 | Progress-Download   | ![alt text](./component_screenshots/kaiui-progress-download.png 'Download')              | ![alt text](./component_screenshots/kaiui-progress-spec.png 'Progress spec')   |
 | Progress-Buffering  | ![alt text](./component_screenshots/kaiui-progress-buffer.gif 'Buffering')               |                                                                                |
 | Slider              | ![alt text](./component_screenshots/kaiui-slider.gif 'Slider')                           | ![alt text](./component_screenshots/kaiui-slider-spec.png 'Slider spec')       |
-| Button              | TBD                                                                                      | ![alt text](./component_screenshots/kaiui-button.png 'Button')                 |
+| Button              | ![alt text](./component_screenshots/kaiui-button.png 'Button')                           | ![alt text](./component_screenshots/kaiui-button-spec.png 'Button spec')       |
 | Input               | TBD                                                                                      | ![alt text](./component_screenshots/kaiui-input.png 'Input')                   |
 
 ## Views

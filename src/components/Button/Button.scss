@@ -1,0 +1,64 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+@import '../../kai-font/style.scss';
+
+:root {
+  --button-text-focused: var(--color-gs00);
+  --button-icon-unfocused: var(--color-gs100);
+}
+.kai-button {
+  margin: 1rem;
+  &-input {
+    line-height: calc(var(--button-height) / 2);
+    width: 100%;
+    height: var(--button-height);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    @extend %text-ellipsis;
+    border: none;
+    outline: none;
+    &:focus {
+      color: var(--button-text-focused);
+    }
+  }
+
+  &-icon {
+    &-focused {
+      span::before {
+        @include button-icon;
+        color: var(--button-text-focused);
+      }
+    }
+
+    &-unfocused {
+      span::before {
+        @include button-icon;
+        color: var(--button-icon-unfocused);
+      }
+    }
+  }
+
+  &-line {
+    span {
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  .left {
+    box-sizing: border-box;
+    padding: 1rem 0 1rem 1rem;
+  }
+  .right {
+    box-sizing: border-box;
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  &-text {
+    @extend .p-btn;
+  }
+}

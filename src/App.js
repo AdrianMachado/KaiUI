@@ -12,6 +12,7 @@ import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonLis
 import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
+import Button from './components/Button/Button';
 import './App.scss';
 import colors from './theme/colors.scss';
 
@@ -69,12 +70,7 @@ function App() {
                 minValue={0}
                 maxValue={10}
               />
-              <Slider
-                header="Also a slider"
-                initialValue={5}
-                minValue={0}
-                maxValue={10}
-              />
+              <Button text="A button" icon="kai-icon-camera" iconSide="left" />
               <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"
