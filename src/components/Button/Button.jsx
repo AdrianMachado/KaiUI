@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
@@ -25,23 +25,27 @@ const Button = React.memo(props => {
     index,
     forwardedRef,
     softKeyManager,
+    softKeyText,
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocusChange = isNowFocused => {
-    setIsFocused(isNowFocused);
-    if (isNowFocused) {
-      const centerText = 'Select';
-      softKeyManager.setSoftKeyTexts({ centerText });
-      softKeyManager.setSoftKeyCallbacks({
-        centerCallback: onClick,
-      });
-      onFocusChange(index);
-    } else {
-      softKeyManager.unregisterSoftKeys();
-    }
-  };
+  const handleFocusChange = useCallback(
+    isNowFocused => {
+      setIsFocused(isNowFocused);
+      if (isNowFocused) {
+        const centerText = softKeyText;
+        softKeyManager.setSoftKeyTexts({ centerText });
+        softKeyManager.setSoftKeyCallbacks({
+          centerCallback: onClick,
+        });
+        onFocusChange(index);
+      } else {
+        softKeyManager.unregisterSoftKeys();
+      }
+    },
+    [index, onFocusChange, onClick, softKeyManager, softKeyText]
+  );
 
   const buttonCls = prefixCls;
   const inputCls = `${prefixCls}-input`;
@@ -112,6 +116,8 @@ Button.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  // For softkey
+  softKeyText: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -126,6 +132,7 @@ Button.defaultProps = {
   formNoValidate: undefined,
   formTarget: undefined,
   name: undefined,
+  softKeyText: 'select',
 };
 
 export default React.forwardRef((props, ref) => (
