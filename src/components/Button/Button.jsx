@@ -13,6 +13,14 @@ const Button = React.memo(props => {
     iconSide,
     onClick,
     focusColor,
+    form,
+    formAction,
+    formEncType,
+    formMethod,
+    formNoValidate,
+    formTarget,
+    name,
+    type,
     onFocusChange,
     index,
     forwardedRef,
@@ -55,6 +63,14 @@ const Button = React.memo(props => {
         tabIndex="0"
         className={inputCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.grayscale20 }}
+        form={form}
+        formAction={formAction}
+        formEncType={formEncType}
+        formMethod={formMethod}
+        formNoValidate={formNoValidate}
+        formTarget={formTarget}
+        name={name}
+        type={type}
         ref={forwardedRef}
         onClick={onClick}
         onFocus={() => handleFocusChange(true)}
@@ -76,6 +92,19 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   iconSide: PropTypes.oneOf(['left', 'right']),
   focusColor: PropTypes.string,
+  // HTML Button props
+  form: PropTypes.string,
+  formAction: PropTypes.string,
+  formEncType: PropTypes.oneOf([
+    'application/x-www-form-urlencoded',
+    'multipart/form-data',
+    'text/plain',
+  ]),
+  formMethod: PropTypes.oneOf(['get', 'post']),
+  formNoValidate: PropTypes.bool,
+  formTarget: PropTypes.oneOf(['_blank', '_self', '_parent', '_top']),
+  name: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
   // For ListView navigation
   onFocusChange: PropTypes.func,
   index: PropTypes.number,
@@ -89,6 +118,14 @@ Button.defaultProps = {
   icon: null,
   iconSide: null,
   focusColor: colors.defaultFocusColor,
+  type: 'button',
+  form: undefined,
+  formAction: undefined,
+  formEncType: undefined,
+  formMethod: undefined,
+  formNoValidate: undefined,
+  formTarget: undefined,
+  name: undefined,
 };
 
 export default React.forwardRef((props, ref) => (
