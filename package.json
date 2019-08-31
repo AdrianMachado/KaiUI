@@ -14,7 +14,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "app:install": "kdeploy build install",
+    "app:uninstall": "kdeploy build uninstall",
+    "app:update": "npm run build && kdeploy build update",
+    "app:start": "kdeploy build start",
+    "app:stop": "kdeploy build stop"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +36,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "kdeploy": "kaiostech/kdeploy"
+  }
 }
