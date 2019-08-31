@@ -10,6 +10,7 @@ const Button = React.memo(props => {
   const {
     text,
     icon,
+    iconSrc,
     iconSide,
     onClick,
     focusColor,
@@ -55,9 +56,13 @@ const Button = React.memo(props => {
   const textCls = `${prefixCls}-text`;
   const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
 
+  const renderedIcon = iconSrc === null ?
+    <span className={icon} /> :
+    <img src={iconSrc} alt="" />;
+
   const iconComp = (
     <div className={iconCls}>
-      <span className={icon} />
+      {renderedIcon}
     </div>
   );
 
@@ -93,6 +98,7 @@ const Button = React.memo(props => {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.string,
+  iconSrc: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   iconSide: PropTypes.oneOf(['left', 'right']),
   focusColor: PropTypes.string,
@@ -122,6 +128,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   icon: null,
+  iconSrc: null,
   iconSide: null,
   focusColor: colors.defaultFocusColor,
   type: 'button',

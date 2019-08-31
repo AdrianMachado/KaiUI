@@ -18,6 +18,7 @@
     align-items: center;
     justify-content: center;
     @extend %text-ellipsis;
+    overflow: hidden;
     border: none;
     outline: none;
     &:focus {
@@ -31,12 +32,24 @@
         @include button-icon;
         color: var(--button-text-focused);
       }
+
+      img {
+        @include button-icon;
+        color: var(--button-text-focused);
+        max-height: calc(var(--button-height) / 2);
+      }
     }
 
     &-unfocused {
       span::before {
         @include button-icon;
         color: var(--button-icon-unfocused);
+      }
+
+      img {
+        @include button-icon;
+        color: var(--button-icon-unfocused);
+        max-height: calc(var(--button-height) / 2);
       }
     }
   }
