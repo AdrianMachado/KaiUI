@@ -7,13 +7,31 @@ import './TextInput.scss';
 
 const prefixCls = 'kai-text-input';
 
-const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onChange}) => {
+const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onChange, enableTabSwitching }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [caretPosition, setCaretPosition] = useState(0);
+  const [value, setValue] = useState('');
 
   const handleKeyUp = (event) => {
+    if (enableTabSwitching) {
+      if (
+        (event.key === 'ArrowLeft' && caretPosition !== 0) ||
+        (event.key === 'ArrowRight' && caretPosition !== value.length)
+      ) {
+        event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
+      }
+    } else {
+      event.stopPropagation();
+      event.nativeEvent.stopImmediatePropagation();
+    }
     setCaretPosition(event.target.selectionStart);
-  }
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    onChange(event);
+  };
 
   const handleFocusChange = (isFocused) => {
     const input = forwardedRef.current;
@@ -26,7 +44,7 @@ const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onCh
         input.selectionStart = caretPosition;
       })
     }
-  }
+  };
 
   const itemCls = classnames([
     prefixCls,
@@ -48,8 +66,9 @@ const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onCh
         ref={forwardedRef}
         type="text"
         className={inputCls}
-        onChange={onChange}
-        onKeyUp={(e) => handleKeyUp(e)}
+        onChange={handleChange}
+        onKeyUpCapture={handleKeyUp}
+        value={value}
       />
     </div>
   );
@@ -57,6 +76,7 @@ const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onCh
 
 TextInput.defaultProps = {
   focusColor: colors.defaultFocusColor,
+  enableTabSwitching: false,
   onChange: () => {}
 };
 
@@ -69,7 +89,8 @@ TextInput.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  enableTabSwitching: PropTypes.bool,
 };
 
 export default React.forwardRef((props, ref) => (

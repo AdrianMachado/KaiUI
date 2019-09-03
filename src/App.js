@@ -135,6 +135,10 @@ function App() {
                 onChange={e => setInputValue(e.target.value)}
               />
               <TextListItem primary={`Input value: ${inputValue}`} />
+              <TextInput
+                label="I am a text input that lets you change tabs"
+                enableTabSwitching
+              />
             </ListView>
             <ListView>
               <BodyTextListItem
