@@ -23,7 +23,7 @@ function App() {
     console.log('new input value', newVal);
   };
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <div className="App">
@@ -47,7 +47,7 @@ function App() {
                 onInputChange={() => {}}
                 checkboxSide="left"
               />
-              <Separator separatorText={"hello, separator here"} />
+              <Separator separatorText={'hello, separator here'} />
               <CheckboxListItem
                 primary="Another item with more text"
                 secondary="secondary text at the bottom"
