@@ -41,6 +41,7 @@ All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-co
 | Button              | ![alt text](./component_screenshots/kaiui-button.png 'Button')                           | ![alt text](./component_screenshots/kaiui-button-spec.png 'Button spec')       |
 | Input               | TBD                                                                                      | ![alt text](./component_screenshots/kaiui-input.png 'Input')                   |
 
+
 ## Views
 
 Navigation details can be found [here](https://developer.kaiostech.com/design-guide/basic-navigation)
@@ -52,7 +53,9 @@ Navigation details can be found [here](https://developer.kaiostech.com/design-gu
 
 ## Popups
 
-TBD
+| Name                | Preview                                                                                  | Spec                                                                           |
+| ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Toast               | ![alt text](./component_screenshots/kaiui-toast.gif 'Toast')                             | ![alt text](./component_screenshots/kaiui-toast-spec.png 'Toast')              |
 
 ## Notifications
 
