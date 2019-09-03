@@ -1,5 +1,5 @@
-@import '../../theme/fonts.scss';
-@import '../../theme/theme.scss';
+@import "../../theme/fonts.scss";
+@import "../../theme/theme.scss";
 
 :root {
   --tl-text-focused: var(--color-gs00);
@@ -22,6 +22,8 @@
     line-height: 3.6rem;
     padding: 0 0.5rem;
     font-size: 1.6rem;
+    border: 1px solid var(--color-epsilon);
+    border-radius: 2px;
 
     &:focus {
       outline: none;

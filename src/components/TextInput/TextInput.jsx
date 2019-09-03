@@ -8,10 +8,10 @@ import './TextInput.scss';
 const prefixCls = 'kai-text-input';
 
 class TextInput extends React.PureComponent {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      isFocused: false,
+      isFocused: false
     };
     this.handleFocusChange = this.handleFocusChange.bind(this);
   }
@@ -30,7 +30,7 @@ class TextInput extends React.PureComponent {
 
     const itemCls = classnames([
       prefixCls,
-      isFocused && `${prefixCls}--focused`,
+      isFocused && `${prefixCls}--focused`
     ]);
     const labelCls = `${prefixCls}-label`;
     const inputCls = `${prefixCls}-input`;
@@ -57,7 +57,7 @@ class TextInput extends React.PureComponent {
 
 TextInput.defaultProps = {
   focusColor: colors.defaultFocusColor,
-  onChange: () => {},
+  onChange: () => {}
 };
 
 TextInput.propTypes = {
@@ -65,11 +65,11 @@ TextInput.propTypes = {
   focusColor: PropTypes.string,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default React.forwardRef((props, ref) => (

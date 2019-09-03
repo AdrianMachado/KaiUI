@@ -25,21 +25,21 @@ All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-co
 
 | Name                | Preview                                                                                  | Spec                                                                           |
 | ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Header              | ![alt text](./component_screenshots/kaiui-header.png "Header")                           | ![alt text](./component_screenshots/kaiui-header-spec.png "Header spec")       |
-| Tabs                | ![alt text](./component_screenshots/kaiui-tabs.gif "Tabs")                               | ![alt text](./component_screenshots/kaiui-tabs-spec.png "Header spec")         |
-| SoftKey             | ![alt text](./component_screenshots/kaiui-softkey.png "Tabs")                            | ![alt text](./component_screenshots/kaiui-softkey-spec.png "Header spec")      |
-| Text List Item      | ![alt text](./component_screenshots/kaiui-text-list-item.png "Text List Item")           | ![alt text](./component_screenshots/kaiui-list-item-spec.png "List item spec") |
-| Body Text List Item | ![alt text](./component_screenshots/kaiui-body-text-list-item.png "Body Text List Item") |                                                                                |
-| Icon List Item      | ![alt text](./component_screenshots/kaiui-icon-list-item.png "Icon List Item")           |                                                                                |
-| Arrow List Item     | ![alt text](./component_screenshots/kaiui-arrow-list-item.png "Arrow Text List Item")    |                                                                                |
-| Separator           | ![alt text](./component_screenshots/kaiui-separator.png "Separator")                     | ![alt text](./component_screenshots/kaiui-separator-spec.png "Separator spec") |
-| Checkbox            | ![alt text](./component_screenshots/kaiui-cb.png "Checkbox")                             | ![alt text](./component_screenshots/kaiui-cb-spec.png "Checkbox spec")         |
-| Radio Button        | ![alt text](./component_screenshots/kaiui-rb.png "Radio button")                         |                                                                                |
-| Progress-Download   | ![alt text](./component_screenshots/kaiui-progress-download.png "Download")              | ![alt text](./component_screenshots/kaiui-progress-spec.png "Progress spec")   |
-| Progress-Buffering  | ![alt text](./component_screenshots/kaiui-progress-buffer.gif "Buffering")               |                                                                                |
-| Slider              | ![alt text](./component_screenshots/kaiui-slider.gif "Slider")                           | ![alt text](./component_screenshots/kaiui-slider-spec.png "Slider spec")       |
-| Button              | ![alt text](./component_screenshots/kaiui-button.png "Button")                           | ![alt text](./component_screenshots/kaiui-button-spec.png "Button spec")       |
-| Input               | ![alt text](./component_screenshots/kaiui-input.png "Input")                             | ![alt text](./component_screenshots/kaiui-input-spec.png "Input")              |
+| Header              | ![alt text](./component_screenshots/kaiui-header.png 'Header')                           | ![alt text](./component_screenshots/kaiui-header-spec.png 'Header spec')       |
+| Tabs                | ![alt text](./component_screenshots/kaiui-tabs.gif 'Tabs')                               | ![alt text](./component_screenshots/kaiui-tabs-spec.png 'Header spec')         |
+| SoftKey             | ![alt text](./component_screenshots/kaiui-softkey.png 'Tabs')                            | ![alt text](./component_screenshots/kaiui-softkey-spec.png 'Header spec')      |
+| Text List Item      | ![alt text](./component_screenshots/kaiui-text-list-item.png 'Text List Item')           | ![alt text](./component_screenshots/kaiui-list-item-spec.png 'List item spec') |
+| Body Text List Item | ![alt text](./component_screenshots/kaiui-body-text-list-item.png 'Body Text List Item') |                                                                                |
+| Icon List Item      | ![alt text](./component_screenshots/kaiui-icon-list-item.png 'Icon List Item')           |                                                                                |
+| Arrow List Item     | ![alt text](./component_screenshots/kaiui-arrow-list-item.png 'Arrow Text List Item')    |                                                                                |
+| Separator           | ![alt text](./component_screenshots/kaiui-separator.png 'Separator')                     | ![alt text](./component_screenshots/kaiui-separator-spec.png 'Separator spec') |
+| Checkbox            | ![alt text](./component_screenshots/kaiui-cb.png 'Checkbox')                             | ![alt text](./component_screenshots/kaiui-cb-spec.png 'Checkbox spec')         |
+| Radio Button        | ![alt text](./component_screenshots/kaiui-rb.png 'Radio button')                         |                                                                                |
+| Progress-Download   | ![alt text](./component_screenshots/kaiui-progress-download.png 'Download')              | ![alt text](./component_screenshots/kaiui-progress-spec.png 'Progress spec')   |
+| Progress-Buffering  | ![alt text](./component_screenshots/kaiui-progress-buffer.gif 'Buffering')               |                                                                                |
+| Slider              | ![alt text](./component_screenshots/kaiui-slider.gif 'Slider')                           | ![alt text](./component_screenshots/kaiui-slider-spec.png 'Slider spec')       |
+| Button              | ![alt text](./component_screenshots/kaiui-button.png 'Button')                           | ![alt text](./component_screenshots/kaiui-button-spec.png 'Button spec')       |
+| Input               | ![alt text](./component_screenshots/kaiui-input.png 'Input')                             | ![alt text](./component_screenshots/kaiui-input-spec.png 'Input')              |
 
 ## Views
 
@@ -47,8 +47,8 @@ Navigation details can be found [here](https://developer.kaiostech.com/design-gu
 
 | Name     | Preview                                                              |
 | -------- | -------------------------------------------------------------------- |
-| TabView  | ![alt text](./component_screenshots/kaiui-tab-view.gif "Tab view")   |
-| ListView | ![alt text](./component_screenshots/kaiui-list-view.gif "List view") |
+| TabView  | ![alt text](./component_screenshots/kaiui-tab-view.gif 'Tab view')   |
+| ListView | ![alt text](./component_screenshots/kaiui-list-view.gif 'List view') |
 
 ## Popups
 

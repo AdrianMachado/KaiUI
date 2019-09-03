@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Header from "./components/Header/Header";
-import { SoftKeyProvider } from "./components/SoftKey/SoftKeyProvider";
-import TabView from "./views/TabView/TabView";
-import ListView from "./views/ListView/ListView";
-import CheckboxListItem from "./components/CheckboxListItem/CheckboxListItem";
-import IconListItem from "./components/IconListItem/IconListItem";
-import TextListItem from "./components/TextListItem/TextListItem";
-import BodyTextListItem from "./components/BodyTextListItem/BodyTextListItem";
-import ArrowListItem from "./components/ArrowListItem/ArrowListItem";
-import RadioButtonListItem from "./components/RadioButtonListItem/RadioButtonListItem";
-import Separator from "./components/Separator/Separator";
-import ProgressBar from "./components/ProgressBar/ProgressBar";
-import Slider from "./components/Slider/Slider";
-import Button from "./components/Button/Button";
-import TextInput from "./components/TextInput/TextInput";
-import "./App.scss";
-import colors from "./theme/colors.scss";
-import exampleIcon from "./assets/example.png";
+import React, { useState } from 'react';
+import Header from './components/Header/Header';
+import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
+import TabView from './views/TabView/TabView';
+import ListView from './views/ListView/ListView';
+import CheckboxListItem from './components/CheckboxListItem/CheckboxListItem';
+import IconListItem from './components/IconListItem/IconListItem';
+import TextListItem from './components/TextListItem/TextListItem';
+import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
+import ArrowListItem from './components/ArrowListItem/ArrowListItem';
+import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
+import Separator from './components/Separator/Separator';
+import ProgressBar from './components/ProgressBar/ProgressBar';
+import Slider from './components/Slider/Slider';
+import Button from './components/Button/Button';
+import TextInput from './components/TextInput/TextInput';
+import './App.scss';
+import colors from './theme/colors.scss';
+import exampleIcon from './assets/example.png';
 
 function App() {
   const handleInputChange = newVal => {
-    console.log("new input value", newVal);
+    console.log('new input value', newVal);
   };
 
   const [inputValue, setInputValue] = useState("");
@@ -32,11 +32,11 @@ function App() {
         <div className="content">
           <TabView
             tabLabels={[
-              "CB Tab",
-              "Icon Tab",
-              "Txt Tab",
-              "Form Tab",
-              "Misc Tab"
+              'CB Tab',
+              'Icon Tab',
+              'Txt Tab',
+              'Form Tab',
+              'Misc Tab'
             ]}
           >
             <ListView>
@@ -88,7 +88,7 @@ function App() {
                 maxValue={10}
               />
               <Button text="A button" icon="kai-icon-camera" iconSide="left" />
-              <Separator separatorText={"Another separator"} />
+              <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"
                 icon="kai-icon-wifi"
@@ -97,15 +97,15 @@ function App() {
             </ListView>
             <ListView>
               <ProgressBar
-                header={"Downloading..."}
+                header={'Downloading...'}
                 percentage={80}
-                type={"download"}
+                type={'download'}
                 focusColor={colors.lime}
               />
               <ProgressBar
-                header={"Downloading..."}
+                header={'Downloading...'}
                 percentage={30}
-                type={"download"}
+                type={'download'}
               />
               <TextListItem
                 primary="Hello primary text"
@@ -114,14 +114,14 @@ function App() {
                 focusColor={colors.gold}
               />
               <ProgressBar
-                header={"Buffering..."}
+                header={'Buffering...'}
                 percentage={30}
-                type={"buffer"}
+                type={'buffer'}
               />
               <ProgressBar
-                header={"Buffering..."}
+                header={'Buffering...'}
                 percentage={70}
-                type={"buffer"}
+                type={'buffer'}
               />
               <TextListItem
                 primary="Hello primary text"
