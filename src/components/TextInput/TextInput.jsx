@@ -11,9 +11,15 @@ class TextInput extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      isFocused: false
+      isFocused: false,
+      caretPosition: 0,
     };
+    this.inputRef = null;
     this.handleFocusChange = this.handleFocusChange.bind(this);
+  }
+
+  handleKeyUp(event) {
+    this.setState({ caretPosition: event.target.selectionStart });
   }
 
   handleFocusChange(isFocused) {
@@ -21,6 +27,9 @@ class TextInput extends React.PureComponent {
     if (isFocused) {
       this.props.onFocusChange(this.props.index);
       this.props.forwardedRef.current.focus();
+      requestAnimationFrame(() => {
+        this.props.forwardedRef.current.selectionStart = this.state.caretPosition;
+      });
     }
   }
 
@@ -49,6 +58,7 @@ class TextInput extends React.PureComponent {
           type="text"
           className={inputCls}
           onChange={onChange}
+          onKeyUp={(e) => this.handleKeyUp(e)}
         />
       </div>
     );
