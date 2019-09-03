@@ -139,6 +139,10 @@ function App() {
                 label="I am a text input that lets you change tabs"
                 enableTabSwitching
               />
+              <TextInput
+                label="I am a text input with a custom input prop"
+                placeholder="Placeholder text"
+              />
             </ListView>
             <ListView>
               <BodyTextListItem

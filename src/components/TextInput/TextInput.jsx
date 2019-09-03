@@ -7,7 +7,16 @@ import './TextInput.scss';
 
 const prefixCls = 'kai-text-input';
 
-const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onChange, enableTabSwitching }) => {
+const TextInput = ({
+  focusColor,
+  label,
+  index,
+  onFocusChange,
+  forwardedRef,
+  onChange,
+  enableTabSwitching,
+  ...props,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
   const [caretPosition, setCaretPosition] = useState(0);
   const [value, setValue] = useState('');
@@ -69,6 +78,7 @@ const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onCh
         onChange={handleChange}
         onKeyUpCapture={handleKeyUp}
         value={value}
+        {...props}
       />
     </div>
   );
