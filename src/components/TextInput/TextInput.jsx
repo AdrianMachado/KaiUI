@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import colors from '../../theme/colors.scss';
@@ -7,62 +7,52 @@ import './TextInput.scss';
 
 const prefixCls = 'kai-text-input';
 
-class TextInput extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      isFocused: false,
-      caretPosition: 0,
-    };
-    this.inputRef = null;
-    this.handleFocusChange = this.handleFocusChange.bind(this);
+const TextInput = ({ focusColor, label, index, onFocusChange, forwardedRef, onChange}) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [caretPosition, setCaretPosition] = useState(0);
+
+  const handleKeyUp = (event) => {
+    setCaretPosition(event.target.selectionStart);
   }
 
-  handleKeyUp(event) {
-    this.setState({ caretPosition: event.target.selectionStart });
-  }
-
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
+  const handleFocusChange = (isFocused) => {
+    const input = forwardedRef.current;
+    setIsFocused(isFocused);
     if (isFocused) {
-      this.props.onFocusChange(this.props.index);
-      this.props.forwardedRef.current.focus();
+      onFocusChange(index);
+      input.focus();
+      // Without this, it will just focus at position 0
       requestAnimationFrame(() => {
-        this.props.forwardedRef.current.selectionStart = this.state.caretPosition;
-      });
+        input.selectionStart = caretPosition;
+      })
     }
   }
 
-  render() {
-    const { focusColor, forwardedRef, label, onChange } = this.props;
-    const { isFocused } = this.state;
+  const itemCls = classnames([
+    prefixCls,
+    isFocused && `${prefixCls}--focused`
+  ]);
+  const labelCls = `${prefixCls}-label`;
+  const inputCls = `${prefixCls}-input`;
 
-    const itemCls = classnames([
-      prefixCls,
-      isFocused && `${prefixCls}--focused`
-    ]);
-    const labelCls = `${prefixCls}-label`;
-    const inputCls = `${prefixCls}-input`;
-
-    return (
-      <div
-        tabIndex="0"
-        className={itemCls}
-        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
-      >
-        <label className={labelCls}>{label}</label>
-        <input
-          ref={forwardedRef}
-          type="text"
-          className={inputCls}
-          onChange={onChange}
-          onKeyUp={(e) => this.handleKeyUp(e)}
-        />
-      </div>
-    );
-  }
+  return (
+    <div
+      tabIndex="0"
+      className={itemCls}
+      style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+      onFocus={() => handleFocusChange(true)}
+      onBlur={() => handleFocusChange(false)}
+    >
+      <label className={labelCls}>{label}</label>
+      <input
+        ref={forwardedRef}
+        type="text"
+        className={inputCls}
+        onChange={onChange}
+        onKeyUp={(e) => handleKeyUp(e)}
+      />
+    </div>
+  );
 }
 
 TextInput.defaultProps = {
