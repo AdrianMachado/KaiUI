@@ -1,30 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { requireOneOf } from '../../utils'
 import colors from '../../theme/colors.scss';
 
 import './IconListItem.scss';
 
 const prefixCls = 'kai-il';
 
-class IconListItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-    };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-  }
+const IconListItem = React.memo(
+  props => {
+    const {
+      primary,
+      secondary,
+      icon,
+      iconSrc,
+      focusColor,
+      forwardedRef,
+      index,
+      onFocusChange
+    } = props;
 
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.onFocusChange(this.props.index);
-    }
-  }
-
-  render() {
-    const { primary, secondary, icon, focusColor, forwardedRef } = this.props;
-    const { isFocused } = this.state;
+    const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
     const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
@@ -32,17 +28,28 @@ class IconListItem extends React.PureComponent {
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
 
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
+
+    const renderedIcon = iconSrc === null ?
+        <span className={icon} /> :
+        <img src={iconSrc} alt="" />;
+
     return (
       <div
         tabIndex="0"
         className={itemCls}
         ref={forwardedRef}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
         <div className={iconCls}>
-          <span className={icon} />
+          {renderedIcon}
         </div>
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
@@ -51,24 +58,32 @@ class IconListItem extends React.PureComponent {
       </div>
     );
   }
-}
+);
 
-IconListItem.defaultProps = {
-  secondary: null,
-  focusColor: colors.defaultFocusColor,
-};
+const requireOneIcon = requireOneOf({
+  icon: PropTypes.string,
+  iconSrc: PropTypes.string
+});
 
 IconListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
-  icon: PropTypes.string.isRequired,
+  icon: requireOneIcon,
+  iconSrc: requireOneIcon,
   focusColor: PropTypes.string,
-  forwardedRed: PropTypes.oneOfType([
+  forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+};
+
+IconListItem.defaultProps = {
+  secondary: null,
+  icon: null,
+  iconSrc: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default React.forwardRef((props, ref) => (

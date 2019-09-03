@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 
@@ -6,25 +6,18 @@ import './ArrowListItem.scss';
 
 const prefixCls = 'kai-al';
 
-class ArrowListItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-    };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-  }
+const ArrowListItem = React.memo(
+  props => {
+    const {
+      primary,
+      secondary,
+      focusColor,
+      forwardedRef,
+      index,
+      onFocusChange
+    } = props;
 
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.onFocusChange(this.props.index);
-    }
-  }
-
-  render() {
-    const { primary, secondary, forwardedRef, focusColor } = this.props;
-    const { isFocused } = this.state;
+    const [isFocused, setFocused] = useState(false);
 
     const itemCls = prefixCls;
     const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
@@ -32,14 +25,21 @@ class ArrowListItem extends React.PureComponent {
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
 
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
+
     return (
       <div
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
@@ -51,12 +51,7 @@ class ArrowListItem extends React.PureComponent {
       </div>
     );
   }
-}
-
-ArrowListItem.defaultProps = {
-  secondary: null,
-  focusColor: colors.defaultFocusColor,
-};
+);
 
 ArrowListItem.propTypes = {
   primary: PropTypes.string.isRequired,
@@ -68,6 +63,11 @@ ArrowListItem.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+};
+
+ArrowListItem.defaultProps = {
+  secondary: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default React.forwardRef((props, ref) => (

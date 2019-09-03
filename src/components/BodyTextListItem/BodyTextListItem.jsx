@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 
@@ -6,28 +6,29 @@ import './BodyTextListItem.scss';
 
 const prefixCls = 'kai-btl';
 
-class BodyTextListItem extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFocused: false,
-    };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-  }
+const BodyTextListItem = React.memo(
+  props => {
+    const {
+      header,
+      body,
+      focusColor,
+      forwardedRef,
+      index,
+      onFocusChange
+    } = props;
 
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.onFocusChange(this.props.index);
-    }
-  }
+    const [isFocused, setFocused] = useState(false);
 
-  render() {
-    const { header, body, focusColor, forwardedRef } = this.props;
-    const { isFocused } = this.state;
     const itemCls = prefixCls;
     const headerCls = `${prefixCls}-header`;
     const bodyCls = `${prefixCls}-body ${body ? '' : 'hidden'}`;
+
+    const handleFocusChange = isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
 
     return (
       <div
@@ -35,20 +36,15 @@ class BodyTextListItem extends React.PureComponent {
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
       >
         <span className={headerCls}>{header}</span>
         <label className={bodyCls}>{body}</label>
       </div>
     );
   }
-}
-
-BodyTextListItem.defaultProps = {
-  body: null,
-  focusColor: colors.defaultFocusColor,
-};
+);
 
 BodyTextListItem.propTypes = {
   header: PropTypes.string.isRequired,
@@ -60,6 +56,11 @@ BodyTextListItem.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+};
+
+BodyTextListItem.defaultProps = {
+  body: null,
+  focusColor: colors.defaultFocusColor,
 };
 
 export default React.forwardRef((props, ref) => (

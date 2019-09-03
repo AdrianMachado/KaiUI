@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
@@ -6,110 +6,93 @@ import './Slider.scss';
 
 const prefixCls = 'kai-slider';
 
-class Slider extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { isFocused: false, sliderValue: props.initialValue };
-    this.handleFocusChange = this.handleFocusChange.bind(this);
-    this.handleSliderChange = this.handleSliderChange.bind(this);
-    this.handleDecrementSlider = this.handleDecrementSlider.bind(this);
-    this.handleIncrementSlider = this.handleIncrementSlider.bind(this);
-  }
+const Slider = React.memo(props => {
+  const {
+    header,
+    initialValue,
+    maxValue,
+    minValue,
+    stepSize,
+    focusColor,
+    forwardedRef,
+    index,
+    onFocusChange,
+    softKeyManager,
+    softKeyLeftText,
+    softKeyRightText,
+  } = props;
 
-  handleFocusChange(isFocused) {
-    this.setState({ isFocused });
-    if (isFocused) {
-      this.props.softKeyManager.setSoftKeyTexts({
-        leftText: '-',
-        rightText: '+',
-      });
-      this.props.softKeyManager.setSoftKeyCallbacks({
-        leftCallback: this.handleDecrementSlider,
-        rightCallback: this.handleIncrementSlider,
-      });
-      this.props.onFocusChange(this.props.index);
-    } else {
-      this.props.softKeyManager.unregisterSoftKeys();
-    }
-  }
+  const [isFocused, setFocused] = useState(false);
+  const [sliderValue, setSliderValue] = useState(initialValue);
 
-  handleDecrementSlider() {
-    this.setState(prevState => {
-      return { ...prevState, sliderValue: prevState.sliderValue - 1 };
-    });
-  }
+  const lineCls = `${prefixCls}-line`;
+  const headerCls = `${prefixCls}-header`;
+  const trackerCls = `${prefixCls}-tracker`;
+  const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
 
-  handleIncrementSlider() {
-    this.setState(prevState => {
-      return { ...prevState, sliderValue: prevState.sliderValue + 1 };
-    });
-  }
+  const handleFocusChange = useCallback(
+    isNowFocused => {
+      setFocused(isNowFocused);
+      if (isNowFocused) {
+        softKeyManager.setSoftKeyTexts({
+          leftText: softKeyLeftText,
+          rightText: softKeyRightText,
+        });
+        softKeyManager.setSoftKeyCallbacks({
+          leftCallback: handleDecrementSlider,
+          rightCallback: handleIncrementSlider,
+        });
+        onFocusChange(index);
+      } else {
+        softKeyManager.unregisterSoftKeys();
+      }
+    },
+    [index, onFocusChange, softKeyManager, softKeyLeftText, softKeyRightText]
+  );
 
-  handleSliderChange(event) {
-    const sliderValue = event.target.value;
-    this.setState({ sliderValue });
-  }
+  const handleDecrementSlider = () => setSliderValue(prevVal => prevVal - 1);
 
-  render() {
-    const {
-      header,
-      maxValue,
-      minValue,
-      stepSize,
-      focusColor,
-      forwardedRef,
-    } = this.props;
-    const { isFocused, sliderValue } = this.state;
-    const lineCls = `${prefixCls}-line`;
-    const headerCls = `${prefixCls}-header`;
-    const trackerCls = `${prefixCls}-tracker`;
-    const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
+  const handleIncrementSlider = () => setSliderValue(prevVal => prevVal + 1);
 
-    return (
-      <div
-        tabIndex="0"
-        className={prefixCls}
-        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        ref={forwardedRef}
-        onFocus={() => this.handleFocusChange(true)}
-        onBlur={() => this.handleFocusChange(false)}
-      >
-        <div className={lineCls}>
-          <span className={headerCls}>{header}</span>
-          <span className={trackerCls}>{`${sliderValue}/${maxValue}`}</span>
-        </div>
+  const handleSliderChange = event => setSliderValue(event.target.value);
 
-        <div className={sliderWrapperCls}>
-          <input
-            ref={this.slider}
-            type="range"
-            min={minValue}
-            max={maxValue}
-            step={stepSize}
-            value={sliderValue}
-            onChange={this.handleSliderChange}
-            style={{
-              '--min': minValue,
-              '--max': maxValue,
-              '--val': sliderValue,
-              '--slider-left-filler-color': isFocused
-                ? colors.white
-                : focusColor,
-              '--slider-thumb-border-color': isFocused
-                ? focusColor
-                : colors.white,
-            }}
-          />
-        </div>
+  return (
+    <div
+      tabIndex="0"
+      className={prefixCls}
+      style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+      ref={forwardedRef}
+      onFocus={() => handleFocusChange(true)}
+      onBlur={() => handleFocusChange(false)}
+    >
+      <div className={lineCls}>
+        <span className={headerCls}>{header}</span>
+        <span className={trackerCls}>{`${sliderValue}/${maxValue}`}</span>
       </div>
-    );
-  }
-}
 
-Slider.defaultProps = {
-  focusColor: colors.defaultFocusColor,
-  stepSize: 1,
-};
+      <div className={sliderWrapperCls}>
+        <input
+          ref={forwardedRef}
+          type="range"
+          min={minValue}
+          max={maxValue}
+          step={stepSize}
+          value={sliderValue}
+          onChange={handleSliderChange}
+          style={{
+            '--min': minValue,
+            '--max': maxValue,
+            '--val': sliderValue,
+            '--slider-left-filler-color': isFocused ? colors.white : focusColor,
+            '--slider-thumb-border-color': isFocused
+              ? focusColor
+              : colors.white,
+          }}
+        />
+      </div>
+    </div>
+  );
+});
 
 Slider.propTypes = {
   header: PropTypes.string.isRequired,
@@ -124,6 +107,16 @@ Slider.propTypes = {
   ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
+  // For softkey
+  softKeyLeftText: PropTypes.string,
+  softKeyRightText: PropTypes.string,
+};
+
+Slider.defaultProps = {
+  focusColor: colors.defaultFocusColor,
+  stepSize: 1,
+  softKeyLeftText: '-',
+  softKeyRightText: '+',
 };
 
 export default React.forwardRef((props, ref) => (

@@ -25,10 +25,20 @@
         @include list-item-icon;
         color: var(--il-text-focused);
       }
+
+      img {
+        @include list-item-icon;
+        color: var(--il-text-focused);
+      }
     }
 
     &-unfocused {
       span::before {
+        @include list-item-icon;
+        color: var(--il-icon-unfocused);
+      }
+
+      img {
         @include list-item-icon;
         color: var(--il-icon-unfocused);
       }
