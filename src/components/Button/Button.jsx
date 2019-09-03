@@ -6,7 +6,7 @@ import './Button.scss';
 
 const prefixCls = 'kai-button';
 
-const Button = React.memo(props => {
+const PureButton = React.memo(props => {
   const {
     text,
     icon,
@@ -90,6 +90,14 @@ const Button = React.memo(props => {
   );
 });
 
+const Button = React.forwardRef((props, ref) => (
+  <SoftKeyConsumer>
+    {context => (
+      <PureButton softKeyManager={context} forwardedRef={ref} {...props} />
+    )}
+  </SoftKeyConsumer>
+));
+
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.string,
@@ -135,10 +143,4 @@ Button.defaultProps = {
   softKeyText: 'select',
 };
 
-export default React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <Button softKeyManager={context} forwardedRef={ref} {...props} />
-    )}
-  </SoftKeyConsumer>
-));
+export default Button

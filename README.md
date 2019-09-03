@@ -67,6 +67,20 @@ Currently you can customize the focus color of components through props, font co
 
 KaiUI uses custom icons provided on the KaiOS developer portal. These are included in the kai-icons font and incorporated as [SASS/CSS classes](https://github.com/AdrianMachado/KaiUI/tree/master/src/kai-font).
 
+## Documentation
+
+Documentation is written using [React Styleguidist](https://react-styleguidist.js.org/). You can run the docs server by running
+
+```
+npm run docs
+```
+
+You can build the docs for publishing by running
+
+```
+npm run docs:build
+```
+
 # Contributing
 
 There's much work to be done on building out more UI components, writing tests, and integrating typing (probably using flow).

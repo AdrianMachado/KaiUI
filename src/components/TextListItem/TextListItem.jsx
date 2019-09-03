@@ -6,7 +6,7 @@ import './TextListItem.scss';
 
 const prefixCls = 'kai-tl';
 
-const TextListItem = React.memo(
+const PureTextListItem = React.memo(
   props => {
     const {
       primary,
@@ -49,6 +49,10 @@ const TextListItem = React.memo(
   }
 );
 
+const TextListItem = React.forwardRef((props, ref) => (
+  <PureTextListItem forwardedRef={ref} {...props} />
+));
+
 TextListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
@@ -68,6 +72,4 @@ TextListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <TextListItem forwardedRef={ref} {...props} />
-));
+export default TextListItem;

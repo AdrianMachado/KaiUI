@@ -6,7 +6,7 @@ import './ProgressBar.scss';
 
 const prefixCls = 'kai-pbar';
 
-const ProgressBar = React.memo(
+const PureProgressBar = React.memo(
   props => {
     const {
       header,
@@ -64,6 +64,10 @@ const ProgressBar = React.memo(
   }
 );
 
+const ProgressBar = React.forwardRef((props, ref) => (
+  <PureProgressBar forwardedRef={ref} {...props} />
+));
+
 ProgressBar.propTypes = {
   header: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['download', 'buffer']).isRequired,
@@ -81,6 +85,4 @@ ProgressBar.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <ProgressBar forwardedRef={ref} {...props} />
-));
+export default ProgressBar;

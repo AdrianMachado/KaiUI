@@ -7,7 +7,7 @@ import './IconListItem.scss';
 
 const prefixCls = 'kai-il';
 
-const IconListItem = React.memo(
+const PureIconListItem = React.memo(
   props => {
     const {
       primary,
@@ -65,6 +65,10 @@ const requireOneIcon = requireOneOf({
   iconSrc: PropTypes.string
 });
 
+const IconListItem = React.forwardRef((props, ref) => (
+  <PureIconListItem forwardedRef={ref} {...props} />
+));
+
 IconListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
@@ -86,6 +90,4 @@ IconListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <IconListItem forwardedRef={ref} {...props} />
-));
+export default IconListItem;

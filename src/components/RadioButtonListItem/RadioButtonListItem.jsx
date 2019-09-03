@@ -6,7 +6,7 @@ import './RadioButtonListItem.scss';
 
 const prefixCls = 'kai-rbl';
 
-const RadioButtonListItem = React.memo(props => {
+const PureRadioButtonListItem = React.memo(props => {
   const {
     primary,
     secondary,
@@ -124,6 +124,18 @@ const RadioButtonListItem = React.memo(props => {
   );
 });
 
+const RadioButtonListItem = React.forwardRef((props, ref) => (
+  <SoftKeyConsumer>
+    {context => (
+      <PureRadioButtonListItem
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
+));
+
 RadioButtonListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
@@ -154,14 +166,4 @@ RadioButtonListItem.defaultProps = {
   softKeyUncheckedText: 'Select',
 };
 
-export default React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <RadioButtonListItem
-        softKeyManager={context}
-        forwardedRef={ref}
-        {...props}
-      />
-    )}
-  </SoftKeyConsumer>
-));
+export default RadioButtonListItem;

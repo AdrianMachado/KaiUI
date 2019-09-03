@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docs": "styleguidist server",
+    "docs:build": "styleguidist build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +33,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-styleguidist": "^9.1.16"
+  }
 }

@@ -6,7 +6,7 @@ import './Tab.scss';
 
 const prefixCls = 'kai-tab';
 
-const Tab = React.memo(
+const PureTab = React.memo(
   props => {
     const {
       index,
@@ -34,6 +34,10 @@ const Tab = React.memo(
   }
 );
 
+const Tab = React.forwardRef((props, ref) => (
+  <PureTab forwardedRef={ref} {...props} />
+));
+
 Tab.propTypes = {
   index: PropTypes.number,
   label: PropTypes.string,
@@ -54,6 +58,4 @@ Tab.defaultProps = {
   focusColor: colors.defaultFocusColor
 };
 
-export default React.forwardRef((props, ref) => (
-  <Tab forwardedRef={ref} {...props} />
-));
+export default Tab;

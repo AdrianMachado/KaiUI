@@ -6,7 +6,7 @@ import './CheckboxListItem.scss';
 
 const prefixCls = 'kai-cbl';
 
-const CheckboxListItem = React.memo(props => {
+const PureCheckboxListItem = React.memo(props => {
   const {
     primary,
     secondary,
@@ -126,6 +126,18 @@ const CheckboxListItem = React.memo(props => {
   );
 });
 
+const CheckboxListItem = React.forwardRef((props, ref) => (
+  <SoftKeyConsumer>
+    {context => (
+      <PureCheckboxListItem
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
+));
+
 CheckboxListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
@@ -156,14 +168,4 @@ CheckboxListItem.defaultProps = {
   softKeyUncheckedText: 'Select',
 };
 
-export default React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <CheckboxListItem
-        softKeyManager={context}
-        forwardedRef={ref}
-        {...props}
-      />
-    )}
-  </SoftKeyConsumer>
-));
+export default CheckboxListItem;

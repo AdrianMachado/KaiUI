@@ -6,7 +6,7 @@ import './ArrowListItem.scss';
 
 const prefixCls = 'kai-al';
 
-const ArrowListItem = React.memo(
+const PureArrowListItem = React.memo(
   props => {
     const {
       primary,
@@ -53,6 +53,10 @@ const ArrowListItem = React.memo(
   }
 );
 
+const ArrowListItem = React.forwardRef((props, ref) => (
+  <PureArrowListItem forwardedRef={ref} {...props} />
+));
+
 ArrowListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
@@ -70,6 +74,4 @@ ArrowListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <ArrowListItem forwardedRef={ref} {...props} />
-));
+export default ArrowListItem;

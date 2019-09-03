@@ -6,7 +6,7 @@ import './BodyTextListItem.scss';
 
 const prefixCls = 'kai-btl';
 
-const BodyTextListItem = React.memo(
+const PureBodyTextListItem = React.memo(
   props => {
     const {
       header,
@@ -46,6 +46,10 @@ const BodyTextListItem = React.memo(
   }
 );
 
+const BodyTextListItem = React.forwardRef((props, ref) => (
+  <PureBodyTextListItem forwardedRef={ref} {...props} />
+));
+
 BodyTextListItem.propTypes = {
   header: PropTypes.string.isRequired,
   body: PropTypes.string,
@@ -63,6 +67,4 @@ BodyTextListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <BodyTextListItem forwardedRef={ref} {...props} />
-));
+export default BodyTextListItem;

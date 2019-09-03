@@ -6,7 +6,7 @@ import './Slider.scss';
 
 const prefixCls = 'kai-slider';
 
-const Slider = React.memo(props => {
+const PureSlider = React.memo(props => {
   const {
     header,
     initialValue,
@@ -94,6 +94,14 @@ const Slider = React.memo(props => {
   );
 });
 
+const Slider = React.forwardRef((props, ref) => (
+  <SoftKeyConsumer>
+    {context => (
+      <PureSlider softKeyManager={context} forwardedRef={ref} {...props} />
+    )}
+  </SoftKeyConsumer>
+));
+
 Slider.propTypes = {
   header: PropTypes.string.isRequired,
   initialValue: PropTypes.number.isRequired,
@@ -119,10 +127,4 @@ Slider.defaultProps = {
   softKeyRightText: '+',
 };
 
-export default React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <Slider softKeyManager={context} forwardedRef={ref} {...props} />
-    )}
-  </SoftKeyConsumer>
-));
+export default Slider;
