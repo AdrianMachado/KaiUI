@@ -59,8 +59,8 @@ const TextInput = ({
     prefixCls,
     isFocused && `${prefixCls}--focused`
   ]);
-  const labelCls = `${prefixCls}-label`;
-  const inputCls = `${prefixCls}-input`;
+  const labelCls = `${prefixCls}-label p-thi`;
+  const inputCls = `${prefixCls}-input p-pri`;
 
   return (
     <div
