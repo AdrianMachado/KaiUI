@@ -6,15 +6,13 @@ import './SoftKey.scss';
 const prefixCls = 'kai-softkey';
 
 const Button = props => {
-  const {
-    handleClick
-  } = props;
+  const { handleClick } = props;
 
   const handleButtonClick = e => {
     e.preventDefault();
     handleClick();
   };
-  
+
   // We want to avoid losing focus on the parent element
   const handleCheckFocus = e => {
     e.preventDefault();
@@ -33,66 +31,61 @@ const Button = props => {
       onClick={handleButtonClick}
       onFocus={handleCheckFocus}
     >
-      {props.icon ? <i class={props.icon} /> : null}
+      {props.icon ? <span className={props.icon} /> : null}
       {props.text}
     </button>
   );
 };
 
-const SoftKey = React.memo(
-  props => {
-    const {
-      leftCallback,
-      rightCallback,
-      centerCallback,
-      leftText,
-      rightText,
-      centerText,
-      centerIcon,
-    } = props;
+const SoftKey = React.memo(props => {
+  const {
+    leftCallback,
+    rightCallback,
+    centerCallback,
+    leftText,
+    rightText,
+    centerText,
+    centerIcon,
+  } = props;
 
-    const handleKeyDown = useCallback(
-      e => {
-        switch (e.key) {
-          case 'SoftLeft':
-            leftCallback();
-            break;
-          case 'SoftRight':
-            rightCallback();
-            break;
-          case 'Enter':
-            // Action case press center key
-            centerCallback();
-            break;
-          default:
-            break;
-        }
-      },
-      [leftCallback, rightCallback, centerCallback]
-    );
+  const handleKeyDown = useCallback(
+    e => {
+      switch (e.key) {
+        case 'SoftLeft':
+          leftCallback();
+          break;
+        case 'SoftRight':
+          rightCallback();
+          break;
+        case 'Enter':
+          // Action case press center key
+          centerCallback();
+          break;
+        default:
+          break;
+      }
+    },
+    [leftCallback, rightCallback, centerCallback]
+  );
 
-    useEffect(
-      () => {
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-      },
-      [handleKeyDown]
-    );
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
-    return (
-      <div className={`${prefixCls} visible`}>
-        <Button pos="left" text={leftText} handleClick={leftCallback} />
-        <Button
-          pos="center"
-          text={centerText}
-          icon={centerIcon}
-          handleClick={centerCallback}
-        />
-        <Button pos="right" text={rightText} handleClick={rightCallback} />
-      </div>
-    );
-  }
-);
+  return (
+    <div className={`${prefixCls} visible`}>
+      <Button pos="left" text={leftText} handleClick={leftCallback} />
+      <Button
+        pos="center"
+        text={centerText}
+        icon={centerIcon}
+        handleClick={centerCallback}
+      />
+      <Button pos="right" text={rightText} handleClick={rightCallback} />
+    </div>
+  );
+});
 
 SoftKey.propTypes = {
   leftText: PropTypes.string,
