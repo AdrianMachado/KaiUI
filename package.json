@@ -15,6 +15,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "app:install": "kdeploy build install",
+    "app:uninstall": "kdeploy build uninstall",
+    "app:update": "npm run build && kdeploy build update",
+    "app:start": "kdeploy build start",
+    "app:stop": "kdeploy build stop",
     "docs": "styleguidist server",
     "docs:build": "styleguidist build"
   },
@@ -34,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "kdeploy": "kaiostech/kdeploy",
     "react-styleguidist": "^9.1.16"
   }
 }

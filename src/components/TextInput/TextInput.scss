@@ -1,0 +1,38 @@
+@import "../../theme/fonts.scss";
+@import "../../theme/theme.scss";
+
+:root {
+  --tl-text-focused: var(--color-gs00);
+}
+
+.kai-text-input {
+  padding: 1rem;
+
+  &-label {
+    padding-bottom: 0.5rem;
+    display: block;
+    color: var(--color-epsilon);
+  }
+
+  &-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 3.6rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--color-epsilon);
+    border-radius: 2px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &--focused {
+    .kai-text-input {
+      &-label {
+        color: var(--tl-text-focused);
+      }
+    }
+  }
+}
