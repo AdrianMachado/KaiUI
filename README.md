@@ -59,7 +59,13 @@ Navigation details can be found [here](https://developer.kaiostech.com/design-gu
 
 ## Notifications
 
-TBD
+Notifications are provided by KaiOS itself when you use the standard [Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/notification) while your app is running, or the [Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) if you want push notifications. Installed apps need to request permission for this through the manifest file. Just add this line to the permissions section of your `manifest.webapp` file.
+
+```
+"desktop-notification": {}
+```
+
+Once this is added, you can send the user notifications without needing to request permission.
 
 ## Themes
 
