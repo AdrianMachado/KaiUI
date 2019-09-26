@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -13,6 +13,7 @@ import Separator from './components/Separator/Separator';
 import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
 import Button from './components/Button/Button';
+import TextInput from './components/TextInput/TextInput';
 import ToastContext, { ToastContextProvider } from './contexts/ToastContext/ToastContext';
 import './App.scss';
 import colors from './theme/colors.scss';
@@ -24,6 +25,7 @@ function App() {
   };
 
   const App = () => {
+    const [inputValue, setInputValue] = useState('');
     const { showToast } = useContext(ToastContext);
     const toastValues = ['Mmmm... Toasty!', '*pop* toast\'s done!', 'Hey, I\'m a toast!'];
     return (
@@ -31,7 +33,15 @@ function App() {
         <Header text="KaiUI" backgroundColor={colors.headerPurple} />
         <SoftKeyProvider>
           <div className="content">
-            <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
+            <TabView
+              tabLabels={[
+                'CB Tab',
+                'Icon Tab',
+                'Txt Tab',
+                'Form Tab',
+                'Misc Tab'
+              ]}
+            >
               <ListView>
                 <CheckboxListItem
                   primary="Hello primary text"
@@ -124,6 +134,21 @@ function App() {
                 <TextListItem primary="Just primary" />
               </ListView>
               <ListView>
+                <TextInput
+                  label="I am a text input"
+                  onChange={e => setInputValue(e.target.value)}
+                />
+                <TextListItem primary={`Input value: ${inputValue}`} />
+                <TextInput
+                  label="I am a text input that lets you change tabs"
+                  enableTabSwitching
+                />
+                <TextInput
+                  label="I am a text input with a custom input prop"
+                  placeholder="Placeholder text"
+                />
+              </ListView>
+              <ListView>
                 <BodyTextListItem
                   header="Header text"
                   body="body text, can support a whole lot of text"
@@ -140,7 +165,7 @@ function App() {
           </div>
         </SoftKeyProvider>
       </div>
-    )
+    );
   }
 
   return (
