@@ -1,0 +1,37 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+@import '../../kai-font/style.scss';
+
+:root {
+
+}
+
+.kai-dialog {
+  height: 100vh;
+  background: #00000055;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    height: 82vh; 
+  }
+
+  &-header {
+    display: flex;
+    justify-content:center;
+    height: 3rem;
+    background: lightgray;
+  }
+
+  &-content {
+    &-text {
+
+    }
+  }
+}
+
+.kai-dialog .flex-start {
+
+}

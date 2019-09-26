@@ -22,9 +22,16 @@ function App() {
     console.log('new input value', newVal);
   };
 
+  const [showDialog, setShowDialog] = useState(false);
+
+  const showHello = () => {
+    setShowDialog(prev => !prev);
+  };
+
   return (
     <div className="App">
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
+      <Dialog header="Hello World" text="Lorem ipsum dolor sit amet." isActive={showDialog}/>
       <SoftKeyProvider>
         <div className="content">
           <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
@@ -77,7 +84,7 @@ function App() {
                 maxValue={10}
               />
               <Button text="A button" icon="kai-icon-camera" iconSide="left" />
-              <Button text="A button" iconSrc={exampleIcon} iconSide="right" onClick={()=> {}} />
+              <Button text="Dialog Demo" iconSrc={exampleIcon} iconSide="right" onClick={showHello()} />
               <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"
