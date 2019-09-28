@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import {requireOneOf } from '../../utils';
+import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 
 const prefixCls = 'kai-dialog';
 
 const Dialog = React.memo(
-  props => ({
-    header,
-    text,
-    children
+  ({
+    title,
+    message,
+    cancelable,
+    positivBtn,
+    negativeBtn,
+    neutralBtn,
+    onOpen,
+    onClose,
+    onCancel,
+    onDismiss,
+    onApprove,
+    children,
+    forwardedRef,
+    softKeyManager
   }) => {
 
     const itemCls = `${prefixCls}`;
@@ -16,10 +29,32 @@ const Dialog = React.memo(
     const contentCls = `${itemCls}-content`;
     const textContentCls = `${contentCls}-text`;
 
+    useEffect(
+      () => {
+        softKeyManager.setSoftKeyTexts({
+          leftText: onDismiss && negativeBtn,
+          centerText: positivBtn, 
+          rightText: cancelable && neutralBtn
+        });
+        softKeyManager.setSoftKeyCallbacks({
+          leftCallback: onDismiss,
+          centerCallback: onApprove,
+          rightCallback: cancelable && onCancel,
+        });
+
+        onOpen && onOpen();
+
+        return () => {
+          softKeyManager.unregisterSoftKeys();
+          onClose && onClose();
+        };
+      }, []
+    );
+
     const renderChildren = () => {
-      if(text !== null) {
+      if(message !== null) {
         return (
-          <div className={textContentCls}>{text}</div>
+          <div className={textContentCls}>{message}</div>
         );
       } else {
         return React.Children.map(
@@ -28,18 +63,18 @@ const Dialog = React.memo(
 
             return React.cloneElement(child, {
               index,
-              ref: newRef,
+              ref: newRef
             });
         });
       }
     };
 
     return (
-      <div className={itemCls}>
+      <div className={itemCls} ref={forwardedRef}>
         <div className={containerCls}>
-          <label className={headerCls}>{header}</label>
+          <label className={headerCls}>{title}</label>
           <div className={contentCls}>
-            {renderChildren()}
+            { renderChildren() }
           </div>
         </div>
       </div>
@@ -53,14 +88,44 @@ const requireContent = requireOneOf({
 });
 
 Dialog.propTypes = {
-  header: PropTypes.string.isRequired,
-  text: requireContent,
+  title: PropTypes.string.isRequired,
+  message: requireContent,
+  cancelable: PropTypes.bool,
+  positivBtn: PropTypes.string,
+  negativeBtn: PropTypes.string,
+  neutralBtn: PropTypes.string,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  onCancel: PropTypes.func,
+  onDismiss: PropTypes.func,
+  onApprove: PropTypes.func,
   children: requireContent,
-  isActive: PropTypes.bool
+  forwardedRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ])
 };
 
 Dialog.defaultProps = {
-  isActive: true
+  cancelable: true,
+  positivBtn: 'Ok',
+  negativeBtn: 'No',
+  neutralBtn: 'Cancel',
+  onOpen: null,
+  onClose: null,
+  onCancel: null,
+  onDismiss: null,
+  onApprove: null
 };
 
-export default Dialog;
+export default React.forwardRef((props, ref) => (
+  <SoftKeyConsumer>
+    {context => (
+      <Dialog
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
+));

@@ -1,4 +1,5 @@
 import React from 'react';
+import Dialog from './components/Dialog/Dialog';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -22,17 +23,11 @@ function App() {
     console.log('new input value', newVal);
   };
 
-  const [showDialog, setShowDialog] = useState(false);
-
-  const showHello = () => {
-    setShowDialog(prev => !prev);
-  };
-
   return (
     <div className="App">
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
-      <Dialog header="Hello World" text="Lorem ipsum dolor sit amet." isActive={showDialog}/>
       <SoftKeyProvider>
+        <Dialog title="Hello World" message="Lorem ipsum dolor sit amet." cancelable={true} />
         <div className="content">
           <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
             <ListView>
@@ -84,7 +79,7 @@ function App() {
                 maxValue={10}
               />
               <Button text="A button" icon="kai-icon-camera" iconSide="left" />
-              <Button text="Dialog Demo" iconSrc={exampleIcon} iconSide="right" onClick={showHello()} />
+              <Button text="Dialog Demo" iconSrc={exampleIcon} iconSide="right" onClick={() => {}} />
               <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"
