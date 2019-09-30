@@ -1,5 +1,5 @@
 import React from 'react';
-import Dialog from './components/Dialog/Dialog';
+import Dialog, { showDialog } from './components/Dialog/Dialog';
 import Header from './components/Header/Header';
 import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
 import TabView from './views/TabView/TabView';
@@ -27,7 +27,6 @@ function App() {
     <div className="App">
       <Header text="KaiUI" backgroundColor={colors.headerPurple} />
       <SoftKeyProvider>
-        <Dialog title="Hello World" message="Lorem ipsum dolor sit amet." cancelable={true} />
         <div className="content">
           <TabView tabLabels={['CB Tab', 'Icon Tab', 'Txt Tab', 'Misc Tab']}>
             <ListView>
@@ -78,8 +77,19 @@ function App() {
                 minValue={0}
                 maxValue={10}
               />
-              <Button text="A button" icon="kai-icon-camera" iconSide="left" />
-              <Button text="Dialog Demo" iconSrc={exampleIcon} iconSide="right" onClick={() => {}} />
+              <Button text="A button" icon="kai-icon-camera" iconSide="left" onClick={() => {}} />
+              <Button 
+                text="Dialog Demo"
+                iconSrc={exampleIcon} 
+                iconSide="right" 
+                onClick={() => {
+                  showDialog({
+                    title: "Hello World",
+                    message: "Lorem ipsum dolor sit amet.",
+                    cancelable: true
+                  });
+                }}
+              />
               <Separator separatorText={'Another separator'} />
               <IconListItem
                 primary="Item without secondary"

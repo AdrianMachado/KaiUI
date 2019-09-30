@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import {requireOneOf } from '../../utils';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 
@@ -13,7 +14,7 @@ const Dialog = React.memo(
     positivBtn,
     negativeBtn,
     neutralBtn,
-    onOpen,
+//    onOpen,
     onClose,
     onCancel,
     onDismiss,
@@ -31,22 +32,38 @@ const Dialog = React.memo(
 
     useEffect(
       () => {
+        const dismiss = onDismiss !== null ?
+          () => {
+            onDismiss();
+            onClose();
+          } : null;
+    
+        const approve = onApprove !== null ?
+          () => {
+            onApprove();
+            onClose();
+          } : null;
+        
+        const cancel = cancelable && onCancel !== null ?
+          () => {
+            onCancel();
+            onClose();
+          } : null;
+
         softKeyManager.setSoftKeyTexts({
           leftText: onDismiss && negativeBtn,
-          centerText: positivBtn, 
+          centerText: positivBtn,
           rightText: cancelable && neutralBtn
         });
-        softKeyManager.setSoftKeyCallbacks({
-          leftCallback: onDismiss,
-          centerCallback: onApprove,
-          rightCallback: cancelable && onCancel,
-        });
 
-        onOpen && onOpen();
+        softKeyManager.setSoftKeyCallbacks({
+          leftCallback: dismiss,
+          centerCallback: approve,
+          rightCallback: cancel,
+        });
 
         return () => {
           softKeyManager.unregisterSoftKeys();
-          onClose && onClose();
         };
       }, []
     );
@@ -94,7 +111,7 @@ Dialog.propTypes = {
   positivBtn: PropTypes.string,
   negativeBtn: PropTypes.string,
   neutralBtn: PropTypes.string,
-  onOpen: PropTypes.func,
+//  onOpen: PropTypes.func,
   onClose: PropTypes.func,
   onCancel: PropTypes.func,
   onDismiss: PropTypes.func,
@@ -111,7 +128,7 @@ Dialog.defaultProps = {
   positivBtn: 'Ok',
   negativeBtn: 'No',
   neutralBtn: 'Cancel',
-  onOpen: null,
+//  onOpen: null,
   onClose: null,
   onCancel: null,
   onDismiss: null,
@@ -129,3 +146,21 @@ export default React.forwardRef((props, ref) => (
     )}
   </SoftKeyConsumer>
 ));
+
+export const showDialog = props => {
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  const render = props => {
+    ReactDOM.render(<Dialog {...props} />, container);
+  };
+
+  const close = () => {
+    ReactDOM.unmountComponentAtNode(container);
+    document.body.removeChild(container);
+    props.onClose && props.onClose();
+  };
+
+  props.onOpen && props.onOpen();
+  render({ ...props, close });
+};
