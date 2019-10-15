@@ -7,13 +7,12 @@ import './ProgressBar.scss';
 const prefixCls = 'kai-pbar';
 
 const ProgressBar = React.memo(
-  props => {
+  React.forwardRef((props, ref) => {
     const {
       header,
       type,
       percentage,
       focusColor,
-      forwardedRef,
       index,
       onFocusChange
     } = props;
@@ -41,7 +40,7 @@ const ProgressBar = React.memo(
         tabIndex="0"
         className={prefixCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        ref={forwardedRef}
+        ref={ref}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
       >
@@ -62,17 +61,13 @@ const ProgressBar = React.memo(
       </div>
     );
   }
-);
+));
 
 ProgressBar.propTypes = {
   header: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['download', 'buffer']).isRequired,
   percentage: PropTypes.number.isRequired,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };
@@ -81,6 +76,4 @@ ProgressBar.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <ProgressBar forwardedRef={ref} {...props} />
-));
+export default ProgressBar;

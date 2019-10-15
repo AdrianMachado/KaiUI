@@ -1,128 +1,130 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
-import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
+import { SoftKeyContext } from '../SoftKey/SoftKeyProvider';
 import './RadioButtonListItem.scss';
 
 const prefixCls = 'kai-rbl';
 
-const RadioButtonListItem = React.memo(props => {
-  const {
-    primary,
-    secondary,
-    initButtonVal,
-    onInputChange,
-    buttonSide,
-    onFocusChange,
-    focusColor,
-    index,
-    forwardedRef,
-    softKeyManager,
-    softKeyCheckedText,
-    softKeyUncheckedText,
-  } = props;
-
-  // Managed vs self-managed radio buttons
-  const [isChecked, setChecked] = useState(initButtonVal);
-  const [isFocused, setFocused] = useState(false);
-
-  const itemCls = prefixCls;
-  const buttonCls = `${prefixCls}-button`;
-  const lineCls = `${prefixCls}-line ${
-    buttonSide === 'left' ? 'right' : 'left'
-  }`;
-  const primaryCls = `${prefixCls}-primary`;
-  const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
-  const inputCls = `${buttonCls}-input-${isFocused ? 'focused' : 'unfocused'}`;
-
-  useEffect(() => {
-    const centerText = isChecked ? softKeyCheckedText : softKeyUncheckedText;
-    if (isFocused) {
-      softKeyManager.setCenterText(centerText);
-    }
-  }, [
-    isFocused,
-    isChecked,
-    softKeyManager,
-    softKeyCheckedText,
-    softKeyUncheckedText,
-  ]);
-
-  const handleInputChange = e => {
-    setChecked(e.target.checked);
-    onInputChange(e.target.checked);
-  };
-
-  // We want to avoid losing focus on the parent element
-  const handleButtonFocus = e => {
-    e.preventDefault();
-    if (e.relatedTarget) {
-      // Revert focus back to previous blurring element
-      e.relatedTarget.focus();
-    } else {
-      // No previous focus target, blur instead
-      e.currentTarget.blur();
-    }
-  };
-
-  const handleFocusChange = useCallback(
-    isNowFocused => {
-      setFocused(isNowFocused);
-      if (isNowFocused) {
-        const centerText = isChecked
-          ? softKeyCheckedText
-          : softKeyUncheckedText;
-        softKeyManager.setSoftKeyTexts({ centerText });
-        softKeyManager.setSoftKeyCallbacks({
-          centerCallback: () => setChecked(true),
-        });
-        onFocusChange(index);
-      } else {
-        softKeyManager.unregisterSoftKeys();
-      }
-    },
-    [
-      index,
-      isChecked,
+const RadioButtonListItem = React.memo(
+  React.forwardRef((props, ref) => {
+    const {
+      primary,
+      secondary,
+      initButtonVal,
+      onInputChange,
+      buttonSide,
       onFocusChange,
+      focusColor,
+      index,
+      softKeyCheckedText,
+      softKeyUncheckedText,
+    } = props;
+
+    const softKeyManager = useContext(SoftKeyContext);
+
+    // Managed vs self-managed radio buttons
+    const [isChecked, setChecked] = useState(initButtonVal);
+    const [isFocused, setFocused] = useState(false);
+
+    const itemCls = prefixCls;
+    const buttonCls = `${prefixCls}-button`;
+    const lineCls = `${prefixCls}-line ${
+      buttonSide === 'left' ? 'right' : 'left'
+    }`;
+    const primaryCls = `${prefixCls}-primary`;
+    const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
+    const inputCls = `${buttonCls}-input-${isFocused ? 'focused' : 'unfocused'}`;
+
+    useEffect(() => {
+      const centerText = isChecked ? softKeyCheckedText : softKeyUncheckedText;
+      if (isFocused) {
+        softKeyManager.setCenterText(centerText);
+      }
+    }, [
+      isFocused,
+      isChecked,
       softKeyManager,
       softKeyCheckedText,
       softKeyUncheckedText,
-    ]
-  );
+    ]);
 
-  const radioBtn = (
-    <div className={buttonCls}>
-      <input
-        className={inputCls}
-        tabIndex="-1"
-        type="radio"
-        checked={props.isChecked !== null ? props.isChecked : isChecked}
-        onChange={() => {}}
-        onFocus={handleButtonFocus}
-        onClick={handleInputChange}
-      />
-    </div>
-  );
+    const handleInputChange = e => {
+      setChecked(e.target.checked);
+      onInputChange(e.target.checked);
+    };
 
-  return (
-    <div
-      tabIndex="0"
-      className={itemCls}
-      style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-      ref={forwardedRef}
-      onFocus={() => handleFocusChange(true)}
-      onBlur={() => handleFocusChange(false)}
-    >
-      {buttonSide === 'left' ? radioBtn : null}
-      <div className={lineCls}>
-        <span className={primaryCls}>{primary}</span>
-        <label className={secondaryCls}>{secondary}</label>
+    // We want to avoid losing focus on the parent element
+    const handleButtonFocus = e => {
+      e.preventDefault();
+      if (e.relatedTarget) {
+        // Revert focus back to previous blurring element
+        e.relatedTarget.focus();
+      } else {
+        // No previous focus target, blur instead
+        e.currentTarget.blur();
+      }
+    };
+
+    const handleFocusChange = useCallback(
+      isNowFocused => {
+        setFocused(isNowFocused);
+        if (isNowFocused) {
+          const centerText = isChecked
+            ? softKeyCheckedText
+            : softKeyUncheckedText;
+          softKeyManager.setSoftKeyTexts({ centerText });
+          softKeyManager.setSoftKeyCallbacks({
+            centerCallback: () => setChecked(true),
+          });
+          onFocusChange(index);
+        } else {
+          softKeyManager.unregisterSoftKeys();
+        }
+      },
+      [
+        index,
+        isChecked,
+        onFocusChange,
+        softKeyManager,
+        softKeyCheckedText,
+        softKeyUncheckedText,
+      ]
+    );
+
+    const radioBtn = (
+      <div className={buttonCls}>
+        <input
+          className={inputCls}
+          tabIndex="-1"
+          type="radio"
+          checked={props.isChecked !== null ? props.isChecked : isChecked}
+          onChange={() => {}}
+          onFocus={handleButtonFocus}
+          onClick={handleInputChange}
+        />
       </div>
-      {buttonSide === 'right' ? radioBtn : null}
-    </div>
-  );
-});
+    );
+
+    return (
+      <div
+        tabIndex="0"
+        className={itemCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+        ref={ref}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
+      >
+        {buttonSide === 'left' ? radioBtn : null}
+        <div className={lineCls}>
+          <span className={primaryCls}>{primary}</span>
+          <label className={secondaryCls}>{secondary}</label>
+        </div>
+        {buttonSide === 'right' ? radioBtn : null}
+      </div>
+    );
+  }
+));
 
 RadioButtonListItem.propTypes = {
   primary: PropTypes.string.isRequired,
@@ -137,10 +139,6 @@ RadioButtonListItem.propTypes = {
   onFocusChange: PropTypes.func,
   focusColor: PropTypes.string,
   index: PropTypes.number,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   // For softkey
   softKeyCheckedText: PropTypes.string,
   softKeyUncheckedText: PropTypes.string,
@@ -154,14 +152,4 @@ RadioButtonListItem.defaultProps = {
   softKeyUncheckedText: 'Select',
 };
 
-export default React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <RadioButtonListItem
-        softKeyManager={context}
-        forwardedRef={ref}
-        {...props}
-      />
-    )}
-  </SoftKeyConsumer>
-));
+export default RadioButtonListItem;

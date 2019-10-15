@@ -7,12 +7,11 @@ import './ArrowListItem.scss';
 const prefixCls = 'kai-al';
 
 const ArrowListItem = React.memo(
-  props => {
+  React.forwardRef((props, ref) => {
     const {
       primary,
       secondary,
       focusColor,
-      forwardedRef,
       index,
       onFocusChange
     } = props;
@@ -37,7 +36,7 @@ const ArrowListItem = React.memo(
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        ref={forwardedRef}
+        ref={ref}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
       >
@@ -51,16 +50,12 @@ const ArrowListItem = React.memo(
       </div>
     );
   }
-);
+));
 
 ArrowListItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };
@@ -70,6 +65,4 @@ ArrowListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <ArrowListItem forwardedRef={ref} {...props} />
-));
+export default ArrowListItem;

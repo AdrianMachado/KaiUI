@@ -7,14 +7,13 @@ import './Tab.scss';
 const prefixCls = 'kai-tab';
 
 const Tab = React.memo(
-  props => {
+  React.forwardRef((props, ref) => {
     const {
       index,
       label,
       onTabChange,
       isActive,
-      focusColor,
-      forwardedRef
+      focusColor
     } = props;
 
     const actPrefixCls = `${prefixCls}${isActive ? '-active' : '-inactive'}`;
@@ -26,13 +25,13 @@ const Tab = React.memo(
         onClick={handleClick}
         className={actPrefixCls}
         style={{ '--tab-underline-color': focusColor }}
-        ref={forwardedRef}
+        ref={ref}
       >
         <div className={`${actPrefixCls}-label`}>{label}</div>
       </div>
     );
   }
-);
+));
 
 Tab.propTypes = {
   index: PropTypes.number,
@@ -40,10 +39,6 @@ Tab.propTypes = {
   onTabChange: PropTypes.func,
   isActive: PropTypes.bool,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
 };
 
 Tab.defaultProps = {
@@ -54,6 +49,4 @@ Tab.defaultProps = {
   focusColor: colors.defaultFocusColor
 };
 
-export default React.forwardRef((props, ref) => (
-  <Tab forwardedRef={ref} {...props} />
-));
+export default Tab;

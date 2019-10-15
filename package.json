@@ -19,7 +19,9 @@
     "app:uninstall": "kdeploy build uninstall",
     "app:update": "npm run build && kdeploy build update",
     "app:start": "kdeploy build start",
-    "app:stop": "kdeploy build stop"
+    "app:stop": "kdeploy build stop",
+    "docs": "styleguidist server",
+    "docs:build": "styleguidist build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +39,7 @@
     ]
   },
   "devDependencies": {
-    "kdeploy": "kaiostech/kdeploy"
+    "kdeploy": "kaiostech/kdeploy",
+    "react-styleguidist": "^9.1.16"
   }
 }

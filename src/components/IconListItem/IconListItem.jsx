@@ -8,14 +8,13 @@ import './IconListItem.scss';
 const prefixCls = 'kai-il';
 
 const IconListItem = React.memo(
-  props => {
+  React.forwardRef((props, ref) => {
     const {
       primary,
       secondary,
       icon,
       iconSrc,
       focusColor,
-      forwardedRef,
       index,
       onFocusChange
     } = props;
@@ -43,7 +42,7 @@ const IconListItem = React.memo(
       <div
         tabIndex="0"
         className={itemCls}
-        ref={forwardedRef}
+        ref={ref}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
@@ -58,7 +57,7 @@ const IconListItem = React.memo(
       </div>
     );
   }
-);
+));
 
 const requireOneIcon = requireOneOf({
   icon: PropTypes.string,
@@ -71,10 +70,6 @@ IconListItem.propTypes = {
   icon: requireOneIcon,
   iconSrc: requireOneIcon,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };
@@ -86,6 +81,4 @@ IconListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
 };
 
-export default React.forwardRef((props, ref) => (
-  <IconListItem forwardedRef={ref} {...props} />
-));
+export default IconListItem;
