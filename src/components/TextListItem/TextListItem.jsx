@@ -6,14 +6,13 @@ import './TextListItem.scss';
 
 const prefixCls = 'kai-tl';
 
-const PureTextListItem = React.memo(
-  props => {
+const TextListItem = React.memo(
+  React.forwardRef((props, ref) => {
     const {
       primary,
       secondary,
       tertiary,
       focusColor,
-      forwardedRef,
       index,
       onFocusChange
     } = props;
@@ -37,7 +36,7 @@ const PureTextListItem = React.memo(
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        ref={forwardedRef}
+        ref={ref}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
       >
@@ -47,10 +46,6 @@ const PureTextListItem = React.memo(
       </div>
     );
   }
-);
-
-const TextListItem = React.forwardRef((props, ref) => (
-  <PureTextListItem forwardedRef={ref} {...props} />
 ));
 
 TextListItem.propTypes = {
@@ -58,10 +53,6 @@ TextListItem.propTypes = {
   secondary: PropTypes.string,
   tertiary: PropTypes.string,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };

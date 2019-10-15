@@ -1,105 +1,99 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
-import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
+import { SoftKeyContext } from '../SoftKey/SoftKeyProvider';
 import './Slider.scss';
 
 const prefixCls = 'kai-slider';
 
-const PureSlider = React.memo(props => {
-  const {
-    header,
-    initialValue,
-    maxValue,
-    minValue,
-    stepSize,
-    focusColor,
-    forwardedRef,
-    index,
-    onFocusChange,
-    softKeyManager,
-    softKeyLeftText,
-    softKeyRightText,
-  } = props;
+const Slider = React.memo(
+  React.forwardRef((props, ref) => {
+    const {
+      header,
+      initialValue,
+      maxValue,
+      minValue,
+      stepSize,
+      focusColor,
+      index,
+      onFocusChange,
+      softKeyLeftText,
+      softKeyRightText,
+    } = props;
 
-  const [isFocused, setFocused] = useState(false);
-  const [sliderValue, setSliderValue] = useState(initialValue);
+    const softKeyManager = useContext(SoftKeyContext);
 
-  const lineCls = `${prefixCls}-line`;
-  const headerCls = `${prefixCls}-header`;
-  const trackerCls = `${prefixCls}-tracker`;
-  const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
+    const [isFocused, setFocused] = useState(false);
+    const [sliderValue, setSliderValue] = useState(initialValue);
 
-  const handleFocusChange = useCallback(
-    isNowFocused => {
-      setFocused(isNowFocused);
-      if (isNowFocused) {
-        softKeyManager.setSoftKeyTexts({
-          leftText: softKeyLeftText,
-          rightText: softKeyRightText,
-        });
-        softKeyManager.setSoftKeyCallbacks({
-          leftCallback: handleDecrementSlider,
-          rightCallback: handleIncrementSlider,
-        });
-        onFocusChange(index);
-      } else {
-        softKeyManager.unregisterSoftKeys();
-      }
-    },
-    [index, onFocusChange, softKeyManager, softKeyLeftText, softKeyRightText]
-  );
+    const lineCls = `${prefixCls}-line`;
+    const headerCls = `${prefixCls}-header`;
+    const trackerCls = `${prefixCls}-tracker`;
+    const sliderWrapperCls = `${prefixCls}-slider-wrapper`;
 
-  const handleDecrementSlider = () => setSliderValue(prevVal => prevVal - 1);
+    const handleFocusChange = useCallback(
+      isNowFocused => {
+        setFocused(isNowFocused);
+        if (isNowFocused) {
+          softKeyManager.setSoftKeyTexts({
+            leftText: softKeyLeftText,
+            rightText: softKeyRightText,
+          });
+          softKeyManager.setSoftKeyCallbacks({
+            leftCallback: handleDecrementSlider,
+            rightCallback: handleIncrementSlider,
+          });
+          onFocusChange(index);
+        } else {
+          softKeyManager.unregisterSoftKeys();
+        }
+      },
+      [index, onFocusChange, softKeyManager, softKeyLeftText, softKeyRightText]
+    );
 
-  const handleIncrementSlider = () => setSliderValue(prevVal => prevVal + 1);
+    const handleDecrementSlider = () => setSliderValue(prevVal => prevVal - 1);
 
-  const handleSliderChange = event => setSliderValue(event.target.value);
+    const handleIncrementSlider = () => setSliderValue(prevVal => prevVal + 1);
 
-  return (
-    <div
-      tabIndex="0"
-      className={prefixCls}
-      style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-      ref={forwardedRef}
-      onFocus={() => handleFocusChange(true)}
-      onBlur={() => handleFocusChange(false)}
-    >
-      <div className={lineCls}>
-        <span className={headerCls}>{header}</span>
-        <span className={trackerCls}>{`${sliderValue}/${maxValue}`}</span>
+    const handleSliderChange = event => setSliderValue(event.target.value);
+
+    return (
+      <div
+        tabIndex="0"
+        className={prefixCls}
+        style={{ backgroundColor: isFocused ? focusColor : colors.white }}
+        ref={ref}
+        onFocus={() => handleFocusChange(true)}
+        onBlur={() => handleFocusChange(false)}
+      >
+        <div className={lineCls}>
+          <span className={headerCls}>{header}</span>
+          <span className={trackerCls}>{`${sliderValue}/${maxValue}`}</span>
+        </div>
+
+        <div className={sliderWrapperCls}>
+          <input
+            ref={ref}
+            type="range"
+            min={minValue}
+            max={maxValue}
+            step={stepSize}
+            value={sliderValue}
+            onChange={handleSliderChange}
+            style={{
+              '--min': minValue,
+              '--max': maxValue,
+              '--val': sliderValue,
+              '--slider-left-filler-color': isFocused ? colors.white : focusColor,
+              '--slider-thumb-border-color': isFocused
+                ? focusColor
+                : colors.white,
+            }}
+          />
+        </div>
       </div>
-
-      <div className={sliderWrapperCls}>
-        <input
-          ref={forwardedRef}
-          type="range"
-          min={minValue}
-          max={maxValue}
-          step={stepSize}
-          value={sliderValue}
-          onChange={handleSliderChange}
-          style={{
-            '--min': minValue,
-            '--max': maxValue,
-            '--val': sliderValue,
-            '--slider-left-filler-color': isFocused ? colors.white : focusColor,
-            '--slider-thumb-border-color': isFocused
-              ? focusColor
-              : colors.white,
-          }}
-        />
-      </div>
-    </div>
-  );
-});
-
-const Slider = React.forwardRef((props, ref) => (
-  <SoftKeyConsumer>
-    {context => (
-      <PureSlider softKeyManager={context} forwardedRef={ref} {...props} />
-    )}
-  </SoftKeyConsumer>
+    );
+  }
 ));
 
 Slider.propTypes = {
@@ -109,10 +103,6 @@ Slider.propTypes = {
   minValue: PropTypes.number.isRequired,
   stepSize: PropTypes.number,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
   // For softkey

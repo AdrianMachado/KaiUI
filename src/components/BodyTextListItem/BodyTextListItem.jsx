@@ -6,13 +6,12 @@ import './BodyTextListItem.scss';
 
 const prefixCls = 'kai-btl';
 
-const PureBodyTextListItem = React.memo(
-  props => {
+const BodyTextListItem = React.memo(
+  React.forwardRef((props, ref) => {
     const {
       header,
       body,
       focusColor,
-      forwardedRef,
       index,
       onFocusChange
     } = props;
@@ -35,7 +34,7 @@ const PureBodyTextListItem = React.memo(
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
-        ref={forwardedRef}
+        ref={ref}
         onFocus={() => handleFocusChange(true)}
         onBlur={() => handleFocusChange(false)}
       >
@@ -44,20 +43,12 @@ const PureBodyTextListItem = React.memo(
       </div>
     );
   }
-);
-
-const BodyTextListItem = React.forwardRef((props, ref) => (
-  <PureBodyTextListItem forwardedRef={ref} {...props} />
 ));
 
 BodyTextListItem.propTypes = {
   header: PropTypes.string.isRequired,
   body: PropTypes.string,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
 };

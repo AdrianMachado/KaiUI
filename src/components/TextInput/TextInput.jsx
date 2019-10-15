@@ -7,16 +7,15 @@ import './TextInput.scss';
 
 const prefixCls = 'kai-text-input';
 
-const TextInput = ({
+const TextInput = React.forwardRef(({
   focusColor,
   label,
   index,
   onFocusChange,
-  forwardedRef,
   onChange,
   enableTabSwitching,
   ...props,
-}) => {
+}, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [caretPosition, setCaretPosition] = useState(0);
   const [value, setValue] = useState('');
@@ -43,7 +42,7 @@ const TextInput = ({
   };
 
   const handleFocusChange = (isFocused) => {
-    const input = forwardedRef.current;
+    const input = ref.current;
     setIsFocused(isFocused);
     if (isFocused) {
       onFocusChange(index);
@@ -72,7 +71,7 @@ const TextInput = ({
     >
       <label className={labelCls}>{label}</label>
       <input
-        ref={forwardedRef}
+        ref={ref}
         type="text"
         className={inputCls}
         onChange={handleChange}
@@ -82,7 +81,7 @@ const TextInput = ({
       />
     </div>
   );
-}
+});
 
 TextInput.defaultProps = {
   focusColor: colors.defaultFocusColor,
@@ -93,16 +92,10 @@ TextInput.defaultProps = {
 TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   focusColor: PropTypes.string,
-  forwardedRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-  ]),
   index: PropTypes.number,
   onFocusChange: PropTypes.func,
   onChange: PropTypes.func,
   enableTabSwitching: PropTypes.bool,
 };
 
-export default React.forwardRef((props, ref) => (
-  <TextInput forwardedRef={ref} {...props} />
-));
+export default TextInput
