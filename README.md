@@ -11,10 +11,20 @@ npm install
 npm start
 ```
 
-For use in the KaiOS emulator you must build
+To use the example app in the KaiOS emulator you must build
 
 ```
-npm build
+npm build:example
+```
+
+To build the library itself
+```
+npm run build
+```
+
+You can also automatically rebuild on changes
+```
+npm run build:watch
 ```
 
 And update the hashes of the JS and CSS files in [index.html](https://github.com/AdrianMachado/KaiUI/blob/master/index.html) manually before running.

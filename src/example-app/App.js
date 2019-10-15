@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import Header from './components/Header/Header';
-import { SoftKeyProvider } from './components/SoftKey/SoftKeyProvider';
-import TabView from './views/TabView/TabView';
-import ListView from './views/ListView/ListView';
-import CheckboxListItem from './components/CheckboxListItem/CheckboxListItem';
-import IconListItem from './components/IconListItem/IconListItem';
-import TextListItem from './components/TextListItem/TextListItem';
-import BodyTextListItem from './components/BodyTextListItem/BodyTextListItem';
-import ArrowListItem from './components/ArrowListItem/ArrowListItem';
-import RadioButtonListItem from './components/RadioButtonListItem/RadioButtonListItem';
-import Separator from './components/Separator/Separator';
-import ProgressBar from './components/ProgressBar/ProgressBar';
-import Slider from './components/Slider/Slider';
-import Button from './components/Button/Button';
-import TextInput from './components/TextInput/TextInput';
+import Header from '../lib/components/Header/Header';
+import { SoftKeyProvider } from '../lib/components/SoftKey/SoftKeyProvider';
+import TabView from '../lib/views/TabView/TabView';
+import ListView from '../lib/views/ListView/ListView';
+import CheckboxListItem from '../lib/components/CheckboxListItem/CheckboxListItem';
+import IconListItem from '../lib/components/IconListItem/IconListItem';
+import TextListItem from '../lib/components/TextListItem/TextListItem';
+import BodyTextListItem from '../lib/components/BodyTextListItem/BodyTextListItem';
+import ArrowListItem from '../lib/components/ArrowListItem/ArrowListItem';
+import RadioButtonListItem from '../lib/components/RadioButtonListItem/RadioButtonListItem';
+import Separator from '../lib/components/Separator/Separator';
+import ProgressBar from '../lib/components/ProgressBar/ProgressBar';
+import Slider from '../lib/components/Slider/Slider';
+import Button from '../lib/components/Button/Button';
+import TextInput from '../lib/components/TextInput/TextInput';
 import './App.scss';
-import colors from './theme/colors.scss';
-import exampleIcon from './assets/example.png';
+import colors from '../lib/theme/colors.scss';
+import exampleIcon from '../lib/assets/example.png';
 
 function App() {
   const handleInputChange = newVal => {
