@@ -6,7 +6,7 @@ import './SoftKey.scss';
 const prefixCls = 'kai-softkey';
 
 const Button = props => {
-  const { handleClick } = props;
+  const { handleClick, icon, text } = props;
 
   const handleButtonClick = e => {
     e.preventDefault();
@@ -31,8 +31,8 @@ const Button = props => {
       onClick={handleButtonClick}
       onFocus={handleCheckFocus}
     >
-      {props.icon ? <span className={props.icon} /> : null}
-      {props.text}
+      <span className={icon} />
+      {text}
     </button>
   );
 };

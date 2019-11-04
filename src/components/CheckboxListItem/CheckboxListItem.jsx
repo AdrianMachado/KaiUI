@@ -20,6 +20,8 @@ const CheckboxListItem = React.memo(props => {
     softKeyManager,
     softKeyCheckedText,
     softKeyUncheckedText,
+    softKeyCheckedIcon,
+    softKeyUncheckedIcon,
   } = props;
 
   // Managed vs self-managed radio buttons
@@ -37,8 +39,13 @@ const CheckboxListItem = React.memo(props => {
 
   useEffect(() => {
     const centerText = isChecked ? softKeyCheckedText : softKeyUncheckedText;
+    const centerIcon = isChecked ? softKeyCheckedIcon : softKeyUncheckedIcon;
     if (isFocused) {
-      softKeyManager.setCenterText(centerText);
+      if (centerIcon != null) {
+        softKeyManager.setCenterIcon(centerIcon);
+      } else {
+        softKeyManager.setCenterText(centerText);
+      }
     }
   }, [
     isFocused,
@@ -46,6 +53,8 @@ const CheckboxListItem = React.memo(props => {
     softKeyManager,
     softKeyCheckedText,
     softKeyUncheckedText,
+    softKeyCheckedIcon,
+    softKeyUncheckedIcon,
   ]);
 
   const handleInvertCheck = () => setChecked(wasChecked => !wasChecked);
@@ -74,7 +83,14 @@ const CheckboxListItem = React.memo(props => {
         const centerText = isChecked
           ? softKeyCheckedText
           : softKeyUncheckedText;
-        softKeyManager.setSoftKeyTexts({ centerText });
+        const centerIcon = isChecked
+          ? softKeyCheckedIcon
+          : softKeyUncheckedIcon;
+        if (centerIcon != null) {
+          softKeyManager.setCenterIcon(centerIcon);
+        } else {
+          softKeyManager.setSoftKeyTexts({ centerText });
+        }
         softKeyManager.setSoftKeyCallbacks({
           centerCallback: handleInvertCheck,
         });
@@ -89,6 +105,8 @@ const CheckboxListItem = React.memo(props => {
       isChecked,
       softKeyCheckedText,
       softKeyUncheckedText,
+      softKeyCheckedIcon,
+      softKeyUncheckedIcon,
       softKeyManager,
     ]
   );
@@ -146,6 +164,8 @@ CheckboxListItem.propTypes = {
   // For softkey
   softKeyCheckedText: PropTypes.string,
   softKeyUncheckedText: PropTypes.string,
+  softKeyCheckedIcon: PropTypes.string,
+  softKeyUncheckedIcon: PropTypes.string,
 };
 
 CheckboxListItem.defaultProps = {
@@ -154,6 +174,8 @@ CheckboxListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
   softKeyCheckedText: 'Deselect',
   softKeyUncheckedText: 'Select',
+  softKeyCheckedIcon: null,
+  softKeyUncheckedIcon: null,
 };
 
 export default React.forwardRef((props, ref) => (
