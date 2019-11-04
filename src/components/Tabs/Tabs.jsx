@@ -27,7 +27,7 @@ const Tabs = React.memo(
       [childRefs, onChangeIndex]
     );
 
-    const handleKeyDown = useCallback(
+    const handleKeyUp = useCallback(
       e => {
         let index = activeChild;
         switch (e.key) {
@@ -72,10 +72,10 @@ const Tabs = React.memo(
     
     useEffect(
       () => {
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        return () => document.removeEventListener('keyup', handleKeyUp);
       },
-      [handleKeyDown]
+      [handleKeyUp]
     );
   
     return <div className={prefixCls}>{renderChildren()}</div>;

@@ -9,7 +9,7 @@
 }
 
 input {
-  font-variant-numeric: nominal;
+  font-variant-numeric: normal;
 }
 
 /*
@@ -52,8 +52,10 @@ input {
   --color-destructive: #e2443a;
   --color-preferred: #00ba91;
 
-  /* KaiOS Colors */
+  /** KaiOS Colors
+     ---------------------------------------------------------*/
 
+  /* Grey Scale Colors */
   --color-gs100: #000000;
   --color-gs90: #323232;
   --color-gs70: #6a6a6a;
@@ -62,6 +64,7 @@ input {
   --color-gs10: #e6e6e6;
   --color-gs00: #ffffff;
 
+  /* Primary Colors - Best for Highlighting selected UI element */
   --color-purple: #873eff;
   --color-pink: #f6529b;
   --color-lime: #82c51b;
@@ -70,13 +73,23 @@ input {
   --color-orange: #ff8329;
   --color-red: #f3203d;
 
-  --color-purple-pressed: #6c32cc;
-  --color-pink-pressed: #bf2392;
-  --color-lime-pressed: #6b9a23;
-  --color-cyan-pressed: #31979e;
-  --color-blue-pressed: #0a80b4;
-  --color-orange-pressed: #cc5310;
-  --color-red-pressed: #c21930;
+  /* Mid-dark Colors - Generally used for the press effect */
+  --color-purple-mid-dark: #6c32cc;
+  --color-pink-mid-dark: #bf2392;
+  --color-lime-mid-dark: #6b9a23;
+  --color-cyan-mid-dark: #31979e;
+  --color-blue-mid-dark: #0a80b4;
+  --color-orange-mid-dark: #cc5310;
+  --color-red-mid-dark: #c21930;
+
+  /* Dark Colors - Generally used for the header background */
+  --color-purple-dark: #320374;
+  --color-pink-dark: #49122c;
+  --color-lime-dark: #143a06;
+  --color-cyan-dark: #03757c;
+  --color-blue-dark: #21407a;
+  --color-orange-dark: #391e0a;
+  --color-red-dark: #5c0600;
 
   /** Background
      ---------------------------------------------------------*/
@@ -114,16 +127,24 @@ input {
   --button-box-shadow: inset 0 -1px 0 #d8d8d8, inset 0 1px 0 #eeeeee;
   --button-box-shadow-active: var(--button-box-shadow);
 
+  --color-purple-pressed: var(--color-purple-mid-dark);
+  --color-pink-pressed: var(--color-pink-mid-dark);
+  --color-lime-pressed: var(--color-lime-mid-dark);
+  --color-cyan-pressed: var(--color-cyan-mid-dark);
+  --color-blue-pressed: var(--color-blue-mid-dark);
+  --color-orange-pressed: var(--color-orange-mid-dark);
+  --color-red-pressed: var(--color-red-mid-dark);
+
   /** Header
      ---------------------------------------------------------*/
 
-  --header-purple-background: #320374;
-  --header-pink-background: #48132c;
-  --header-lime-background: #2a400c;
-  --header-cyan-background: #045463;
-  --header-blue-background: #20407b;
-  --header-orange-background: #381e0d;
-  --header-red-background: #5b0700;
+  --header-purple-background: var(--color-purple-dark);
+  --header-pink-background: var(--color-pink-dark);
+  --header-lime-background: var(--color-lime-dark);
+  --header-cyan-background: var(--color-cyan-dark);
+  --header-blue-background: var(--color-blue-dark);
+  --header-orange-background: var(--color-orange-dark);
+  --header-red-background: var(--color-red-dark);
 
   --header-disabled-button-color: rgba(255, 255, 255, 0.3);
 
