@@ -80,5 +80,11 @@
       --softkey-font-size: var(--softkey-icon-size);
       --softkey-color: var(--softkey-color--icon);
     }
+
+    span::before {
+      @extend .button-icon-font;
+      line-height: var(--softkeybar-height);
+      color: var(--softkey-color);
+    }
   }
 }

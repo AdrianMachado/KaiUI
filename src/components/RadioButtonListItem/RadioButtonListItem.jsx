@@ -20,6 +20,8 @@ const RadioButtonListItem = React.memo(props => {
     softKeyManager,
     softKeyCheckedText,
     softKeyUncheckedText,
+    softKeyCheckedIcon,
+    softKeyUncheckedIcon,
   } = props;
 
   // Managed vs self-managed radio buttons
@@ -37,8 +39,13 @@ const RadioButtonListItem = React.memo(props => {
 
   useEffect(() => {
     const centerText = isChecked ? softKeyCheckedText : softKeyUncheckedText;
+    const centerIcon = isChecked ? softKeyCheckedIcon : softKeyUncheckedIcon;
     if (isFocused) {
-      softKeyManager.setCenterText(centerText);
+      if (centerIcon != null) {
+        softKeyManager.setCenterIcon(centerIcon);
+      } else {
+        softKeyManager.setCenterText(centerText);
+      }
     }
   }, [
     isFocused,
@@ -46,6 +53,8 @@ const RadioButtonListItem = React.memo(props => {
     softKeyManager,
     softKeyCheckedText,
     softKeyUncheckedText,
+    softKeyCheckedIcon,
+    softKeyUncheckedIcon,
   ]);
 
   const handleInputChange = e => {
@@ -72,7 +81,15 @@ const RadioButtonListItem = React.memo(props => {
         const centerText = isChecked
           ? softKeyCheckedText
           : softKeyUncheckedText;
-        softKeyManager.setSoftKeyTexts({ centerText });
+        const centerIcon = isChecked
+          ? softKeyCheckedIcon
+          : softKeyUncheckedIcon;
+        if (centerIcon != null) {
+          softKeyManager.setCenterIcon(centerIcon);
+        } else {
+          softKeyManager.setSoftKeyTexts({ centerText });
+        }
+
         softKeyManager.setSoftKeyCallbacks({
           centerCallback: () => setChecked(true),
         });
@@ -88,6 +105,8 @@ const RadioButtonListItem = React.memo(props => {
       softKeyManager,
       softKeyCheckedText,
       softKeyUncheckedText,
+      softKeyCheckedIcon,
+      softKeyUncheckedIcon,
     ]
   );
 
@@ -144,6 +163,8 @@ RadioButtonListItem.propTypes = {
   // For softkey
   softKeyCheckedText: PropTypes.string,
   softKeyUncheckedText: PropTypes.string,
+  softKeyCheckedIcon: PropTypes.string,
+  softKeyUncheckedIcon: PropTypes.string,
 };
 
 RadioButtonListItem.defaultProps = {
@@ -152,6 +173,8 @@ RadioButtonListItem.defaultProps = {
   focusColor: colors.defaultFocusColor,
   softKeyCheckedText: '',
   softKeyUncheckedText: 'Select',
+  softKeyCheckedIcon: null,
+  softKeyUncheckedIcon: null,
 };
 
 export default React.forwardRef((props, ref) => (

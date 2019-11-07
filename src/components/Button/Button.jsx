@@ -27,6 +27,7 @@ const Button = React.memo(props => {
     forwardedRef,
     softKeyManager,
     softKeyText,
+    softKeyIcon,
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -35,8 +36,12 @@ const Button = React.memo(props => {
     isNowFocused => {
       setIsFocused(isNowFocused);
       if (isNowFocused) {
-        const centerText = softKeyText;
-        softKeyManager.setSoftKeyTexts({ centerText });
+        if (softKeyIcon != null) {
+          softKeyManager.setCenterIcon(softKeyIcon);
+        } else {
+          softKeyManager.setSoftKeyTexts({ centerText: softKeyText });
+        }
+
         softKeyManager.setSoftKeyCallbacks({
           centerCallback: onClick,
         });
@@ -45,7 +50,7 @@ const Button = React.memo(props => {
         softKeyManager.unregisterSoftKeys();
       }
     },
-    [index, onFocusChange, onClick, softKeyManager, softKeyText]
+    [index, onFocusChange, onClick, softKeyManager, softKeyText, softKeyIcon]
   );
 
   const buttonCls = prefixCls;
@@ -124,6 +129,7 @@ Button.propTypes = {
   ]),
   // For softkey
   softKeyText: PropTypes.string,
+  softKeyIcon: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -140,6 +146,7 @@ Button.defaultProps = {
   formTarget: undefined,
   name: undefined,
   softKeyText: 'select',
+  softKeyIcon: null,
 };
 
 export default React.forwardRef((props, ref) => (
