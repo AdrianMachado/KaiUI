@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useFocus } from '../../hooks';
 import colors from '../../theme/colors.scss';
 
 import './ArrowListItem.scss';
@@ -17,7 +18,13 @@ const ArrowListItem = React.memo(
       onFocusChange
     } = props;
 
-    const [isFocused, setFocused] = useState(false);
+    const handleFocusChange = isNowFocused => {
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
+
+    const isFocused = useFocus(forwardedRef, handleFocusChange, false);
 
     const itemCls = prefixCls;
     const iconCls = `${prefixCls}-icon-${isFocused ? 'focused' : 'unfocused'}`;
@@ -25,21 +32,12 @@ const ArrowListItem = React.memo(
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
 
-    const handleFocusChange = isNowFocused => {
-      setFocused(isNowFocused);
-      if (isNowFocused) {
-        onFocusChange(index);
-      }
-    }
-
     return (
       <div
         tabIndex="0"
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => handleFocusChange(true)}
-        onBlur={() => handleFocusChange(false)}
       >
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>

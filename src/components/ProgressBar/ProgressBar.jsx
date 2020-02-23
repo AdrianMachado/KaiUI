@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
+import { useFocus } from '../../hooks';
 
 import './ProgressBar.scss';
 
@@ -18,7 +19,13 @@ const ProgressBar = React.memo(
       onFocusChange
     } = props;
 
-    const [isFocused, setFocused] = useState(false);
+    const handleFocusChange = isNowFocused => {
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
+
+    const isFocused = useFocus(forwardedRef, handleFocusChange, false);
     
     const lineCls = `${prefixCls}-line`;
     const barWrapperCls = `${prefixCls}-bar-wrapper`;
@@ -29,21 +36,12 @@ const ProgressBar = React.memo(
       isFocused ? 'focused' : 'unfocused'
     }`;
 
-    const handleFocusChange = isNowFocused => {
-      setFocused(isNowFocused);
-      if (isNowFocused) {
-        onFocusChange(index);
-      }
-    }
-
     return (
       <div
         tabIndex="0"
         className={prefixCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => handleFocusChange(true)}
-        onBlur={() => handleFocusChange(false)}
       >
         <span className={lineCls}>{header}</span>
         <div className={barWrapperCls}>
