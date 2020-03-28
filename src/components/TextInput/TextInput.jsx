@@ -15,11 +15,12 @@ const TextInput = ({
   forwardedRef,
   onChange,
   enableTabSwitching,
+  initialValue,
   ...props,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [caretPosition, setCaretPosition] = useState(0);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue);
 
   const handleKeyUp = (event) => {
     if (enableTabSwitching) {
@@ -87,6 +88,7 @@ const TextInput = ({
 TextInput.defaultProps = {
   focusColor: colors.defaultFocusColor,
   enableTabSwitching: false,
+  initialValue: "",
   onChange: () => {}
 };
 
@@ -101,6 +103,7 @@ TextInput.propTypes = {
   onFocusChange: PropTypes.func,
   onChange: PropTypes.func,
   enableTabSwitching: PropTypes.bool,
+  initialValue: PropTypes.string
 };
 
 export default React.forwardRef((props, ref) => (
