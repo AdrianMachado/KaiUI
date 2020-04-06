@@ -154,6 +154,10 @@ function App() {
                 label="I am a text input with a custom input prop"
                 placeholder="Placeholder text"
               />
+              <TextInput
+                label="I am a text input with an initial value"
+                initialValue="Initial text"
+              />
             </ListView>
             <ListView>
               <BodyTextListItem
