@@ -1,0 +1,23 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+
+.kai-toast {
+  background: var(--color-alpha);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  color: white;
+  text-align: center;
+  z-index: var(--z-index--tab, 100000);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+
+  &--displayed {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
