@@ -157,6 +157,10 @@ function App() {
                   label="I am a text input with a custom input prop"
                   placeholder="Placeholder text"
                 />
+                <TextInput
+                  label="I am a text input with an initial value"
+                  initialValue="Initial text"
+                />
               </ListView>
               <ListView>
                 <BodyTextListItem
@@ -169,6 +173,7 @@ function App() {
                   secondary="Secondary text"
                 />
                 <ArrowListItem primary="Just me and arrow" />
+                <Button text="Show a toast" onClick={() => { showToast(toastValues[Math.round(Math.random() * 2)], 5000) }} />
               </ListView>
             </TabView>
           </div>

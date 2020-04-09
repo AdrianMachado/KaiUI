@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useFocus } from '../../hooks';
 import colors from '../../theme/colors.scss';
 
 import './BodyTextListItem.scss';
@@ -17,18 +18,17 @@ const BodyTextListItem = React.memo(
       onFocusChange
     } = props;
 
-    const [isFocused, setFocused] = useState(false);
-
-    const itemCls = prefixCls;
-    const headerCls = `${prefixCls}-header`;
-    const bodyCls = `${prefixCls}-body ${body ? '' : 'hidden'}`;
-
     const handleFocusChange = isNowFocused => {
-      setFocused(isNowFocused);
       if (isNowFocused) {
         onFocusChange(index);
       }
     }
+
+    const isFocused = useFocus(forwardedRef, handleFocusChange, false);
+
+    const itemCls = prefixCls;
+    const headerCls = `${prefixCls}-header`;
+    const bodyCls = `${prefixCls}-body ${body ? '' : 'hidden'}`;
 
     return (
       <div
@@ -36,8 +36,6 @@ const BodyTextListItem = React.memo(
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => handleFocusChange(true)}
-        onBlur={() => handleFocusChange(false)}
       >
         <span className={headerCls}>{header}</span>
         <label className={bodyCls}>{body}</label>

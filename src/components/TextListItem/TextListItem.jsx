@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
+import { useFocus } from '../../hooks';
 
 import './TextListItem.scss';
 
@@ -18,19 +19,18 @@ const TextListItem = React.memo(
       onFocusChange
     } = props;
 
-    const [isFocused, setFocused] = useState(false);
+    const handleFocusChange = isNowFocused => {
+      if (isNowFocused) {
+        onFocusChange(index);
+      }
+    }
+
+    const isFocused = useFocus(forwardedRef, handleFocusChange, false);
 
     const itemCls = prefixCls;
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
     const tertiaryCls = `${prefixCls}-tertiary ${tertiary ? '' : 'hidden'}`;
-
-    const handleFocusChange = isNowFocused => {
-      setFocused(isNowFocused);
-      if (isNowFocused) {
-        onFocusChange(index);
-      }
-    }
 
     return (
       <div
@@ -38,8 +38,6 @@ const TextListItem = React.memo(
         className={itemCls}
         style={{ backgroundColor: isFocused ? focusColor : colors.white }}
         ref={forwardedRef}
-        onFocus={() => handleFocusChange(true)}
-        onBlur={() => handleFocusChange(false)}
       >
         <span className={primaryCls}>{primary}</span>
         <label className={secondaryCls}>{secondary}</label>

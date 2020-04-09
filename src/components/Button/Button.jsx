@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
+import { useFocus } from '../../hooks';
 import './Button.scss';
 
 const prefixCls = 'kai-button';
@@ -30,11 +31,8 @@ const Button = React.memo(props => {
     softKeyIcon,
   } = props;
 
-  const [isFocused, setIsFocused] = useState(false);
-
   const handleFocusChange = useCallback(
     isNowFocused => {
-      setIsFocused(isNowFocused);
       if (isNowFocused) {
         if (softKeyIcon != null) {
           softKeyManager.setCenterIcon(softKeyIcon);
@@ -52,6 +50,8 @@ const Button = React.memo(props => {
     },
     [index, onFocusChange, onClick, softKeyManager, softKeyText, softKeyIcon]
   );
+
+  const isFocused = useFocus(forwardedRef, handleFocusChange, false);
 
   const buttonCls = prefixCls;
   const inputCls = `${prefixCls}-input`;
