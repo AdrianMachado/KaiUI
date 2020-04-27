@@ -16,7 +16,7 @@ const TextInput = ({
   onChange,
   enableTabSwitching,
   initialValue,
-  ...props,
+  ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [caretPosition, setCaretPosition] = useState(0);
