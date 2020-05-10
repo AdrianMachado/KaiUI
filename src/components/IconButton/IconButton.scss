@@ -1,0 +1,22 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+@import '../../kai-font/style.scss';
+
+.kai-icon-button {
+  margin: 1rem;
+  width: min-content;
+
+  &-input {
+    line-height: calc(var(--button-height) / 2);    
+    height: 100%;
+    @extend %text-ellipsis;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    background-color: white;
+    &:focus {
+      color: var(--button-text-focused);
+    }
+  }
+}

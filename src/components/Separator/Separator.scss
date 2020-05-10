@@ -9,11 +9,17 @@
 .kai-separator {
   height: var(--separator-height);
   width: 100%;
+  text-align: center;
   background-color: var(--separator-background-color);
+  vertical-align: "-webkit-baseline-middle"; //-moz-middle-with-baseline
+  margin-bottom: 1rem;
+
   &-text {
     @extend h4;
     margin: 0 1rem;
     text-align: center;
     color: var(--separator-text-color);
+    text-transform: none !important;
+    font-size: 1.5rem !important;
   }
 }
