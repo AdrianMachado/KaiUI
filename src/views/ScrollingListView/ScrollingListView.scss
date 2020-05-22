@@ -1,0 +1,26 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+
+.kai-scroll-list-view {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &-middleItem {
+    background-color: white;
+    color: var(--color-cyan-pressed);
+  }
+
+  &-nonMiddleItem{
+    background-color: white;
+    color: black;
+  }
+
+  &-activeItem {
+    background-color: var(--color-cyan-pressed) !important;
+    color: white !important;
+  }
+
+}
+
