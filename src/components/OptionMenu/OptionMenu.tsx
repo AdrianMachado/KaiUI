@@ -1,22 +1,35 @@
 import React, { useState, useEffect, useCallback }  from "react"
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 import './OptionMenu.scss';
+import TextInput from "../TextInput/TextInput";
+import OptionItem from "./OptionItem";
 
 const prefixCls = 'kai-om';
 
-const OptionMenu = React.memo<any>(
+interface LocalProps {
+  header: string;
+  children: any[];
+  onChangeIndex?: (index: number) => void;
+  isActive: boolean;
+  onExit: () => void;
+  enableSearch?: boolean;
+}
+
+const OptionMenu = React.memo<LocalProps>(
   props => {
     const {
       header,
       children,
       onChangeIndex,
-      isActive
+      isActive,
+      onExit,
+      enableSearch
     } = props;
 
     const itemRefs = [];
     const [selectedItem, setSelectedItem] = useState(0);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const itemCls = prefixCls;
 
@@ -53,6 +66,10 @@ const OptionMenu = React.memo<any>(
           case 'ArrowDown':
             index = index < itemRefs.length - 1 ? index + 1 : 0;
             setFocusToIndex(index);
+            break;  
+          case 'Backspace': 
+            if(selectedItem !== 0 && onExit) //prevent backspace override in text box
+              onExit();
             break;
           default:
             break;
@@ -78,8 +95,19 @@ const OptionMenu = React.memo<any>(
       [isActive, setFocusToIndex, selectedItem]
     );
 
+    const childrenToRender = [...children];
+    if(enableSearch === true){
+      childrenToRender.unshift(<TextInput 
+                                  id="optMenuSearch" 
+                                  initialValue={searchTerm ||  ""} 
+                                  placeholder={this.props.localization.getUIString("search") + "..."} 
+                                  index={0} 
+                                  onChange={(ev) => {setSearchTerm(ev.target.value)}} />);
+    }
+
+
     const renderedItems = React.Children.map(
-      children, (item, idx) => {
+      childrenToRender, (item, idx) => {
         const itemRef = React.createRef();
 
         itemRefs[idx] = itemRef;
@@ -94,28 +122,36 @@ const OptionMenu = React.memo<any>(
       }
     );
 
+    const matchingSearchChildren = searchTerm ?
+      childrenToRender.filter(child => child.props.id === "optMenuSearch" || 
+                              (child.props.text && child.props.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1))
+    : undefined;
+
+    const filteredItems = matchingSearchChildren && matchingSearchChildren.length > 0 ? React.Children.map(
+      matchingSearchChildren, (item, idx) => {
+        const itemRef = React.createRef();
+
+        itemRefs[idx] = itemRef;
+
+        return React.cloneElement(
+          item, {
+            index: idx,
+            onFocusChange: handleItemChange,
+            ref: itemRef
+          }
+        );
+      }
+    ) : undefined;
+
     return (
       <div className={itemCls}>
         <header>{header}</header>
         <nav>
-          { renderedItems }
+          { filteredItems ? filteredItems : renderedItems }
         </nav>
       </div>
     );
   }
 );
-/*
-OptionMenu.propTypes = {
-  header: PropTypes.string,
-  children: PropTypes.array.isRequired,
-  onChangeIndex: PropTypes.func,
-  isActive: PropTypes.bool,
-};
-
-OptionMenu.defaultProps = {
-  header: "Options",
-  onChangeIndex: () => {},
-  isActive: true
-};*/
 
 export default OptionMenu;

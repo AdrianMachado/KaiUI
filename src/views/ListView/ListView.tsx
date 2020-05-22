@@ -3,9 +3,16 @@ import ReactDOM from 'react-dom';
 import './ListView.scss';
 import classNames from 'classnames';
 
+interface LocalProps {
+  isActive: boolean;
+  children: any;
+  onChangeIndex?: (index: number) => void;
+  className?: string;
+}
+
 const prefixCls = 'kai-list-view';
 
-const ListView = React.memo<any>(
+const ListView = React.memo<LocalProps>(
   (props) => {
     const itemRefs:any[] = [];
 
@@ -26,9 +33,11 @@ const ListView = React.memo<any>(
 
     const setFocusToIndex = useCallback(
       index => {
-        const elem:any|null = ReactDOM.findDOMNode(itemRefs[index].current);
-        if(elem){
-          elem.focus();
+        if(itemRefs[index]){
+          const elem:any|null = ReactDOM.findDOMNode(itemRefs[index].current);
+          if(elem){
+            elem.focus();
+          }
         }
       },
       [itemRefs]

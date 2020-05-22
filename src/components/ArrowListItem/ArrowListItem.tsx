@@ -1,34 +1,43 @@
 import React from 'react';
 import { useFocus } from '../../hooks/useFocus';
-import colors from '../../theme/colors.scss';
 
 import './ArrowListItem.scss';
+import classNames from 'classnames';
+import { SoftKeyConsumer, SoftKeyManagerProps } from '../SoftKey/withSoftKeyManager';
 
 const prefixCls = 'kai-al';
 
 interface LocalProps {
   primary: string;
   secondary?: string;
-  focusColor?: string;
+  focusClass?: string;
   forwardedRef?: any;
   index?: number;
   onFocusChange?: (index: number) => void;
+  onClick?:() => void;
 }
+type Props = LocalProps 
+  & SoftKeyManagerProps;
 
-const ArrowListItem = React.memo<LocalProps>(
+const ArrowListItem = React.memo<Props>(
   props => {
     const {
       primary,
       secondary,
-      focusColor,
+      focusClass,
       forwardedRef,
       index,
-      onFocusChange
+      onFocusChange,
+      onClick,
+      softKeyManager
     } = props;
 
     const handleFocusChange = isNowFocused => {
       if (isNowFocused) {
-        onFocusChange(index);
+        if(onFocusChange)
+          onFocusChange(index);
+        if(onClick)
+          softKeyManager.setCenterCallback(onClick);
       }
     }
 
@@ -39,13 +48,15 @@ const ArrowListItem = React.memo<LocalProps>(
     const lineCls = `${prefixCls}-line`;
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
+    
+    const focusedCls = isFocused ? `${prefixCls}-focused ${(focusClass||'defaultFocusCls')}` : '';
 
     return (
       <div
         tabIndex={0}
-        className={itemCls}
-        style={{ backgroundColor: isFocused ? (focusColor || colors.defaultFocusColor) : colors.white }}
+        className={classNames(itemCls, focusedCls)}
         ref={forwardedRef}
+        onClick={onClick}
       >
         <div className={lineCls}>
           <span className={primaryCls}>{primary}</span>
@@ -59,5 +70,13 @@ const ArrowListItem = React.memo<LocalProps>(
   }
 );
 export default React.forwardRef((props: LocalProps, ref) => (
-  <ArrowListItem forwardedRef={ref} {...props} />
+  <SoftKeyConsumer>
+    {context => (
+      <ArrowListItem
+        softKeyManager={context}
+        forwardedRef={ref}
+        {...props}
+      />
+    )}
+  </SoftKeyConsumer>
 ));

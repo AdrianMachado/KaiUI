@@ -11,7 +11,6 @@ interface LocalProps {
   primary: string;
   secondary?:string;
   initCheckboxVal?:boolean;
-  isChecked?:boolean;
   onInputChange?: (checked: any) => void;
   checkboxSide?: "left" | "right";
   focusColor?:string;
@@ -81,7 +80,8 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
 
   const handleInputChange = (e) => {
     setChecked(e.target.checked);
-    onInputChange(e.target.checked);
+    if(onInputChange)
+      onInputChange(e.target.checked);
   };
 
   // We want to avoid losing focus on the parent element
@@ -109,14 +109,12 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
         if (centerIcon != null) {
           softKeyManager.setCenterIcon(centerIcon);
         } else {
-          softKeyManager.setSoftKeyTexts({ centerText });
+          softKeyManager.setCenterText(centerText);
         }
-        softKeyManager.setSoftKeyCallbacks({
-          centerCallback: handleInvertCheck,
-        });
+        softKeyManager.setCenterCallback(handleInvertCheck);
         onFocusChange(index);
       } else {
-        softKeyManager.unregisterSoftKeys();
+        //softKeyManager.unregisterSoftKeys();
       }
     },
     [
@@ -138,7 +136,7 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
         className={inputCls}
         tabIndex={-1}
         type="checkbox"
-        checked={props.isChecked !== null ? props.isChecked : isChecked}
+        checked={isChecked}
         onChange={() => {}}
         onFocus={handleCheckFocus}
         onClick={handleInputChange}
@@ -155,7 +153,7 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
       onFocus={() => handleFocusChange(true)}
       onBlur={() => handleFocusChange(false)}
     >
-      {checkboxSide === 'left' ? checkbox : null}
+      {checkboxSide === 'left' || checkboxSide === undefined ? checkbox : null}
       <div className={lineCls}>
         <span className={primaryCls}>{primary}</span>
         <label className={secondaryCls}>{secondary}</label>
