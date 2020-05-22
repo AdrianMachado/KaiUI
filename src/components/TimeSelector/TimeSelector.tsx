@@ -5,7 +5,6 @@ import './TimeSelector.scss';
 import SoftKey from '../SoftKey/SoftKey';
 import TriColListView from '../../views/TriColumnListView/TriColumnListView';
 import BodyTextListItem from '../BodyTextListItem/BodyTextListItem';
-import Loading from '../Loading/Loading';
 
 export interface Time {
   hour: number;
@@ -102,7 +101,7 @@ class TimeSelector extends React.Component<Props, LocalState> {
 
   render() {
     if(this.state.isLoading){
-      return (<Loading/>);
+      return (<div>Loading...</div>);
     }
 
     const { header, onOK } = this.props;

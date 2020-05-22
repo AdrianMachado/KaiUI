@@ -4,8 +4,8 @@ import './ListView.scss';
 import classNames from 'classnames';
 
 interface LocalProps {
-  isActive: boolean;
-  children: any;
+  isActive?: boolean;
+  children: any[];
   onChangeIndex?: (index: number) => void;
   className?: string;
 }
