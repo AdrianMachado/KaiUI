@@ -4,16 +4,18 @@ import classnames from 'classnames';
 import './TextInput.scss';
 
 interface LocalProps {
-  focusClass: string | undefined,
-  label: string | undefined,
-  index: number,
-  onFocusChange: (index: number) => void,
-  forwardedRef: any,
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
-  enableTabSwitching: boolean,
-  initialValue: string,
-  placeholder: string | undefined,
-  isNumeric: boolean | undefined
+  id?: string;
+  focusClass?: string,
+  label?: string,
+  index?: number,
+  onFocusChange?: (index: number) => void,
+  forwardedRef?: any,
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+  enableTabSwitching?: boolean,
+  initialValue?: string,
+  placeholder?: string,
+  isNumeric?: boolean,
+  validationError?: string
 };
 
 const prefixCls = 'kai-text-input';
@@ -21,6 +23,7 @@ const prefixCls = 'kai-text-input';
 const TextInput = React.memo<LocalProps>(
   props => {
     const {
+      id,
       focusClass,
       label,
       index,
@@ -30,7 +33,8 @@ const TextInput = React.memo<LocalProps>(
       enableTabSwitching,
       initialValue,
       placeholder,
-      isNumeric
+      isNumeric,
+      validationError
     } = props;
 
   const [isFocused, setIsFocused] = useState(false);
@@ -72,22 +76,25 @@ const TextInput = React.memo<LocalProps>(
     }
   };
 
+  const errorCls = validationError ? `${prefixCls}-error` : '';
   const itemCls = classnames([
     prefixCls,
-    isFocused && `${prefixCls}--focused ${(focusClass||'')}`
+    isFocused && `${prefixCls}--focused ${(focusClass||'')}`,
+    errorCls
   ]);
   const labelCls = `${prefixCls}-label p-thi`;
   const inputCls = `${prefixCls}-input p-pri`;
 
   return (
     <div
+      id={id}
       tabIndex={0}
       className={itemCls}
       //style={{ backgroundColor: isFocused ? (focusColor || colors.defaultFocusColor) : colors.white }}
       onFocus={() => handleFocusChange(true)}
       onBlur={() => handleFocusChange(false)}
     >
-      <label className={labelCls}>{label}</label>
+      <label className={labelCls}>{validationError ? validationError : label}</label>
       <input
         ref={forwardedRef}
         type={isNumeric ? "tel": "text"}
@@ -101,6 +108,6 @@ const TextInput = React.memo<LocalProps>(
   );
 });
 
-export default React.forwardRef((props:any, ref) => (
+export default React.forwardRef((props:LocalProps, ref) => (
   <TextInput forwardedRef={ref} {...props} />
 ));
