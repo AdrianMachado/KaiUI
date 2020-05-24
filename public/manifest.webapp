@@ -1,0 +1,17 @@
+{"version": "1.1.0",
+  "name": "KaiUI",
+  "description": "Used for Kaios Components",
+  "launch_path": "/index.html",
+  "cursor": true,
+  "developer": {
+    "name": "Your name",
+    "url": "http://example.com"
+  },
+  "type": "privileged",
+  "permissions": {
+      "spatialnavigation-app-manage": {
+         "description": "Required for toggling the cursor in JS."
+      }
+  },
+  "default_locale": "en"
+}
