@@ -16,8 +16,7 @@ For use in the KaiOS emulator you must build
 ```
 npm build
 ```
-
-And update the hashes of the JS and CSS files in [index.html](https://github.com/AdrianMachado/KaiUI/blob/master/index.html) manually before running.
+Install the build folder in Kaios device/emulator
 
 ## Components
 
