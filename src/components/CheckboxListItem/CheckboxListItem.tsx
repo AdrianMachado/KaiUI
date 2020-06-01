@@ -80,8 +80,9 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
 
   const handleInputChange = (e) => {
     setChecked(e.target.checked);
-    if(onInputChange)
+    if(onInputChange) {
       onInputChange(e.target.checked);
+    }
   };
 
   // We want to avoid losing focus on the parent element
@@ -113,8 +114,6 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
         }
         softKeyManager.setCenterCallback(handleInvertCheck);
         onFocusChange(index);
-      } else {
-        //softKeyManager.unregisterSoftKeys();
       }
     },
     [
@@ -137,7 +136,6 @@ const CheckboxListItem = React.memo<LocalProps>(props => {
         tabIndex={-1}
         type="checkbox"
         checked={isChecked}
-        onChange={() => {}}
         onFocus={handleCheckFocus}
         onClick={handleInputChange}
       />

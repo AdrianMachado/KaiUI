@@ -36,8 +36,9 @@ const OptionMenu = React.memo<LocalProps>(
     const handleItemChange = useCallback(
       itemIndex => {
         setSelectedItem(itemIndex);
-        if(onChangeIndex)
+        if(onChangeIndex) {
           onChangeIndex(itemIndex);
+        }
       },
       [onChangeIndex]
     );
@@ -45,8 +46,9 @@ const OptionMenu = React.memo<LocalProps>(
     const setFocusToIndex = useCallback(
       index => {
         const elem:any|null = ReactDOM.findDOMNode(itemRefs[index].current);
-        if(elem)
+        if(elem) {
           elem.focus();
+        }
       },
       [itemRefs]
     );
@@ -68,8 +70,9 @@ const OptionMenu = React.memo<LocalProps>(
             setFocusToIndex(index);
             break;  
           case 'Backspace': 
-            if(selectedItem !== 0 && onExit) //prevent backspace override in text box
+            if(selectedItem !== 0 && onExit) {
               onExit();
+            }
             break;
           default:
             break;
@@ -124,7 +127,7 @@ const OptionMenu = React.memo<LocalProps>(
 
     const matchingSearchChildren = searchTerm ?
       childrenToRender.filter(child => child.props.id === "optMenuSearch" || 
-                              (child.props.text && child.props.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1))
+        (child.props.text && child.props.text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1))
     : undefined;
 
     const filteredItems = matchingSearchChildren && matchingSearchChildren.length > 0 ? React.Children.map(

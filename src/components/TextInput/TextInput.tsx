@@ -59,14 +59,15 @@ const TextInput = React.memo<LocalProps>(
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    if(onChange)
+    if(onChange) {
       onChange(event);
+    }
   };
 
-  const handleFocusChange = (isFocused) => {
+  const handleFocusChange = (foc: boolean) => {
     const input = forwardedRef.current;
-    setIsFocused(isFocused);
-    if (isFocused) {
+    setIsFocused(foc);
+    if (foc) {
       onFocusChange(index);
       input.focus();
       // Without this, it will just focus at position 0
@@ -90,7 +91,6 @@ const TextInput = React.memo<LocalProps>(
       id={id}
       tabIndex={0}
       className={itemCls}
-      //style={{ backgroundColor: isFocused ? (focusColor || colors.defaultFocusColor) : colors.white }}
       onFocus={() => handleFocusChange(true)}
       onBlur={() => handleFocusChange(false)}
     >

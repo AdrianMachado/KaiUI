@@ -5,7 +5,18 @@ import classNames from 'classnames';
 
 const prefixCls = 'kai-tl';
 
-const TextListItem = React.memo<any>(
+interface LocalProps {
+  primary: string;
+  secondary?:string;
+  tertiary?: string;
+  focusClass?: string;
+  forwardedRef?:any;
+  index?:number;
+  onFocusChange?: (index: number) => void;
+  className?: string;
+}
+
+const TextListItem = React.memo<LocalProps>(
   props => {
     const {
       primary,
@@ -18,24 +29,22 @@ const TextListItem = React.memo<any>(
       className
     } = props;
 
-    let isFocused = false;
-    if(index){
-      const handleFocusChange = isNowFocused => {
-        if (isNowFocused) {
-          onFocusChange(index);
-        }
+    const handleFocusChange = isNowFocused => {
+      if (isNowFocused) {
+        onFocusChange(index);
       }
-      isFocused = useFocus(forwardedRef, handleFocusChange, false);
     }
+    
+    const isFocused = useFocus(forwardedRef, handleFocusChange, false);
 
     const itemCls = prefixCls;
     const primaryCls = `${prefixCls}-primary`;
     const secondaryCls = `${prefixCls}-secondary ${secondary ? '' : 'hidden'}`;
     const tertiaryCls = `${prefixCls}-tertiary ${tertiary ? '' : 'hidden'}`;
-    const focusedCls = isFocused ? `${prefixCls}-focused ${(focusClass||'')}` : '';
+    const focusedCls = isFocused ? `${prefixCls}-focused ${(focusClass||'defaultFocusCls')}` : '';
     return (
       <div
-        tabIndex={index || undefined}
+        tabIndex={0}
         className={classNames(itemCls, (className || ''), focusedCls)}
         ref={forwardedRef}
       >
@@ -47,6 +56,6 @@ const TextListItem = React.memo<any>(
   }
 );
 
-export default React.forwardRef((props:any, ref:any) => (
+export default React.forwardRef((props:LocalProps, ref:any) => (
   <TextListItem forwardedRef={ref} {...props} />
 ));

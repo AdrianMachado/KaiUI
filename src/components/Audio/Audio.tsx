@@ -10,7 +10,7 @@ interface LocalProps {
 type Props = LocalProps;
 
 interface LocalState {
-    play: boolean;
+    isPlaying: boolean;
 }
 
 class AudioComponent extends React.Component<Props, LocalState> {
@@ -18,33 +18,33 @@ class AudioComponent extends React.Component<Props, LocalState> {
     constructor(props) {
         super(props);
         this.state = {
-            play: false
+            isPlaying: false
         };
         this.audioElem = new Audio(this.props.url);
-        this.audioElem.onended = this.stop;
+        this.audioElem.onended = this.stopPlayback;
     }
 
-    play = () => {
-        this.setState({ play: true });
+    startPlayback = () => {
+        this.setState({ isPlaying: true });
         this.audioElem.play();
     }
     
-    pause = () => {
-        this.setState({ play: false });
+    pausePlayback = () => {
+        this.setState({ isPlaying: false });
         this.audioElem.pause();
     }
     
-    stop = () => {
-        this.setState({ play: false });
-        this.audioElem = new Audio(this.props.url); //start over
+    stopPlayback = () => {
+        this.setState({ isPlaying: false });
+        this.audioElem = new Audio(this.props.url);
     }
 
     render() {
         return (
             <div className="audio-softkey-container">
-                {!this.state.play ? 
-                    <FontAwesomeIcon size="2x" icon={faVolumeUp} onClick={this.play} /> : 
-                    <FontAwesomeIcon size="2x"  icon={faSpinner} spin={true} onClick={this.pause} />}
+                {!this.state.isPlaying ? 
+                    <FontAwesomeIcon size="2x" icon={faVolumeUp} onClick={this.startPlayback} /> : 
+                    <FontAwesomeIcon size="2x"  icon={faSpinner} spin={true} onClick={this.pausePlayback} />}
             </div>
         );
     }

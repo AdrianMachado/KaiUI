@@ -75,8 +75,9 @@ const IconButton = React.memo<LocalProps>(props => {
   );
 
   const handleClick = () => {
-    if(onClick)
+    if(onClick) {
       onClick();
+    }
   };
 
   return (

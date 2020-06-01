@@ -43,8 +43,9 @@ const TriColListView = React.memo<LocalProps>(
       //       Otherwise you will face strange race condition bugs.
       setTransitionDone(false);
       setActiveTab(tabIndex);
-      if(onChangeIndex)
+      if(onChangeIndex) {
         onChangeIndex(tabIndex);
+      }
     };
 
     

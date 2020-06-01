@@ -20,8 +20,9 @@ const HorizontalListView = React.memo<any>(
 
     const handleChangeIndex = itemIndex => {
       setActiveItem(itemIndex);
-      if(onChangeIndex)
+      if(onChangeIndex) {
         onChangeIndex(itemIndex);
+      }
     };
 
     const setFocusToIndex = useCallback(

@@ -26,8 +26,9 @@ const ScrollingListView = React.memo<LocalProps>(
     const [activeItem, setActiveItem] = useState(initialSelectedIndex === undefined ? 1 : initialSelectedIndex);
 
     const handleChangeIndex = itemIndex => {
-      if(onChangeIndex)
+      if(onChangeIndex) {
         onChangeIndex(itemIndex);
+      }
     };
 
     const handleKeyDown = useCallback(
@@ -66,11 +67,11 @@ const ScrollingListView = React.memo<LocalProps>(
     const renderChildren = () => {
       const childrenToDisplay = children.filter((item, i) => i >= activeItem - 1 && i <= activeItem + 1);
 
-      if(childrenToDisplay.length == 2){
-        if(activeItem == 0){
+      if(childrenToDisplay.length === 2){
+        if(activeItem === 0){
           childrenToDisplay.unshift(<BodyTextListItem header=""/>);
         }
-        else if(activeItem == children.length){
+        else if(activeItem === children.length){
           childrenToDisplay.push(<BodyTextListItem header=""/>);
         }
       }
@@ -87,8 +88,8 @@ const ScrollingListView = React.memo<LocalProps>(
           index,
           ref: newRef,
           className: classNames(
-                        index == 1 ? prefixCls + "-middleItem" : prefixCls + "-nonMiddleItem",
-                        index == 1 && isActive ? prefixCls + "-activeItem" : ''
+                        index === 1 ? prefixCls + "-middleItem" : prefixCls + "-nonMiddleItem",
+                        index === 1 && isActive ? prefixCls + "-activeItem" : ''
                      )
         });
       });

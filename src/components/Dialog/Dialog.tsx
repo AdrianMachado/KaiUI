@@ -17,39 +17,19 @@ interface LocalProps {
 type Props = LocalProps;
 
 class Dialog extends React.Component<Props> {
-    //private lastFocus: HTMLElement | null = null;
-    //private el: HTMLDivElement | null = null;
-    private input: HTMLInputElement | null = null;
+  private input: HTMLInputElement | null = null;
 
   constructor(props: Props){
     super(props);
-  }
-
-  componentDidMount() {
-    /*this.lastFocus = document.activeElement as HTMLElement;
-    this.focus();*/
-  }
-
-  focusLast() {
-    /*if (this.lastFocus && this.lastFocus.offsetParent) {
-      this.lastFocus.focus();
-    }
-    this.lastFocus = null;*/
-  }
-
-  focus() {
-    /*if (this.input) {
-      this.input.focus();
-    } else if(this.el) {
-      this.el.focus();
-    }*/
   }
 
   onKeyDown = e => {
     const { type, onOK, onCancel } = this.props;
     switch (e.key) {
       case 'SoftLeft':
-        onCancel && onCancel();
+        if(onCancel){
+          onCancel();
+        }
         this.close();
         break;
 
@@ -58,7 +38,9 @@ class Dialog extends React.Component<Props> {
         if (type === 'prompt' && this.input) {
           res = this.input.value;
         }
-        onOK && onOK(res);
+        if(onOK){
+          onOK(res);
+        }
         this.close();
         break;
 
@@ -74,7 +56,6 @@ class Dialog extends React.Component<Props> {
 
   close() {
     this.props.close();
-    //this.focusLast();
   }
 
   render() {
@@ -82,7 +63,6 @@ class Dialog extends React.Component<Props> {
     return (
       <div className="systemContent">
         <div
-          //ref={node => { this.el = node }}
           className="kai-dialog-wrapper"
           tabIndex={-1}
           onKeyDown={this.onKeyDown}
@@ -103,7 +83,7 @@ class Dialog extends React.Component<Props> {
         <SoftKey
             leftText={"Cancel"}
             leftCallback={() => { close(); onClose(); }}
-            rightText={type == "confirm" ? 
+            rightText={type === "confirm" ? 
                         "Confirm" :
                         "OK" }
             rightCallback={() => { onOK(); close(); }}
@@ -125,10 +105,14 @@ function showDialog(config) {
   function close() {
     ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);
-    config.onClose && config.onClose();
+    if(config.onClose){ 
+      config.onClose();
+    }
   }
 
-  config.onOpen && config.onOpen();
+  if(config.onOpen) {
+    config.onOpen();
+  }
   render({ ...config, close });
 }
 

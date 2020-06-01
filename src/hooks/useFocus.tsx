@@ -5,19 +5,23 @@ export const useFocus = (ref, onFocusChanged, focusedByDefault = false) => {
 
   useEffect(
     () => {
-      if(!ref) return;
+      if(!ref) {
+        return;
+      }
       
       const component = ref.current;
 
       const onFocus = () => {
         setFocused(true);
-        if(onFocusChanged)
+        if(onFocusChanged) {
           onFocusChanged(true);
+        }
       }
       const onBlur = () =>  {
         setFocused(false);
-        if(onFocusChanged)
+        if(onFocusChanged) {
           onFocusChanged(false);
+        }
       }
 
       component.addEventListener('focus', onFocus);

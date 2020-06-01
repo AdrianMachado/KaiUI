@@ -122,7 +122,6 @@ function App() {
                 primary="Hello primary text"
                 secondary="secondary text"
                 tertiary="tertiary text"
-                focusColor={colors.gold}
               />
               <ProgressBar
                 header={'Buffering...'}

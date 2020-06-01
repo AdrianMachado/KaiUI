@@ -7,7 +7,14 @@ import './TabView.scss';
 
 const prefixCls = 'kai-tab-view';
 
-const TabView = React.memo<any>(
+interface LocalProps {
+  tabLabels: string[],
+  onChangeIndex?: (index: number) => void,
+  focusColor?: string,
+  children: any[]
+}
+
+const TabView = React.memo<LocalProps>(
   props => {
     const {
       tabLabels,
@@ -27,8 +34,9 @@ const TabView = React.memo<any>(
       //       Otherwise you will face strange race condition bugs.
       setTransitionDone(false);
       setActiveTab(tabIndex);
-      if(onChangeIndex)
+      if(onChangeIndex){
         onChangeIndex(tabIndex);
+      }
     };
 
     const handleTransitionEnd = () => setTransitionDone(true);

@@ -2,12 +2,29 @@ import React, { useState, useCallback, useEffect } from 'react';
 import colors from '../../theme/colors.scss';
 import { SoftKeyConsumer } from '../SoftKey/withSoftKeyManager';
 import './RadioButtonListItem.scss';
+import { SoftKeyContextProps } from '../SoftKey/SoftKeyProvider';
 
 const prefixCls = 'kai-rbl';
 
-const RadioButtonListItem = React.memo<any>(props => {
+interface LocalProps {
+  primary: string,
+  secondary?: string,
+  initButtonVal?: boolean,
+  onInputChange?: (val: string) => void,
+  buttonSide?: "left" | "right",
+  onFocusChange?: (index: number) => void,
+  focusColor?: string,
+  index?: number,
+  forwardedRef?: any,
+  softKeyManager: SoftKeyContextProps,
+  softKeyCheckedText?:string,
+  softKeyUncheckedText?: string,
+  softKeyCheckedIcon?: any,
+  softKeyUncheckedIcon?: any,
+}
+
+const RadioButtonListItem = React.memo<LocalProps>(props => {
   const {
-    id,
     primary,
     secondary,
     initButtonVal,
@@ -93,7 +110,9 @@ const RadioButtonListItem = React.memo<any>(props => {
         softKeyManager.setSoftKeyCallbacks({
           centerCallback: () => setChecked(true),
         });
-        onFocusChange(index);
+        if(index) {
+          onFocusChange(index);
+        }
       } else {
         softKeyManager.unregisterSoftKeys();
       }
@@ -116,8 +135,7 @@ const RadioButtonListItem = React.memo<any>(props => {
         className={inputCls}
         tabIndex={-1}
         type="radio"
-        checked={props.isChecked !== null ? props.isChecked : isChecked}
-        onChange={() => {}}
+        checked={isChecked}
         onFocus={handleButtonFocus}
         onClick={handleInputChange}
       />

@@ -60,19 +60,24 @@ const IconListItem = React.memo<LocalProps>(
 
     const focusedCls = isFocused ? `${prefixCls}-focused ${(focusClass||'')}` : '';
 
-    let renderedIcon:any|undefined = undefined;
-    if(iconSrc)
+    let renderedIcon: any | undefined;
+    if(iconSrc) {
       renderedIcon = <img src={iconSrc} alt="" width={iconWidth || 50} />
-    else if(React.isValidElement(icon))
+    }
+    else if(React.isValidElement(icon)) {
       renderedIcon = <span>{icon}</span>;
-    else
+    }
+    else {
       renderedIcon = <span className={icon} style={{width: iconWidth}} />;
+    }
   
     const handleClick = () => {
-      if(onClick)
+      if(onClick) {
         onClick();
-      else if(linkTo)
+      }
+      else if(linkTo) {
         window.location.href = linkTo;
+      }
     };
 
     return (

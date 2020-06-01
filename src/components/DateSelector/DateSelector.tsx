@@ -93,22 +93,20 @@ class DateSelector extends React.Component<Props, LocalState> {
     });
   }
 
-  focusLast() {
-  }
-
-  focus() {
-  }
-
   onKeyDown = e => {
     const { onOK, onCancel } = this.props;
     switch (e.key) {
       case 'SoftLeft':
-        onCancel && onCancel();
+        if(onCancel){
+          onCancel();
+        }
         this.closeWindow();
         break;
 
       case 'Enter':
-        onOK && onOK(this.calcSelectedDate());
+        if(onOK) {
+          onOK(this.calcSelectedDate());
+        }
         this.closeWindow();
         break;
 
@@ -135,7 +133,6 @@ class DateSelector extends React.Component<Props, LocalState> {
     return (
       <div className="systemContent">
         <div
-          //ref={node => { this.el = node }}
           className="kai-datesel-wrapper"
           tabIndex={-1}
           onKeyDown={this.onKeyDown}
@@ -198,7 +195,7 @@ class DateSelector extends React.Component<Props, LocalState> {
       days.push(i);
     }
 
-    this.setState({days: days});
+    this.setState({days});
   }
 }
 
@@ -219,6 +216,6 @@ function showDateSelctor(config: LocalProps) {
   render({ ...config, close: closeWindow });
 }
 
-
 export {showDateSelctor};
+
 export default DateSelector;

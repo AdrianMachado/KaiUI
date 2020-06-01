@@ -1,25 +1,21 @@
 import { Time } from "../components/TimeSelector/TimeSelector";
 
-export const getDaysInMonth = function(month,year) {
-    // Here January is 1 based
-    //Day 0 is the last day in the previous month
+export const getDaysInMonth = (month,year) => {
     return new Date(year, month, 0).getDate();
-    // Here January is 0 based
-    // return new Date(year, month+1, 0).getDate();
   };
 
-export const get12Hour = function(hh) {
+export const get12Hour = (hh) => {
   let h = hh;
   if (h >= 12) {
     h = hh - 12;
   }
-  if (h == 0) {
+  if (h === 0) {
     h = 12;
   }
   return h;
 }
 
-export const getPeriod = function(hh) {
+export const getPeriod = (hh) => {
   let p = "AM";
   if (hh >= 12) {
     p = "PM"
@@ -27,12 +23,12 @@ export const getPeriod = function(hh) {
   return p;
 }
 
-export const getTimeString = function(time: Time): string {
-  let dd = time.period;
-  let h = time.hour;
-  let m = time.minute;
+export const getTimeString = (time: Time): string => {
+  const dd = time.period;
+  const h = time.hour;
+  const m = time.minute;
   
-  let mStr = m < 10 ? "0" + m : m;
+  const mStr = m < 10 ? "0" + m : m;
 
   return `${h}:${mStr} ${dd}`;
 }

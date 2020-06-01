@@ -33,8 +33,9 @@ const ImageListItem = React.memo<any>(
     }
     
     const handleClick = () => {
-      if(linkTo)
+      if(linkTo) {
         window.location.href = linkTo;
+      }
     };
  
     const isFocused = useFocus(forwardedRef, handleFocusChange, false);

@@ -9,8 +9,9 @@ const Button = props => {
 
   const handleButtonClick = e => {
     e.preventDefault();
-    if(handleClick)
+    if(handleClick) {
       handleClick();
+    }
   };
 
   // We want to avoid losing focus on the parent element
@@ -25,15 +26,17 @@ const Button = props => {
     }
   };
 
-  let renderedIcon:any|undefined = undefined;
-
+  let renderedIcon:any|undefined;
   if(icon){
-    if(React.isValidElement(icon))
+    if(React.isValidElement(icon)) {
       renderedIcon = icon;
-    else if(icon.toString().indexOf("kai-") === -1) 
+    }
+    else if(icon.toString().indexOf("kai-") === -1) {
       renderedIcon = <img src={icon} width={20} height={20}/>
-    else
+    }
+    else {
       renderedIcon = <span className={icon} />;
+    }
   }
 
   return (
@@ -79,17 +82,20 @@ const SoftKey = React.memo<SoftKeyProps>(props => {
     e => {
       switch (e.key) {
         case 'SoftLeft':
-          if(leftCallback)
+          if(leftCallback) {
             leftCallback();
+          }
           break;
         case 'SoftRight':
-          if(rightCallback)
+          if(rightCallback) {
             rightCallback();
+          }
           break;
         case 'Enter':
           // Action case press center key
-          if(centerCallback)
+          if(centerCallback) {
             centerCallback();
+          }
           break;
         default:
           break;

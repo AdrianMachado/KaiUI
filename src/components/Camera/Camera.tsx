@@ -31,7 +31,6 @@ export class Camera extends React.Component<LocalProps, LocalState> {
 
     processDevices(devices) {
         devices.forEach(device => {
-            console.log(device.label);
             this.setDevice(device);
         });
     }

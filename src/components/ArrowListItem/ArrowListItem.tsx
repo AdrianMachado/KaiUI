@@ -34,10 +34,12 @@ const ArrowListItem = React.memo<Props>(
 
     const handleFocusChange = isNowFocused => {
       if (isNowFocused) {
-        if(onFocusChange)
+        if(onFocusChange) {
           onFocusChange(index);
-        if(onClick)
+        }
+        if(onClick) {
           softKeyManager.setCenterCallback(onClick);
+        }
       }
     }
 

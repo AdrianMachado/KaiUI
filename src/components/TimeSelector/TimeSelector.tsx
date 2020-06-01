@@ -66,22 +66,20 @@ class TimeSelector extends React.Component<Props, LocalState> {
     });
   }
 
-  focusLast() {
-  }
-
-  focus() {
-  }
-
   onKeyDown = e => {
     const { onOK, onCancel } = this.props;
     switch (e.key) {
       case 'SoftLeft':
-        onCancel && onCancel();
+        if(onCancel) {
+          onCancel();
+        }
         this.closeWindow();
         break;
 
       case 'Enter':
-        onOK && onOK(this.calcSelectedTime());
+        if(onOK) {
+          onOK(this.calcSelectedTime());
+        }
         this.closeWindow();
         break;
 
@@ -108,7 +106,6 @@ class TimeSelector extends React.Component<Props, LocalState> {
     return (
       <div className="systemContent">
         <div
-          //ref={node => { this.el = node }}
           className="kai-timesel-wrapper"
           tabIndex={-1}
           onKeyDown={this.onKeyDown}
