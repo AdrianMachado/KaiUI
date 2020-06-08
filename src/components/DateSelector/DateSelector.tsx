@@ -31,6 +31,7 @@ const Months = {
   Nov: 11,
   Dec: 12
 }
+Object.freeze(Months);
 
 interface DateSelectorEvents {
   close: () => void;
@@ -48,7 +49,7 @@ interface LocalState {
 }
 
 class DateSelector extends React.Component<Props, LocalState> {
-    private input: HTMLInputElement | null = null
+  private input: HTMLInputElement | null = null
 
   constructor(props: Props){
     super(props);

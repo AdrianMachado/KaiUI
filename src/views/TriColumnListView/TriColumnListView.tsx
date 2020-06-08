@@ -40,7 +40,7 @@ const TriColListView = React.memo<LocalProps>(
 
     const handleChangeIndex = tabIndex => {
       // NOTE: Ensure you set state for tab transition first.
-      //       Otherwise you will face strange race condition bugs.
+      // Otherwise you will face strange race condition bugs.
       setTransitionDone(false);
       setActiveTab(tabIndex);
       if(onChangeIndex) {
@@ -54,7 +54,7 @@ const TriColListView = React.memo<LocalProps>(
         let index = activeTab;
         switch (e.key) {
           case 'ArrowLeft':
-            index = index - 1 >= 0 ? index - 1 : 3 - 1;
+            index = index - 1 >= 0 ? index - 1 : 2;
             setActiveTab(index);
             break;
           case 'ArrowRight':

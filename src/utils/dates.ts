@@ -4,7 +4,7 @@ export const getDaysInMonth = (month,year) => {
     return new Date(year, month, 0).getDate();
   };
 
-export const get12Hour = (hh) => {
+export const getTwelveHour = (hh) => {
   let h = hh;
   if (h >= 12) {
     h = hh - 12;
