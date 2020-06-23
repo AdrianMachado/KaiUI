@@ -9,6 +9,7 @@ $kai-header-height: 2.8rem;
   width: 100%;
   line-height: $kai-header-height;
   outline: none;
+  padding: 0.5rem 0;
 
   h1 {
     width: 100%;
@@ -19,5 +20,8 @@ $kai-header-height: 2.8rem;
     text-align: center;
     padding: 0 1rem;
     margin: 0;
+    text-transform: uppercase !important;
+    letter-spacing: 3px;
+    font-weight: bold; 
   }
 }

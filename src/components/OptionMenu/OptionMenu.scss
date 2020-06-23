@@ -1,0 +1,33 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+
+:root {
+  --il-text-focused: var(--color-gs00);
+  --il-icon-unfocused: var(--color-zeta);
+}
+
+.kai-om {
+	width: 100%;
+
+    header {
+        text-align: center;
+        padding: 0 1rem;
+        line-height: var(--separator-height);
+        color: var(--color-gs90);
+        background: var(--color-gs20);
+    }
+    
+    &-item {
+        @extend .p-pri;
+
+        width: auto;
+        min-height: var(--option-menu-item-height);
+        color: var(--option-menu-color);
+        padding: 1rem 1rem 1rem 0;
+
+        &:focus {
+          color: var(--il-text-focused);
+        }
+    }
+}

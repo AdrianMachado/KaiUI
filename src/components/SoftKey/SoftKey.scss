@@ -78,8 +78,7 @@
 
     &[data-icon] {
       --softkey-font-size: var(--softkey-icon-size);
-      --softkey-color: var(--softkey-color--icon);
-    }
+      --softkey-color: var(--softkey-color--icon);    }
 
     span::before {
       @extend .button-icon-font;
