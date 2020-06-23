@@ -14,7 +14,7 @@ import ProgressBar from './components/ProgressBar/ProgressBar';
 import Slider from './components/Slider/Slider';
 import Button from './components/Button/Button';
 import TextInput from './components/TextInput/TextInput';
-import ToastContext, { ToastContextProvider } from './contexts/ToastContext/ToastContext';
+import ToastContext, { ToastContextProvider } from './contexts/toastContext';
 import './App.scss';
 import colors from './theme/colors.scss';
 import exampleIcon from './assets/example.png';
@@ -125,7 +125,6 @@ function App() {
                   primary="Hello primary text"
                   secondary="secondary text"
                   tertiary="tertiary text"
-                  focusColor={colors.gold}
                 />
                 <ProgressBar
                   header={'Buffering...'}
