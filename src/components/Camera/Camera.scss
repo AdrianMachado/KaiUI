@@ -1,0 +1,22 @@
+.c-camera-feed{
+    height: 220px;    
+}
+
+.c-camera-feed__viewer{
+}
+
+.c-camera-feed__stage{
+    padding: 0px 20px;
+}
+
+.camera-controls {
+    text-align: center;
+        
+    .kai-icon-button-input{
+        background: #d0d0d0;
+        padding: 20px;
+        border-radius: 50px;
+    }
+}
+
+.hidden{ display: none;}

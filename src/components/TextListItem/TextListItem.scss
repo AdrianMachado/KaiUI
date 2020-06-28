@@ -1,9 +1,11 @@
 @import '../../theme/fonts.scss';
 @import '../../theme/theme.scss';
+@import '../../theme/colors.scss';
 
 :root {
   --tl-text-focused: var(--color-gs00);
 }
+
 .kai-tl {
   height: fit-content;
   width: 100%;
@@ -14,6 +16,7 @@
   justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
+  background-color: white;
 
   span,
   label {
@@ -24,6 +27,9 @@
 
   &:focus {
     color: var(--tl-text-focused);
+  }
+
+  &-focused {
   }
 
   &-primary {

@@ -1,0 +1,26 @@
+@import '../../theme/fonts.scss';
+@import '../../theme/theme.scss';
+@import '../../theme/layout';
+
+.kai-tricol-view {
+    display: flex;
+    flex-grow: 1;
+    height: 180px;
+}
+
+.kai-tricol-view-content {
+    display: flex;
+    flex-grow: 1;
+    height: 180px;
+    text-align: center;
+}
+
+.col {
+    width: 33%;
+    height: 100%;
+    border-left: 1px solid grey;
+}
+
+.col:first-child {
+    border: none;
+}

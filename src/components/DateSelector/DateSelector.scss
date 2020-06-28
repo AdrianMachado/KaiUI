@@ -1,0 +1,51 @@
+.kai-datesel {
+    z-index: 9999;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .85);
+    color: var(--color-gs90);
+  
+    &-wrapper {
+      position: absolute;
+      bottom: var(--softkeybar-height);
+      width: 100%;
+      max-height: calc(100% - 2rem - var(--statusbar-height));
+    }
+  
+    &-header {
+      padding: .5rem 1rem;
+      text-align: center;
+      background-color: var(--color-gs20);
+    }
+  
+    &-container {
+      background-color: var(--color-gs00);
+      &.prompt {
+        color: var(--color-gs00);
+        background-color: var(--highlight-color);
+        p {
+          margin-top: -.5rem;
+          font-size: 1.4rem;
+        }
+        input:focus {
+          border: none;
+        }
+      }
+    }
+  
+    &-content {
+      margin: 0;
+      overflow-y: scroll;
+    }
+  
+    &-input {
+      display: block;
+      width: 100%;
+      height: 3.6rem;
+      padding: 0 1rem;
+      margin-top: .5rem;
+      box-sizing: border-box;
+    }
+  }

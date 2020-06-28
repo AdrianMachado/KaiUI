@@ -1,16 +1,18 @@
 @import '../../theme/fonts.scss';
 @import '../../theme/theme.scss';
 @import '../../theme/layout';
-@import '../../kai-font/style.scss';
 @import '../../theme/colors.scss';
+@import '../../kai-font/style.scss';
 
 :root {
   --il-text-focused: var(--color-gs00);
   --il-icon-unfocused: var(--color-zeta);
 }
-.kai-il {
+.kai-il-img {
   width: auto;
   min-height: var(--list-item-height);
+  text-align: left;
+  margin: 0px auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,42 +27,29 @@
     background-color: $defaultFocusColor;
   }
 
+  &-selected {
+  }
+
   &-icon {
     &-focused {
-      width: 8rem;
-      text-align: center;
-
       span::before {
         @include list-item-icon;
         color: var(--il-text-focused);
       }
 
       img {
-        @include list-item-icon;
-        color: var(--il-text-focused);
-      }
-      
-      svg {
         @include list-item-icon;
         color: var(--il-text-focused);
       }
     }
 
     &-unfocused {
-      width: 8rem;
-      text-align: center;
-
       span::before {
         @include list-item-icon;
         color: var(--il-icon-unfocused);
       }
 
       img {
-        @include list-item-icon;
-        color: var(--il-icon-unfocused);
-      }
-
-      svg {
         @include list-item-icon;
         color: var(--il-icon-unfocused);
       }
@@ -77,10 +66,19 @@
     padding: 1rem 1rem 1rem 0;
     span,
     label {
-      padding: 0;
+      padding: 1rem;
       width: 100%;
       overflow: hidden;
     }
+      
+  }
+
+  span.counter{
+    padding:0;
+    margin-right: 1rem;
+    width: inherit;
+    font-weight: bold;
+    font-size: 1.6rem;
   }
 
   &-primary {
@@ -89,10 +87,5 @@
 
   &-secondary {
     @extend .p-sec;
-  }
-
-  &-disabled {
-    pointer-events: none;
-    opacity: 0.4;
   }
 }
