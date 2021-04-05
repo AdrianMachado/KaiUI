@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
+import { ReactElements } from './../../utils/types'
 import ReactDOM from 'react-dom';
 import './ListView.scss';
 import classNames from 'classnames';
 
 interface LocalProps {
   isActive?: boolean;
-  children: any[];
+  children: ReactElements;
   onChangeIndex?: (index: number) => void;
   className?: string;
 }
@@ -89,7 +90,7 @@ const ListView = React.memo<LocalProps>(
 
     const renderChildren = () => {
       let index = -1;
-      return React.Children.map(children, child => {
+      return React.Children.map(children, (child:ReactElement) => {
         // Don't focus on separators
         if (!child || child.props.separatorText != null) {
           return child;

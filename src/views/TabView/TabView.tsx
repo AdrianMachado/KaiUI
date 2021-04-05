@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { ReactElement, ReactEventHandler, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '../../components/Tabs/Tabs';
 import Tab from '../../components/Tab/Tab';
 import colors from '../../theme/colors.scss';
 import './TabView.scss';
+import { ReactElements } from '../../utils/types';
 
 const prefixCls = 'kai-tab-view';
 
@@ -11,7 +12,7 @@ interface LocalProps {
   tabLabels: string[],
   onChangeIndex?: (index: number) => void,
   focusColor?: string,
-  children: any[]
+  children: ReactElements
 }
 
 const TabView = React.memo<LocalProps>(
@@ -54,7 +55,7 @@ const TabView = React.memo<LocalProps>(
     };
 
     const renderChildren = () => {
-      return React.Children.map(children, (child:any, i) => {
+      return React.Children.map(children, (child:ReactElement, i) => {
         return React.cloneElement(child, {
           isActive: activeTab === i && isTransitionDone,
         });
