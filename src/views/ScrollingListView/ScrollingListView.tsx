@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 import './ScrollingListView.scss';
 import classNames from 'classnames';
 import BodyTextListItem from '../../components/BodyTextListItem/BodyTextListItem';
+import { ReactElements } from '../../utils/types';
 
 const prefixCls = 'kai-scroll-list-view';
 
 interface LocalProps {
-  children: any[];
+  children: ReactElements;
   onChangeIndex?: (index: number) => void;
   isActive: boolean;
   className?: string;
@@ -16,12 +17,13 @@ interface LocalProps {
 const ScrollingListView = React.memo<LocalProps>(
   (props) => {
     const {
-      children,
       onChangeIndex,
       isActive,
       className,
       initialSelectedIndex
     } = props;
+
+    const children:ReactElement[] = [].concat(props.children);
 
     const [activeItem, setActiveItem] = useState(initialSelectedIndex === undefined ? 1 : initialSelectedIndex);
 

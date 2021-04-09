@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import './TriColumnListView.scss';
-import ListView from '../ListView/ListView';
 import ScrollingListView from '../ScrollingListView/ScrollingListView';
+import { ReactElements } from '../../utils/types';
 
 const prefixCls = 'kai-tricol-view';
 
 interface LocalProps {
   onChangeIndex?: (index: number) => void,
   focusColor?: string,
-  col1Children: any[],
-  col2Children: any[],
-  col3Children: any[],
+  col1Children: ReactElements,
+  col2Children: ReactElements,
+  col3Children: ReactElements,
   onCol1ChangeIndex?: (index: number) => void,
   onCol2ChangeIndex?: (index: number) => void,
   onCol3ChangeIndex?: (index: number) => void,
@@ -75,8 +75,8 @@ const TriColListView = React.memo<LocalProps>(
       [handleKeyDown]
     );
 
-    const renderChildren = (children) => {
-      return React.Children.map(children, (child:any, i) => {
+    const renderChildren = (children: ReactElements) => {
+      return React.Children.map(children, (child:ReactElement, i) => {
         return React.cloneElement(child, {
           isActive: activeTab === i && isTransitionDone,
           onFocusChange: handleChangeIndex,

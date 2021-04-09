@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './HorizontalListView.scss';
 import classNames from 'classnames';
@@ -88,7 +88,7 @@ const HorizontalListView = React.memo<any>(
 
     const renderChildren = () => {
       let index = -1;
-      return React.Children.map(children, child => {
+      return React.Children.map(children, (child:ReactElement) => {
         // Don't focus on separators
         if (!child || child.props.separatorText != null) {
           return child;
