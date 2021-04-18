@@ -21,7 +21,7 @@ And update the hashes of the JS and CSS files in [index.html](https://github.com
 
 ## Components
 
-All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-component)
+All specs can be found [here](https://developer.kaiostech.com/docs/04.design-guide/ui-component)
 
 | Name                | Preview                                                                                  | Spec                                                                           |
 | ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -44,7 +44,7 @@ All specs can be found [here](https://developer.kaiostech.com/design-guide/ui-co
 
 ## Views
 
-Navigation details can be found [here](https://developer.kaiostech.com/design-guide/basic-navigation)
+Navigation details can be found [here](https://developer.kaiostech.com/docs/04.design-guide/basic-navigation)
 
 | Name     | Preview                                                              |
 | -------- | -------------------------------------------------------------------- |
@@ -69,7 +69,7 @@ Once this is added, you can send the user notifications without needing to reque
 
 ## Themes
 
-Standardized colors and font stylings are found in the [themes directory](https://github.com/AdrianMachado/KaiUI/tree/master/src/theme). These follow the KaiOS [typography standard](https://developer.kaiostech.com/design-guide/typography).
+Standardized colors and font stylings are found in the [themes directory](https://github.com/AdrianMachado/KaiUI/tree/master/src/theme). These follow the KaiOS [typography standard](https://developer.kaiostech.com/docs/04.design-guide/typography).
 Currently you can customize the focus color of components through props, font color is a WIP.
 
 ## Icons
