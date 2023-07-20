@@ -2,7 +2,7 @@
 
 UI Component library for building KaiOS apps. All components and views are navigable using a phone's d-pad and softkeys.
 
-**CAUTION:** The style specs of some components has been updated recently, which has not been reflected in this implementatio. Please refer to the [KaiOS blog article](https://medium.com/design-at-kai/design-exploration-for-ui-components-in-kaios-smart-feature-phones-85f211603ed0) at Medium.
+**CAUTION:** The style specs of some components has been updated recently, which has yet to be reflected in this implementation. Please refer to the [KaiOS blog article](https://medium.com/design-at-kai/design-exploration-for-ui-components-in-kaios-smart-feature-phones-85f211603ed0) on Medium.
 
 ## Building and Usage
 
